@@ -1,11 +1,13 @@
-    package main
-    import "fmt"
+```
+package main
+import "fmt"
+```
 
-<!---->
-
-    func main() {
-     fmt.Println("Hello, World!")
-    }
+```
+func main() {
+ fmt.Println("Hello, World!")
+}
+```
 
 -Package must
 
@@ -22,7 +24,7 @@ Function -> func
 “” around string is like c++
 
 
-## **1. Core Rules for Go Packages and Directories**
+## **1. Core Rules for Go Packages and Directories** {#h.gj0cjqcuyg1j}
 
 - **One Package Per Directory**: All `.go` files in the same folder **must** declare the **exact same package name** (e.g., all `package main` or all `package utils`). Go treats the directory as the package's "home"—mixing package names in one dir causes build errors like "found packages X and Y in \[dir]".
 
@@ -51,7 +53,7 @@ Function -> func
   - Avoid import cycles (Package A imports B, B imports A)—Go forbids them.
 
 
-## **2. Common Mistakes and How to Avoid Them**
+## **2. Common Mistakes and How to Avoid Them** {#h.miqa6h4efzda}
 
 - **Mistake: Multiple Packages in One Directory**
 
@@ -90,19 +92,19 @@ Function -> func
   - Avoid: Always run `go mod init yourprojectname` in new projects to enable proper imports and dependencies.
 
 
-## **3. Best Practices for Beginners**
+## **3. Best Practices for Beginners** {#h.wc4uc8pzsj2b}
 
 - **Start Small**: Begin with a single `main.go` file in `package main`. Add files/directories as your project grows.
 
 - **Directory Structure Template**:
 
-<!---->
-
-    /myproject/          # Root (run go mod init myproject here)
-    ├── go.mod           # Module file
-    ├── main.go          # package main; func main() { ... }
-    └── utils/           # Subdirectory for a library package
-        └── utils.go     # package utils; func Helper() { ... }
+```
+/myproject/          # Root (run go mod init myproject here)
+├── go.mod           # Module file
+├── main.go          # package main; func main() { ... }
+└── utils/           # Subdirectory for a library package
+    └── utils.go     # package utils; func Helper() { ... }
+```
 
 - - Import example in `main.go`: `import "myproject/utils"`.
 
@@ -129,15 +131,17 @@ Function -> func
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfgclJlFXKpPGlqgFs97_jeLLudIHQn0JtWEt5ixcA7uAqrhApXiEZfp2GS1F2Fu9ILlY12iBSW2LI17YZqDJSPOt6kUwHKNwTPFnJwkjQ531d5RQ6vbXD-9ppYrmltkLNCMLeggA?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
 
-# **📚 Go Variable Declaration Rules**
+# **📚 Go Variable Declaration Rules** {#h.dg7dstcona15}
 
-## **1. Basic Syntax**
+## **1. Basic Syntax** {#h.lp92d2vjoqti}
 
 go
 
 CopyEdit
 
-    var name type = value
+```
+var name type = value
+```
 
 - `var` keyword is used.
 
@@ -149,13 +153,15 @@ go
 
 CopyEdit
 
-    var age int = 25
-    var name = "Alice"  // type inferred as string
+```
+var age int = 25
+var name = "Alice"  // type inferred as string
+```
 
 ***
 
 
-## **2. Short Declaration** `:=`
+## **2. Short Declaration** `:=` {#h.fxkyfz2iaqvo}
 
 - Inside functions, you can **declare and assign** in one line:
 
@@ -163,8 +169,10 @@ go
 
 CopyEdit
 
-    name := "Bob"
-    age := 30
+```
+name := "Bob"
+age := 30
+```
 
 - **Type is always inferred**.
 
@@ -173,7 +181,7 @@ CopyEdit
 ***
 
 
-## **3. Declaration Without Initialization**
+## **3. Declaration Without Initialization** {#h.wermoy31hwdv}
 
 - You can declare a variable without giving it a value.
 
@@ -185,14 +193,16 @@ go
 
 CopyEdit
 
-    var count int       // default 0
-    var message string  // default ""
-    var active bool     // default false
+```
+var count int       // default 0
+var message string  // default ""
+var active bool     // default false
+```
 
 ***
 
 
-## **4. Multiple Variable Declarations**
+## **4. Multiple Variable Declarations** {#h.f5r05qft4ph2}
 
 You can declare multiple variables at once:
 
@@ -200,7 +210,9 @@ go
 
 CopyEdit
 
-    var x, y, z int = 1, 2, 3
+```
+var x, y, z int = 1, 2, 3
+```
 
 or even:
 
@@ -208,11 +220,13 @@ go
 
 CopyEdit
 
-    var (
-        a int
-        b string
-        c float64
-    )
+```
+var (
+    a int
+    b string
+    c float64
+)
+```
 
 With short form:
 
@@ -220,12 +234,14 @@ go
 
 CopyEdit
 
-    a, b, c := 1, "hello", 3.14
+```
+a, b, c := 1, "hello", 3.14
+```
 
 ***
 
 
-## **5. Constants**
+## **5. Constants** {#h.5l1291j2b28y}
 
 Use `const` for **values that never change**:
 
@@ -233,8 +249,10 @@ go
 
 CopyEdit
 
-    const Pi = 3.14
-    const Greeting = "Hello"
+```
+const Pi = 3.14
+const Greeting = "Hello"
+```
 
 - `const` **must** be assigned immediately.
 
@@ -243,7 +261,7 @@ CopyEdit
 ***
 
 
-## **6. Blank Identifier** `_`
+## **6. Blank Identifier** `_` {#h.cbq3m9770121}
 
 If you want to **ignore a value**, use `_`:
 
@@ -251,14 +269,16 @@ go
 
 CopyEdit
 
-    _, err := someFunction()
+```
+_, err := someFunction()
+```
 
 - Useful when you don't care about a returned value.
 
 ***
 
 
-## **7. Rules at Different Scopes**
+## **7. Rules at Different Scopes** {#h.17yi6id1imgl}
 
 |                                          |                                          |
 | :--------------------------------------: | :--------------------------------------: |
@@ -272,15 +292,17 @@ go
 
 CopyEdit
 
-    package main
+```
+package main
 
-    var globalVar = 100  // OK
-    // x := 100         // ❌ NOT allowed here
+var globalVar = 100  // OK
+// x := 100         // ❌ NOT allowed here
+```
 
 ***
 
 
-## **8. Redeclaration**
+## **8. Redeclaration** {#h.6s696f4dbssv}
 
 You **can** reuse `:=` if **at least one** new variable is being introduced:
 
@@ -288,15 +310,17 @@ go
 
 CopyEdit
 
-    x := 5
-    x, y := 10, 20  // OK: y is new
+```
+x := 5
+x, y := 10, 20  // OK: y is new
+```
 
 - If you don't introduce any new variable, it's an error.
 
 ***
 
 
-## **9. Zero Values Table**
+## **9. Zero Values Table** {#h.yi55vbm6pykx}
 
 |                                               |                |
 | :-------------------------------------------: | :------------: |
@@ -311,16 +335,18 @@ CopyEdit
 ***
 
 
-# **🏆 Summary Cheat Sheet**
+# **🏆 Summary Cheat Sheet** {#h.2wj0mapg4hfj}
 
 go
 
 CopyEdit
 
-    var a int = 10    // full form
-    var b = 20        // inferred type
-    c := 30           // short form inside function
-    const Pi = 3.14   // constant
+```
+var a int = 10    // full form
+var b = 20        // inferred type
+c := 30           // short form inside function
+const Pi = 3.14   // constant
+```
 
 - `var` → anywhere
 
@@ -337,20 +363,22 @@ CopyEdit
 
 
 
-# **📚 Go** `if-else` **and** `switch` **Conventions**
+# **📚 Go** `if-else` **and** `switch` **Conventions** {#h.snvp4h79zpux}
 
 ***
 
 
-## **1.** `if` **Basic Syntax**
+## **1.** `if` **Basic Syntax** {#h.i0r3e2fji8cf}
 
 go
 
 CopyEdit
 
-    if condition {
-        // code
-    }
+```
+if condition {
+    // code
+}
+```
 
 Example:
 
@@ -358,9 +386,11 @@ go
 
 CopyEdit
 
-    if age >= 18 {
-        fmt.Println("Adult")
-    }
+```
+if age >= 18 {
+    fmt.Println("Adult")
+}
+```
 
 ✅ **No parentheses** `()` around condition (unlike C, Java).\
 &#x20;✅ **Must use** `{}` **braces** even for single-line blocks.
@@ -368,17 +398,19 @@ CopyEdit
 ***
 
 
-## **2.** `if-else` **Syntax**
+## **2.** `if-else` **Syntax** {#h.rjluhyriknw0}
 
 go
 
 CopyEdit
 
-    if condition {
-        // code
-    } else {
-        // code
-    }
+```
+if condition {
+    // code
+} else {
+    // code
+}
+```
 
 Example:
 
@@ -386,28 +418,32 @@ go
 
 CopyEdit
 
-    if age >= 18 {
-        fmt.Println("Adult")
-    } else {
-        fmt.Println("Minor")
-    }
+```
+if age >= 18 {
+    fmt.Println("Adult")
+} else {
+    fmt.Println("Minor")
+}
+```
 
 ***
 
 
-## **3.** `if-else if-else` **Chain**
+## **3.** `if-else if-else` **Chain** {#h.f6db0c415yd3}
 
 go
 
 CopyEdit
 
-    if condition1 {
-        // code
-    } else if condition2 {
-        // code
-    } else {
-        // code
-    }
+```
+if condition1 {
+    // code
+} else if condition2 {
+    // code
+} else {
+    // code
+}
+```
 
 Example:
 
@@ -415,18 +451,20 @@ go
 
 CopyEdit
 
-    if score >= 90 {
-        fmt.Println("A grade")
-    } else if score >= 80 {
-        fmt.Println("B grade")
-    } else {
-        fmt.Println("Needs improvement")
-    }
+```
+if score >= 90 {
+    fmt.Println("A grade")
+} else if score >= 80 {
+    fmt.Println("B grade")
+} else {
+    fmt.Println("Needs improvement")
+}
+```
 
 ***
 
 
-## **4.** `if` **with Initialization**
+## **4.** `if` **with Initialization** {#h.yd5tlimrclvw}
 
 - You can **initialize a variable** just before checking the condition.
 
@@ -434,29 +472,33 @@ go
 
 CopyEdit
 
-    if x := compute(); x > 10 {
-        fmt.Println("Big number")
-    }
+```
+if x := compute(); x > 10 {
+    fmt.Println("Big number")
+}
+```
 
 - `x` is **only visible inside** the `if` block (scoped).
 
 ***
 
 
-## **5.** `switch` **Basic Syntax**
+## **5.** `switch` **Basic Syntax** {#h.vxoqxov1ess0}
 
 go
 
 CopyEdit
 
-    switch variable {
-    case value1:
-        // code
-    case value2:
-        // code
-    default:
-        // code
-    }
+```
+switch variable {
+case value1:
+    // code
+case value2:
+    // code
+default:
+    // code
+}
+```
 
 Example:
 
@@ -464,55 +506,61 @@ go
 
 CopyEdit
 
-    switch day {
-    case "Monday":
-        fmt.Println("Start of work week")
-    case "Friday":
-        fmt.Println("End of work week")
-    default:
-        fmt.Println("Midweek")
-    }
+```
+switch day {
+case "Monday":
+    fmt.Println("Start of work week")
+case "Friday":
+    fmt.Println("End of work week")
+default:
+    fmt.Println("Midweek")
+}
+```
 
 ✅ **No** `break` **needed** after each case — Go **automatically breaks** unless you say otherwise.
 
 ***
 
 
-## **6.** `switch` **Without Variable (Condition Switch)**
+## **6.** `switch` **Without Variable (Condition Switch)** {#h.pmhi4w3tuo}
 
 go
 
 CopyEdit
 
-    switch {
-    case age < 18:
-        fmt.Println("Minor")
-    case age >= 18:
-        fmt.Println("Adult")
-    }
+```
+switch {
+case age < 18:
+    fmt.Println("Minor")
+case age >= 18:
+    fmt.Println("Adult")
+}
+```
 
 - Acts like `if-else if-else`.
 
 ***
 
 
-## **7. Multiple Values in One** `case`
+## **7. Multiple Values in One** `case` {#h.d20l71lm744j}
 
 go
 
 CopyEdit
 
-    switch day {
-    case "Saturday", "Sunday":
-        fmt.Println("Weekend")
-    default:
-        fmt.Println("Weekday")
-    }
+```
+switch day {
+case "Saturday", "Sunday":
+    fmt.Println("Weekend")
+default:
+    fmt.Println("Weekday")
+}
+```
 
 ***
 
 
-## **8.** `fallthrough`
+## **8.** `fallthrough` {#h.8mlbvuafkf3b}
 
 - Forces Go to **continue** to the next case (rarely used).
 
@@ -522,13 +570,15 @@ go
 
 CopyEdit
 
-    switch num := 2; num {
-    case 1:
-        fmt.Println("One")
-        fallthrough
-    case 2:
-        fmt.Println("Two")
-    }
+```
+switch num := 2; num {
+case 1:
+    fmt.Println("One")
+    fallthrough
+case 2:
+    fmt.Println("Two")
+}
+```
 
 Output:
 
@@ -536,14 +586,16 @@ nginx
 
 CopyEdit
 
-    Two
+```
+Two
+```
 
 (`fallthrough` prints the next case even if its condition is not matched.)
 
 ***
 
 
-# **🏆 Quick Rules Cheat Sheet**
+# **🏆 Quick Rules Cheat Sheet** {#h.tn6j1bjr96mj}
 
 |                        |                                            |
 | :--------------------: | :----------------------------------------: |
@@ -558,7 +610,7 @@ CopyEdit
 ***
 
 
-# **📋 Common Mistakes to Avoid**
+# **📋 Common Mistakes to Avoid** {#h.fstx2zqan1e5}
 
 - ❌ Writing `if (x > 0)` with parentheses — **remove** `()`.
 
@@ -571,48 +623,52 @@ CopyEdit
 ***
 
 
-# **📌 Example Together:**
+# **📌 Example Together:** {#h.6v6hwmhkvrc}
 
 go
 
 CopyEdit
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        age := 20
-        if age < 18 {
-            fmt.Println("Minor")
-        } else {
-            fmt.Println("Adult")
-        }
+func main() {
+    age := 20
+    if age < 18 {
+        fmt.Println("Minor")
+    } else {
+        fmt.Println("Adult")
+    }
 
-        day := "Saturday"
-        switch day {
-        case "Saturday", "Sunday":
-            fmt.Println("Weekend")
-        default:
-            fmt.Println("Weekday")
-        }
-    }
+    day := "Saturday"
+    switch day {
+    case "Saturday", "Sunday":
+        fmt.Println("Weekend")
+    default:
+        fmt.Println("Weekday")
+    }
+}
+```
 
 
-# **📚 Go Function Rules for Beginners**
+# **📚 Go Function Rules for Beginners** {#h.22ajmaljuhg3}
 
 ***
 
 
-## **1. Basic Function Syntax**
+## **1. Basic Function Syntax** {#h.ybiitzwz1fiw}
 
 go
 
 CopyEdit
 
-    func functionName(parameters) returnTypes {
-        // code
-    }
+```
+func functionName(parameters) returnTypes {
+    // code
+}
+```
 
 Example:
 
@@ -620,9 +676,11 @@ go
 
 CopyEdit
 
-    func greet() {
-        fmt.Println("Hello!")
-    }
+```
+func greet() {
+    fmt.Println("Hello!")
+}
+```
 
 ✅ `func` keyword\
 &#x20;✅ Function name in **camelCase** ✅ `{}` braces required
@@ -630,15 +688,17 @@ CopyEdit
 ***
 
 
-## **2. Function with Parameters**
+## **2. Function with Parameters** {#h.danmr4533svp}
 
 go
 
 CopyEdit
 
-    func greetPerson(name string) {
-        fmt.Println("Hello,", name)
-    }
+```
+func greetPerson(name string) {
+    fmt.Println("Hello,", name)
+}
+```
 
 - Function **takes input** (parameter).
 
@@ -650,9 +710,11 @@ go
 
 CopyEdit
 
-    func add(x int, y int) {
-        fmt.Println(x + y)
-    }
+```
+func add(x int, y int) {
+    fmt.Println(x + y)
+}
+```
 
 or same type:
 
@@ -660,22 +722,26 @@ go
 
 CopyEdit
 
-    func add(x, y int) {
-        fmt.Println(x + y)
-    }
+```
+func add(x, y int) {
+    fmt.Println(x + y)
+}
+```
 
 ***
 
 
-## **3. Function with Return Value**
+## **3. Function with Return Value** {#h.lqnj74uk48bg}
 
 go
 
 CopyEdit
 
-    func add(x int, y int) int {
-        return x + y
-    }
+```
+func add(x int, y int) int {
+    return x + y
+}
+```
 
 - After parameters, specify the **return type**.
 
@@ -684,15 +750,17 @@ CopyEdit
 ***
 
 
-## **4. Function Returning Multiple Values**
+## **4. Function Returning Multiple Values** {#h.8ga9namqamp2}
 
 go
 
 CopyEdit
 
-    func calculate(x int, y int) (int, int) {
-        return x + y, x * y
-    }
+```
+func calculate(x int, y int) (int, int) {
+    return x + y, x * y
+}
+```
 
 - Enclose multiple return types in `()` parentheses.
 
@@ -704,7 +772,9 @@ go
 
 CopyEdit
 
-    sum, product := calculate(3, 4)
+```
+sum, product := calculate(3, 4)
+```
 
 ✅ You can also ignore one value with `_`:
 
@@ -712,12 +782,14 @@ go
 
 CopyEdit
 
-    _, product := calculate(3, 4)
+```
+_, product := calculate(3, 4)
+```
 
 ***
 
 
-## **5. Named Return Values**
+## **5. Named Return Values** {#h.x5z2nbw0yjnk}
 
 You can name the return values inside the function signature:
 
@@ -725,31 +797,35 @@ go
 
 CopyEdit
 
-    func getValues() (x int, y int) {
-        x = 10
-        y = 20
-        return  // no need to explicitly return variables
-    }
+```
+func getValues() (x int, y int) {
+    x = 10
+    y = 20
+    return  // no need to explicitly return variables
+}
+```
 
 ✅ Useful for self-documenting code.
 
 ***
 
 
-## **6. Functions with No Parameters and No Returns**
+## **6. Functions with No Parameters and No Returns** {#h.4xa5jzlwp6ax}
 
 go
 
 CopyEdit
 
-    func sayHello() {
-        fmt.Println("Hello")
-    }
+```
+func sayHello() {
+    fmt.Println("Hello")
+}
+```
 
 ***
 
 
-## **7. Anonymous Functions (Function without a name)**
+## **7. Anonymous Functions (Function without a name)** {#h.nw9z1jawfll9}
 
 You can declare and call a function immediately:
 
@@ -757,9 +833,11 @@ go
 
 CopyEdit
 
-    func(x int, y int) int {
-        return x + y
-    }(3, 4)
+```
+func(x int, y int) int {
+    return x + y
+}(3, 4)
+```
 
 Or assign to a variable:
 
@@ -767,15 +845,17 @@ go
 
 CopyEdit
 
-    add := func(x int, y int) int {
-        return x + y
-    }
-    fmt.Println(add(3, 4))
+```
+add := func(x int, y int) int {
+    return x + y
+}
+fmt.Println(add(3, 4))
+```
 
 ***
 
 
-## **8. Functions as Values**
+## **8. Functions as Values** {#h.e2qfpj8pjg3}
 
 Functions can be passed around like variables:
 
@@ -783,31 +863,35 @@ go
 
 CopyEdit
 
-    func greet(name string) {
-        fmt.Println("Hello", name)
-    }
+```
+func greet(name string) {
+    fmt.Println("Hello", name)
+}
 
-    var sayHi = greet
-    sayHi("John")
+var sayHi = greet
+sayHi("John")
+```
 
 ✅ First-class citizens.
 
 ***
 
 
-## **9. Variadic Functions (Variable Number of Arguments)**
+## **9. Variadic Functions (Variable Number of Arguments)** {#h.d1pb37xk0z83}
 
 go
 
 CopyEdit
 
-    func sum(numbers ...int) int {
-        total := 0
-        for _, num := range numbers {
-            total += num
-        }
-        return total
-    }
+```
+func sum(numbers ...int) int {
+    total := 0
+    for _, num := range numbers {
+        total += num
+    }
+    return total
+}
+```
 
 - `...int` means **zero or more ints**.
 
@@ -817,12 +901,14 @@ go
 
 CopyEdit
 
-    fmt.Println(sum(1, 2, 3, 4))
+```
+fmt.Println(sum(1, 2, 3, 4))
+```
 
 ***
 
 
-## **10. Defer Keyword**
+## **10. Defer Keyword** {#h.lvu4hd8km8f4}
 
 `defer` delays execution until the surrounding function returns.
 
@@ -832,10 +918,12 @@ go
 
 CopyEdit
 
-    func main() {
-        defer fmt.Println("World")
-        fmt.Println("Hello")
-    }
+```
+func main() {
+    defer fmt.Println("World")
+    fmt.Println("Hello")
+}
+```
 
 Output:
 
@@ -843,15 +931,17 @@ nginx
 
 CopyEdit
 
-    Hello
-    World
+```
+Hello
+World
+```
 
 ✅ Useful for cleanup (like closing files).
 
 ***
 
 
-# **🏆 Quick Cheat Sheet**
+# **🏆 Quick Cheat Sheet** {#h.um09u1cz2uo0}
 
 |                        |                                     |          |
 | :--------------------: | :---------------------------------: | :------: |
@@ -868,7 +958,7 @@ CopyEdit
 ***
 
 
-# **📋 Common Beginner Mistakes to Avoid**
+# **📋 Common Beginner Mistakes to Avoid** {#h.v4oxjofzknyj}
 
 - ❌ Forgetting type for each parameter (`x int, y int`, not `x, y int int`).
 
@@ -881,44 +971,46 @@ CopyEdit
 ***
 
 
-# **📌 Full Small Example**
+# **📌 Full Small Example** {#h.tfllo9j3c121}
 
 go
 
 CopyEdit
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func add(x int, y int) int {
-        return x + y
-    }
+func add(x int, y int) int {
+    return x + y
+}
 
-    func greet(name string) {
-        fmt.Println("Hello", name)
-    }
+func greet(name string) {
+    fmt.Println("Hello", name)
+}
 
-    func main() {
-        defer fmt.Println("Goodbye!")
+func main() {
+    defer fmt.Println("Goodbye!")
 
-        result := add(5, 3)
-        fmt.Println(result)
+    result := add(5, 3)
+    fmt.Println(result)
 
-        greet("Alice")
-    }
+    greet("Alice")
+}
+```
 
 
-# **📚 Go Package Scope Rules for Beginners**
+# **📚 Go Package Scope Rules for Beginners** {#h.n3rjk2h8u5aq}
 
-### **What is Package Scope?**
+### **What is Package Scope?** {#h.vveiyo7dt5a9}
 
 In Go, **package scope** refers to the visibility of variables, functions, types, and constants that are declared **outside any function**, at the **top level of a package**. These elements are accessible **throughout the entire package**.
 
 ***
 
 
-## **1. Declaring Package-Level Variables**
+## **1. Declaring Package-Level Variables** {#h.9613597qv377}
 
 - **Variables** declared outside any function but within the **same package** are **visible to all functions** in that package.
 
@@ -928,96 +1020,104 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    var x = 10  // Package-level variable
+var x = 10  // Package-level variable
 
-    func printX() {
-        fmt.Println(x)  // Accesses x from package scope
-    }
+func printX() {
+    fmt.Println(x)  // Accesses x from package scope
+}
+```
 
 - `x` is accessible in all functions in the `main` package.
 
 ***
 
 
-## **2. Exported vs Unexported**
+## **2. Exported vs Unexported** {#h.hn9rcrirv30b}
 
 - **Exported** variables, functions, and types have **uppercase** starting letters. They are accessible **from other packages**.
 
 - **Unexported** variables, functions, and types have **lowercase** starting letters. They are **only accessible** within the **same package**.
 
 
-### **Example:**
+### **Example:** {#h.u123jdb56afv}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    // Exported: can be accessed from other packages
-    var ExportedVar = 100  
+// Exported: can be accessed from other packages
+var ExportedVar = 100  
 
-    // Unexported: only accessible within the same package
-    var unexportedVar = 50
+// Unexported: only accessible within the same package
+var unexportedVar = 50
+```
 
 - `ExportedVar` can be accessed from **any package** that imports `main`, but `unexportedVar` is **only accessible** in the `main` package.
 
 ***
 
 
-## **3. Package-Level Functions**
+## **3. Package-Level Functions** {#h.lz02vg9nh303}
 
 - **Functions** declared at the **top-level** of the package can be called anywhere within the same package.
 
 
-### **Example:**
+### **Example:** {#h.awy2ztbo7v79}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    func add(x, y int) int {  // Package-level function
-        return x + y
-    }
+func add(x, y int) int {  // Package-level function
+    return x + y
+}
 
-    func main() {
-        result := add(5, 3)  // Accesses add() within the same package
-        fmt.Println(result)
-    }
+func main() {
+    result := add(5, 3)  // Accesses add() within the same package
+    fmt.Println(result)
+}
+```
 
 ***
 
 
-## **4. Accessing Functions from Other Packages**
+## **4. Accessing Functions from Other Packages** {#h.fop6focpfyrp}
 
 - You can **import** other packages into your program, and access their **exported functions** (those with uppercase names).
 
 
-### **Example:**
+### **Example:** {#h.nvxrws4u3bf3}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    import "example.com/mathlib"  // Import custom mathlib package
+import "example.com/mathlib"  // Import custom mathlib package
 
-    func main() {
-        result := mathlib.Add(4, 7)  // Accessing exported function from mathlib
-        fmt.Println(result)
-    }
+func main() {
+    result := mathlib.Add(4, 7)  // Accessing exported function from mathlib
+    fmt.Println(result)
+}
+```
 
 - `Add()` is an **exported function** from `mathlib` and is **accessible** in the `main` package.
 
 ***
 
 
-## **5. Package-Level Constants**
+## **5. Package-Level Constants** {#h.r0nxuadnc6o0}
 
 - Constants declared at the package level are **accessible throughout the package**.
 
@@ -1027,18 +1127,20 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    const Pi = 3.14  // Package-level constant
+const Pi = 3.14  // Package-level constant
 
-    func area(radius float64) float64 {
-        return Pi * radius * radius  // Access Pi in the same package
-    }
+func area(radius float64) float64 {
+    return Pi * radius * radius  // Access Pi in the same package
+}
+```
 
 ***
 
 
-## **6. Package-Level Types**
+## **6. Package-Level Types** {#h.pp3po9gezocp}
 
 - You can define **types** at the package level (e.g., structs, interfaces), and these types can be used **throughout** the package.
 
@@ -1048,20 +1150,22 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    type Point struct {  // Package-level type
-        x, y int
-    }
+type Point struct {  // Package-level type
+    x, y int
+}
 
-    func printPoint(p Point) {
-        fmt.Println(p.x, p.y)
-    }
+func printPoint(p Point) {
+    fmt.Println(p.x, p.y)
+}
+```
 
 ***
 
 
-## **7. Accessing Variables and Functions from Other Packages**
+## **7. Accessing Variables and Functions from Other Packages** {#h.202tzzxikn8t}
 
 - To access **exported** variables, functions, or types from another package, you need to **import the package**.
 
@@ -1071,21 +1175,23 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "example.com/mathlib"
+import "example.com/mathlib"
 
-    func main() {
-        result := mathlib.Subtract(10, 5)  // Accesses Subtract() from mathlib
-        fmt.Println(result)
-    }
+func main() {
+    result := mathlib.Subtract(10, 5)  // Accesses Subtract() from mathlib
+    fmt.Println(result)
+}
+```
 
 - Only **exported** elements (uppercase names) are accessible when you import a package.
 
 ***
 
 
-## **8. Using** `go mod` **for Package Management**
+## **8. Using** `go mod` **for Package Management** {#h.ej0dcwoihxeu}
 
 - When using **external packages**, you need to initialize Go modules using `go mod init` to manage dependencies.
 
@@ -1095,14 +1201,16 @@ bash
 
 Copy
 
-    go mod init example.com  // Initializes a module
+```
+go mod init example.com  // Initializes a module
+```
 
 - This creates a `go.mod` file where dependencies are tracked.
 
 ***
 
 
-## **9. Variables Declared Inside** `init()`
+## **9. Variables Declared Inside** `init()` {#h.m26y6q5gf00b}
 
 - The `init()` function can be used to **initialize package-level variables**. This function runs before the `main()` function.
 
@@ -1112,22 +1220,24 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    var x int
+var x int
 
-    func init() {
-        x = 10  // Package-level initialization
-    }
+func init() {
+    x = 10  // Package-level initialization
+}
 
-    func main() {
-        fmt.Println(x)  // x will be 10
-    }
+func main() {
+    fmt.Println(x)  // x will be 10
+}
+```
 
 ***
 
 
-# **🏆 Package Scope Summary**
+# **🏆 Package Scope Summary** {#h.lnp4chd1dku2}
 
 |                              |                                                                              |                                       |
 | :--------------------------: | :--------------------------------------------------------------------------: | :-----------------------------------: |
@@ -1143,7 +1253,7 @@ Copy
 ***
 
 
-# **📋 Common Mistakes to Avoid**
+# **📋 Common Mistakes to Avoid** {#h.8inyo3kxvqyi}
 
 - ❌ **Accessing unexported variables/functions** from another package.
 
@@ -1154,28 +1264,30 @@ Copy
 ***
 
 
-# **📌 Example**
+# **📌 Example** {#h.b2tt9djab8he}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    import "example.com/mathlib"  // Import mathlib package
+import "example.com/mathlib"  // Import mathlib package
 
-    var globalVar = 100  // Package-level variable
+var globalVar = 100  // Package-level variable
 
-    func main() {
-        fmt.Println(globalVar)  // Accessing package-level variable
-        result := mathlib.Add(4, 5)  // Accessing exported function from another package
-        fmt.Println(result)
-    }
+func main() {
+    fmt.Println(globalVar)  // Accessing package-level variable
+    result := mathlib.Add(4, 5)  // Accessing exported function from another package
+    fmt.Println(result)
+}
+```
 
 
-# **📚 The** `init()` **Function in Go - A Beginner's Guide**
+# **📚 The** `init()` **Function in Go - A Beginner's Guide** {#h.5hxxzb81x894}
 
-## **What is** `init()`**?**
+## **What is** `init()`**?** {#h.h40srq746zys}
 
 - `init()` is a **special function** in Go that is automatically called when your program starts, before the `main()` function.
 
@@ -1184,19 +1296,19 @@ Copy
 ***
 
 
-## **Key Points about** `init()`**:**
+## **Key Points about** `init()`**:** {#h.c9h1tvyeamgl}
 
-### **1. Automatic Execution:**
+### **1. Automatic Execution:** {#h.lwmlnxq1sru}
 
 - `init()` is **not called manually**. Go automatically calls the `init()` function before running the `main()` function.
 
 
-### **2. Usage:**
+### **2. Usage:** {#h.lth9krn13994}
 
 - It’s often used to set up **package-level variables** or **initial configurations** that need to be done before the program starts.
 
 
-### **3. Multiple** `init()` **Functions:**
+### **3. Multiple** `init()` **Functions:** {#h.idou4jarrruk}
 
 A package can have **multiple** `init()` **functions** (in different files within the same package), and they will all run before `main()`.\
 \
@@ -1206,24 +1318,26 @@ A package can have **multiple** `init()` **functions** (in different files withi
 Copy\
 `// file1.go`
 
-    func init() {
-        fmt.Println("Initializing from file1")
-    }
+```
+func init() {
+    fmt.Println("Initializing from file1")
+}
 
-    // file2.go
-    func init() {
-        fmt.Println("Initializing from file2")
-    }
+// file2.go
+func init() {
+    fmt.Println("Initializing from file2")
+}
+```
 
 -
 
 
-### **4. No Return Value:**
+### **4. No Return Value:** {#h.ofc2mk3minii}
 
 - The `init()` function **does not return anything**. It is used solely for initialization purposes.
 
 
-### **5. Access to Package-Level Variables:**
+### **5. Access to Package-Level Variables:** {#h.pqs9dbu2jova}
 
 You can **initialize package-level variables** in `init()` and they will be available throughout the package.\
 \
@@ -1233,25 +1347,27 @@ You can **initialize package-level variables** in `init()` and they will be avai
 Copy\
 `var counter int  // Package-level variable`
 
-    func init() {
-        counter = 10  // Initialize variable in init()
-    }
+```
+func init() {
+    counter = 10  // Initialize variable in init()
+}
 
-    func main() {
-        fmt.Println(counter)  // Accessing initialized variable
-    }
+func main() {
+    fmt.Println(counter)  // Accessing initialized variable
+}
+```
 
 -
 
 
-### **6. One-Time Initialization:**
+### **6. One-Time Initialization:** {#h.jt5j0t2ple7p}
 
 - `init()` is **called once** per program execution, even if you have multiple `init()` functions across different files. It’s good for **one-time initialization** tasks.
 
 ***
 
 
-## **Rules and Best Practices:**
+## **Rules and Best Practices:** {#h.kz9tlsbv1gro}
 
 1. **Only in the Same Package**:
 
@@ -1278,46 +1394,50 @@ Copy\
 ***
 
 
-## **Example of** `init()` **Function:**
+## **Example of** `init()` **Function:** {#h.k4n07qeyejpy}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    var globalVar int
+var globalVar int
 
-    // init function to initialize globalVar
-    func init() {
-        globalVar = 42  // Initialize package-level variable
-        fmt.Println("Initialization in init() function")
-    }
+// init function to initialize globalVar
+func init() {
+    globalVar = 42  // Initialize package-level variable
+    fmt.Println("Initialization in init() function")
+}
 
-    func main() {
-        fmt.Println("Main function starts")
-        fmt.Println("Value of globalVar:", globalVar)
-    }
+func main() {
+    fmt.Println("Main function starts")
+    fmt.Println("Value of globalVar:", globalVar)
+}
+```
 
 
-### **Output:**
+### **Output:** {#h.bsvaenxjg663}
 
 bash
 
 Copy
 
-    Initialization in init() function
-    Main function starts
-    Value of globalVar: 42
+```
+Initialization in init() function
+Main function starts
+Value of globalVar: 42
+```
 
 - In this example, the `init()` function initializes `globalVar`, which is then accessed in `main()`.
 
 ***
 
 
-## **Summary of** `init()` **in Go:**
+## **Summary of** `init()` **in Go:** {#h.brcwer827n6m}
 
 |                       |                                                                    |
 | :-------------------: | :----------------------------------------------------------------: |
@@ -1332,7 +1452,7 @@ Copy
 ***
 
 
-### **When to Use** `init()`**:**
+### **When to Use** `init()`**:** {#h.o94phcl2ua61}
 
 - When you need to set up or initialize some variables before the program starts.
 
@@ -1341,7 +1461,7 @@ Copy
 ***
 
 
-## **Common Mistakes to Avoid:**
+## **Common Mistakes to Avoid:** {#h.73lhx5pz51v7}
 
 - ❌ **Overusing** `init()` for too many operations. It should only be for initialization purposes.
 
@@ -1351,9 +1471,9 @@ Copy
 
 
 
-# **📚 IIFE (Immediately Invoked Function Expression) in Go**
+# **📚 IIFE (Immediately Invoked Function Expression) in Go** {#h.5p335x7tki21}
 
-### **What is an IIFE?**
+### **What is an IIFE?** {#h.5y8ohnnz7prx}
 
 An **Immediately Invoked Function Expression (IIFE)** is a function that is defined **and immediately executed** in a single statement. This is often used to create a **local scope** for variables, making them **isolated** from the rest of the program.
 
@@ -1362,9 +1482,9 @@ In languages like JavaScript, **IIFE** is commonly used. However, in Go, it's no
 ***
 
 
-## **How to Create an IIFE in Go**
+## **How to Create an IIFE in Go** {#h.lkl97hqyimpr}
 
-### **1. Syntax of an Anonymous Function**
+### **1. Syntax of an Anonymous Function** {#h.upj29wm4rnka}
 
 In Go, an **anonymous function** is a function that is defined without a name.
 
@@ -1372,14 +1492,16 @@ go
 
 Copy
 
-    func() {
-        // Code here
-    }()
+```
+func() {
+    // Code here
+}()
+```
 
 - The `()` at the end **immediately invokes** the function.
 
 
-### **2. Example of IIFE in Go:**
+### **2. Example of IIFE in Go:** {#h.oapmjwc7r396}
 
 In Go, we can write an anonymous function and call it immediately, which is the equivalent of an IIFE.
 
@@ -1387,19 +1509,21 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        // Immediately Invoked Function Expression (IIFE)
-        func() {
-            fmt.Println("This is an IIFE in Go!")
-        }()
-    }
+func main() {
+    // Immediately Invoked Function Expression (IIFE)
+    func() {
+        fmt.Println("This is an IIFE in Go!")
+    }()
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.ow0vb81ihh7z}
 
 - **Anonymous function**: `func() { fmt.Println("This is an IIFE in Go!") }
 
@@ -1408,18 +1532,20 @@ Copy
 - **Immediately invoked**: `()` at the end of the function call, which **executes it immediately** when the program runs.
 
 
-### **Output:**
+### **Output:** {#h.tlyq47p24tq6}
 
 csharp
 
 Copy
 
-    This is an IIFE in Go!
+```
+This is an IIFE in Go!
+```
 
 ***
 
 
-## **Use Cases of IIFE in Go**
+## **Use Cases of IIFE in Go** {#h.mqdu6atye2xc}
 
 1. **Isolating Variables**:
 
@@ -1431,18 +1557,20 @@ Example:\
 Copy\
 `package main`
 
-    import "fmt"
+```
+import "fmt"
 
-    func main() {
-        // IIFE to create a local scope
-        func() {
-            a := 10  // Local variable inside the IIFE
-            fmt.Println("Inside IIFE:", a)
-        }()
-        
-        // Outside IIFE, a is not accessible
-        // fmt.Println(a)  // ❌ Error: a is not defined outside the IIFE
-    }
+func main() {
+    // IIFE to create a local scope
+    func() {
+        a := 10  // Local variable inside the IIFE
+        fmt.Println("Inside IIFE:", a)
+    }()
+    
+    // Outside IIFE, a is not accessible
+    // fmt.Println(a)  // ❌ Error: a is not defined outside the IIFE
+}
+```
 
 2.  **Explanation**: The variable `a` is **only accessible inside the IIFE**, and it doesn't leak into the outer scope.
 
@@ -1456,22 +1584,24 @@ Example:\
 Copy\
 `package main`
 
-    import "fmt"
+```
+import "fmt"
 
-    func main() {
-        // IIFE to initialize multiple variables
-        func() {
-            var x, y = 5, 10
-            fmt.Println("x + y =", x + y)
-        }()
-    }
+func main() {
+    // IIFE to initialize multiple variables
+    func() {
+        var x, y = 5, 10
+        fmt.Println("x + y =", x + y)
+    }()
+}
+```
 
 4.  **Explanation**: The initialization of `x` and `y` happens **immediately** inside the IIFE, without affecting the outer scope.
 
 ***
 
 
-## **How Does Go Handle IIFE?**
+## **How Does Go Handle IIFE?** {#h.92dj9eigtzyi}
 
 - **In Go**, IIFE works similarly to other languages but requires using **anonymous functions**.
 
@@ -1480,7 +1610,7 @@ Copy\
 ***
 
 
-### **Important Notes:**
+### **Important Notes:** {#h.guqg6so6lhh8}
 
 - **IIFE in Go**: Go does not have built-in support for IIFE like JavaScript, but you can **create IIFE-like behavior** using anonymous functions.
 
@@ -1491,7 +1621,7 @@ Copy\
 ***
 
 
-### **Summary of IIFE in Go:**
+### **Summary of IIFE in Go:** {#h.owiidcj8gqnr}
 
 |                   |                                                                              |
 | :---------------: | :--------------------------------------------------------------------------: |
@@ -1506,33 +1636,35 @@ Copy\
 ***
 
 
-### **Full Example of IIFE in Go:**
+### **Full Example of IIFE in Go:** {#h.762q4q5v7ad2}
 
 go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        // IIFE example to calculate and print sum
-        func() {
-            a := 10
-            b := 20
-            sum := a + b
-            fmt.Println("The sum is:", sum)
-        }()
+func main() {
+    // IIFE example to calculate and print sum
+    func() {
+        a := 10
+        b := 20
+        sum := a + b
+        fmt.Println("The sum is:", sum)
+    }()
 
-        // The variables a, b, and sum are not accessible here
-        // fmt.Println(a)  // ❌ Error: a is not defined
-    }
+    // The variables a, b, and sum are not accessible here
+    // fmt.Println(a)  // ❌ Error: a is not defined
+}
+```
 
 ***
 
 
-### **TL;DR:**
+### **TL;DR:** {#h.vsfprw1a0480}
 
 - **Go does not have built-in IIFE** like JavaScript.
 
@@ -1541,14 +1673,14 @@ Copy
 - Great for **isolating variables** and performing **one-time initialization** without polluting the outer scope.
 
 
-# **📚 Function Expressions in Go**
+# **📚 Function Expressions in Go** {#h.wqzgpqova4si}
 
-### **What is a Function Expression?**
+### **What is a Function Expression?** {#h.bt6hfudnuj2g}
 
 A **function expression** is when you assign a function to a variable, and then you can invoke that function via the variable. In Go, you can assign functions to variables just like you would with numbers or strings, and then execute them.
 
 
-### **Key Points:**
+### **Key Points:** {#h.995t4lzsqer}
 
 - **Function expressions** allow you to treat functions as **first-class citizens**.
 
@@ -1557,7 +1689,7 @@ A **function expression** is when you assign a function to a variable, and then 
 ***
 
 
-## **1. Basic Syntax of a Function Expression:**
+## **1. Basic Syntax of a Function Expression:** {#h.9ex2u62z78n3}
 
 In Go, you can define and assign a function to a variable like this:
 
@@ -1565,23 +1697,25 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        // Function expression: Assign a function to a variable
-        add := func(x int, y int) int {
-            return x + y
-        }
+func main() {
+    // Function expression: Assign a function to a variable
+    add := func(x int, y int) int {
+        return x + y
+    }
 
-        // Calling the function using the variable
-        result := add(5, 3)
-        fmt.Println("Result of add:", result)
-    }
+    // Calling the function using the variable
+    result := add(5, 3)
+    fmt.Println("Result of add:", result)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.3bk9kxbluqiu}
 
 - `add := func(x int, y int) int { return x + y }`: This is a **function expression**.
 
@@ -1590,18 +1724,20 @@ Copy
 - We then call `add(5, 3)` just like calling a regular function, and it returns `8`.
 
 
-### **Output:**
+### **Output:** {#h.z1vnzr3ih3vk}
 
 sql
 
 Copy
 
-    Result of add: 8
+```
+Result of add: 8
+```
 
 ***
 
 
-## **2. Anonymous Function Expressions:**
+## **2. Anonymous Function Expressions:** {#h.f70ytkyjmi3b}
 
 A **function expression** often involves **anonymous functions**, which are functions without names.
 
@@ -1609,22 +1745,24 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        // Anonymous function assigned to a variable
-        multiply := func(a, b int) int {
-            return a * b
-        }
+func main() {
+    // Anonymous function assigned to a variable
+    multiply := func(a, b int) int {
+        return a * b
+    }
 
-        result := multiply(4, 5)  // Calling the function
-        fmt.Println("Multiplication result:", result)
-    }
+    result := multiply(4, 5)  // Calling the function
+    fmt.Println("Multiplication result:", result)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.y6h6si29so77}
 
 - `multiply` holds an **anonymous function** that takes two parameters `a` and `b`, multiplies them, and returns the result.
 
@@ -1633,7 +1771,7 @@ Copy
 ***
 
 
-## **3. Passing Function Expressions as Arguments:**
+## **3. Passing Function Expressions as Arguments:** {#h.81ky51ibdq4q}
 
 You can pass **function expressions** as **arguments** to other functions.
 
@@ -1641,45 +1779,49 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Higher-order function that accepts a function as a parameter
-    func operate(a, b int, operation func(int, int) int) int {
-        return operation(a, b)
-    }
+// Higher-order function that accepts a function as a parameter
+func operate(a, b int, operation func(int, int) int) int {
+    return operation(a, b)
+}
 
-    func main() {
-        // Define a function expression for addition
-        add := func(x, y int) int {
-            return x + y
-        }
+func main() {
+    // Define a function expression for addition
+    add := func(x, y int) int {
+        return x + y
+    }
 
-        result := operate(5, 3, add)  // Passing add function expression
-        fmt.Println("Sum:", result)
-    }
+    result := operate(5, 3, add)  // Passing add function expression
+    fmt.Println("Sum:", result)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.i81cziyt6q8s}
 
 - `operate` is a function that takes two integers and a **function expression** as arguments. This function then calls the passed function (`add`) to compute the result.
 
 - We pass the `add` function as an argument to `operate`.
 
 
-### **Output:**
+### **Output:** {#h.67afyt66p3gt}
 
 makefile
 
 Copy
 
-    Sum: 8
+```
+Sum: 8
+```
 
 ***
 
 
-## **4. Returning Function Expressions from a Function:**
+## **4. Returning Function Expressions from a Function:** {#h.qcfr0dwj8926}
 
 Go allows functions to **return other functions** as values, which means you can **create function expressions dynamically** inside functions.
 
@@ -1687,48 +1829,52 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Function that returns another function (closure)
-    func makeMultiplier(factor int) func(int) int {
-        return func(x int) int {
-            return x * factor  // Uses `factor` from the outer scope
-        }
-    }
+// Function that returns another function (closure)
+func makeMultiplier(factor int) func(int) int {
+    return func(x int) int {
+        return x * factor  // Uses `factor` from the outer scope
+    }
+}
 
-    func main() {
-        // Get a multiplier function for 2
-        multiplyBy2 := makeMultiplier(2)
+func main() {
+    // Get a multiplier function for 2
+    multiplyBy2 := makeMultiplier(2)
 
-        result := multiplyBy2(5)  // Calling the returned function
-        fmt.Println("5 multiplied by 2 is:", result)
-    }
+    result := multiplyBy2(5)  // Calling the returned function
+    fmt.Println("5 multiplied by 2 is:", result)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.qc3ejj4icznx}
 
 - `makeMultiplier` returns a **function expression** that multiplies its argument by a factor (in this case, `2`).
 
 - The function returned by `makeMultiplier` can be called independently (`multiplyBy2(5)`).
 
 
-### **Output:**
+### **Output:** {#h.amvlxvl0k3ih}
 
 csharp
 
 Copy
 
-    5 multiplied by 2 is: 10
+```
+5 multiplied by 2 is: 10
+```
 
 
-### **Note: This is an example of a closure, where the returned function remembers the environment in which it was created, including the** `factor` **variable.**
+### **Note: This is an example of a closure, where the returned function remembers the environment in which it was created, including the** `factor` **variable.** {#h.ukojbbq9xs2k}
 
 ***
 
 
-## **5. Using Function Expressions with Closures:**
+## **5. Using Function Expressions with Closures:** {#h.qwgxggb2ef14}
 
 A **closure** is a function that **captures the variables from its surrounding environment**. This is very useful in scenarios where you need to create dynamic behavior.
 
@@ -1736,31 +1882,33 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        // Create a closure
-        counter := func() func() int {
-            count := 0
-            return func() int {
-                count++
-                return count
-            }
-        }
+func main() {
+    // Create a closure
+    counter := func() func() int {
+        count := 0
+        return func() int {
+            count++
+            return count
+        }
+    }
 
-        // Use the counter closure
-        count1 := counter()  // Create a counter
-        fmt.Println(count1())  // 1
-        fmt.Println(count1())  // 2
+    // Use the counter closure
+    count1 := counter()  // Create a counter
+    fmt.Println(count1())  // 1
+    fmt.Println(count1())  // 2
 
-        count2 := counter()  // New counter
-        fmt.Println(count2())  // 1
-    }
+    count2 := counter()  // New counter
+    fmt.Println(count2())  // 1
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.npfm2oke7vb}
 
 - The `counter` function returns a function that **increases** the `count` every time it is called.
 
@@ -1769,18 +1917,20 @@ Copy
 - Each call to `count1()` and `count2()` **increases** their own `count` independently.
 
 
-### **Output:**
+### **Output:** {#h.ytfw88lgsozj}
 
 Copy
 
-    1
-    2
-    1
+```
+1
+2
+1
+```
 
 ***
 
 
-## **Summary of Function Expressions in Go:**
+## **Summary of Function Expressions in Go:** {#h.z4hkd9nkyzcv}
 
 |                                    |                                                                                 |
 | :--------------------------------: | :-----------------------------------------------------------------------------: |
@@ -1794,7 +1944,7 @@ Copy
 ***
 
 
-### **TL;DR:**
+### **TL;DR:** {#h.uf5173g1t392}
 
 - **Function expressions** in Go allow you to treat functions like **first-class citizens**, meaning you can **assign** them to variables, **pass them as arguments**, and even **return them** from other functions.
 
@@ -1806,9 +1956,9 @@ Copy
 
 
 
-# **📚 Go 1st/Higher Order Functions** 
+# **📚 Go 1st/Higher Order Functions**  {#h.r7baxmwel1vg}
 
-### **🧠 First-Order Function**
+### **🧠 First-Order Function** {#h.kd9q99qmrrob}
 
 **Definition**: A function that neither takes other functions as arguments nor returns them. It operates directly on basic data types.​
 
@@ -1818,19 +1968,21 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // First-order function
-    func add(x, y int) int {
-        return x + y
-    }
+// First-order function
+func add(x, y int) int {
+    return x + y
+}
 
-    func main() {
-        result := add(5, 3)
-        fmt.Println("Sum:", result) // Output: Sum: 8
-    }
+func main() {
+    result := add(5, 3)
+    fmt.Println("Sum:", result) // Output: Sum: 8
+}
+```
 
 **Explanation**:
 
@@ -1839,7 +1991,7 @@ Copy
 ***
 
 
-### **🔄 Higher-Order Function**
+### **🔄 Higher-Order Function** {#h.1ac02hejjqlw}
 
 **Definition**: A function that takes one or more functions as arguments, returns a function, or both.​
 
@@ -1849,19 +2001,21 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Higher-order function
-    func apply(op func(int, int) int, x, y int) int {
-        return op(x, y)
-    }
+// Higher-order function
+func apply(op func(int, int) int, x, y int) int {
+    return op(x, y)
+}
 
-    func main() {
-        result := apply(func(x, y int) int { return x + y }, 5, 3)
-        fmt.Println("Sum:", result) // Output: Sum: 8
-    }
+func main() {
+    result := apply(func(x, y int) int { return x + y }, 5, 3)
+    fmt.Println("Sum:", result) // Output: Sum: 8
+}
+```
 
 **Explanation**:
 
@@ -1870,7 +2024,7 @@ Copy
 ***
 
 
-### **🔍 Key Differences**
+### **🔍 Key Differences** {#h.uc8no6bq0b2o}
 
 |                   |                                                                 |                                                                       |
 | :---------------: | :-------------------------------------------------------------: | :-------------------------------------------------------------------: |
@@ -1882,7 +2036,7 @@ Copy
 ***
 
 
-### **🧩 Summary**
+### **🧩 Summary** {#h.mkyn60s2geio}
 
 - **First-Order Functions**: Operate directly on basic data types without involving other functions.
 
@@ -1893,7 +2047,7 @@ Copy
 -
 
 
-# **1. Parameter vs Argument**
+# **1. Parameter vs Argument** {#h.9lmv6e2a9ofi}
 
 **Parameter**: A variable defined in the function definition. It represents data the function expects.\
 \
@@ -1903,8 +2057,10 @@ Copy
 CopyEdit\
 `func add(x int, y int) int {  // 'x' and 'y' are parameters`
 
-        return x + y
-    }
+```
+    return x + y
+}
+```
 
 -
 
@@ -1921,9 +2077,9 @@ CopyEdit\
 ***
 
 
-## **2. Types of Functions in Go**
+## **2. Types of Functions in Go** {#h.903h9946jscn}
 
-### **i. Standard (Named) Function**
+### **i. Standard (Named) Function** {#h.xfrlfws7tj2b}
 
 A function with a name, defined in the usual way.\
 \
@@ -1933,13 +2089,15 @@ A function with a name, defined in the usual way.\
 CopyEdit\
 `func add(x int, y int) int {  // Named function`
 
-        return x + y
-    }
+```
+    return x + y
+}
+```
 
 -
 
 
-### **ii. Anonymous Function**
+### **ii. Anonymous Function** {#h.oaumagcbcelz}
 
 A function defined **without a name**. Often used in **callbacks** or **function expressions**.\
 \
@@ -1952,7 +2110,7 @@ CopyEdit\
 -
 
 
-### **iii. IIFE (Immediately Invoked Function Expression)**
+### **iii. IIFE (Immediately Invoked Function Expression)** {#h.1l41fohjgo7r}
 
 An **anonymous function** that is immediately invoked after it's defined.\
 \
@@ -1962,13 +2120,15 @@ An **anonymous function** that is immediately invoked after it's defined.\
 CopyEdit\
 `func() {`
 
-        fmt.Println("IIFE in Go!")
-    }()
+```
+    fmt.Println("IIFE in Go!")
+}()
+```
 
 -
 
 
-### **iv. Function Expression**
+### **iv. Function Expression** {#h.acuq49kefd7j}
 
 A function can be **assigned to a variable** and invoked later.\
 \
@@ -1978,14 +2138,16 @@ A function can be **assigned to a variable** and invoked later.\
 CopyEdit\
 `sum := func(x, y int) int {`
 
-        return x + y
-    }
-    fmt.Println(sum(5, 3))  // Calling the function stored in sum
+```
+    return x + y
+}
+fmt.Println(sum(5, 3))  // Calling the function stored in sum
+```
 
 ***
 
 
-## **5. Functional Programming Paradigm**
+## **5. Functional Programming Paradigm** {#h.6ab7nfmkdj9o}
 
 - **Functional programming** treats computation as the evaluation of functions, avoiding mutable state.
 
@@ -2000,7 +2162,7 @@ CopyEdit\
 ***
 
 
-# first-class citizen
+# first-class citizen {#h.5j8sq559aze1}
 
 In Go, the term **"first-class citizen"** refers to entities that can be:
 
@@ -2017,7 +2179,7 @@ In Go, **functions are first-class citizens**, meaning they can be treated just 
 ***
 
 
-## **✅ What Does This Mean for Functions in Go?**
+## **✅ What Does This Mean for Functions in Go?** {#h.d91hlawo5205}
 
 Being first-class citizens allows functions in Go to:​
 
@@ -2027,9 +2189,11 @@ Being first-class citizens allows functions in Go to:​
 Copy\
 `add := func(x, y int) int {`
 
-        return x + y
-    }
-    fmt.Println(add(5, 3)) // Output: 8
+```
+    return x + y
+}
+fmt.Println(add(5, 3)) // Output: 8
+```
 
 1.
 
@@ -2039,7 +2203,9 @@ Copy\
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeddXmmXiIO8NdaCdk7PKmY1MiF_uF8RMdAC179WRLhamnRr5RrG4w8xUTMpI3yvrWyAe_ZMqUbWXDQc6trtjdf331ahrJQJy6NV5IdSjfE9aZ8tfwSuwAkCttKiUUusp1_GiPm?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
-    // Output: 7
+```
+// Output: 7
+```
 
 2.
 
@@ -2049,7 +2215,9 @@ Copy\
 
 ` `![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdEyhJT5vpzhv4hRjBbcmsbnTmw8TvDpAW4X5nJCaXh1Rrj4NwYpnhbDa8MqoQ3l5mgWGmA7Gt6pkt-4QNpj5S3hFs5hrbDR0ACFQgvypAmFJHhmHvxThlj7VtVs0pV51_Oj_Vfdg?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
-    // Output: 7
+```
+// Output: 7
+```
 
 3.
 
@@ -2059,17 +2227,19 @@ Copy\
 Copy\
 `operations := map[string]func(int, int) int{`
 
-        "add":      add,
-        "subtract": func(x, y int) int { return x - y },
-    }
-    fmt.Println(operations["add"](5, 3)) // Output: 8
+```
+    "add":      add,
+    "subtract": func(x, y int) int { return x - y },
+}
+fmt.Println(operations["add"](5, 3)) // Output: 8
+```
 
 4.
 
 ***
 
 
-## **🧠 Why Does This Matter?**
+## **🧠 Why Does This Matter?** {#h.u3kdxcxedhzm}
 
 Treating functions as first-class citizens in Go enables:​
 
@@ -2082,7 +2252,7 @@ Treating functions as first-class citizens in Go enables:​
 - **Flexible APIs**: Creating APIs that can accept various behaviors through function parameters.​
 
 
-### 1. **First-Class Citizen**
+### 1. **First-Class Citizen** {#h.iigpldfxy5wh}
 
 - **Definition**:\
   A **first-class citizen** (or **first-class entity**) in a programming language is an entity (e.g., integers, strings, structs) that can be:
@@ -2106,26 +2276,26 @@ Treating functions as first-class citizens in Go enables:​
 
 - Download
 
-<!---->
+```
+// Assign a function to a variable
+subtract := func(a, b int) int {
+    return a - b
+}
+fmt.Println(subtract(5, 3)) // Output: 2
 
-    // Assign a function to a variable
-    subtract := func(a, b int) int {
-        return a - b
-    }
-    fmt.Println(subtract(5, 3)) // Output: 2
+// Store functions in a slice
+operations := []func(int, int) int{
+    func(a, b int) int { return a + b },
+    func(a, b int) int { return a * b },
+}
 
-    // Store functions in a slice
-    operations := []func(int, int) int{
-        func(a, b int) int { return a + b },
-        func(a, b int) int { return a * b },
-    }
-
-    fmt.Println(operations[0](4, 5)) // Output: 9
+fmt.Println(operations[0](4, 5)) // Output: 9
+```
 
 ***
 
 
-### 2. **First-Class Function**
+### 2. **First-Class Function** {#h.8rkxj56j6wy3}
 
 - **Definition**:\
   A **first-class function** is a direct consequence of functions being **first-class citizens**. It emphasizes that functions can be:
@@ -2145,21 +2315,21 @@ Treating functions as first-class citizens in Go enables:​
 
 - Download
 
-<!---->
+```
+// Pass a function as an argument
+func apply(a, b int, op func(int, int) int) int {
+    return op(a, b)
+}
 
-    // Pass a function as an argument
-    func apply(a, b int, op func(int, int) int) int {
-        return op(a, b)
-    }
+result := apply(10, 4, subtract)
 
-    result := apply(10, 4, subtract)
-
-    fmt.Println(result) // Output: 6
+fmt.Println(result) // Output: 6
+```
 
 ***
 
 
-### 3. **First-Order Function**
+### 3. **First-Order Function** {#h.r2vh98jg1a3o}
 
 - **Definition**:\
   A **first-order function** is a function that:
@@ -2180,19 +2350,19 @@ Treating functions as first-class citizens in Go enables:​
 
 - Download
 
-<!---->
+```
+// A first-order function
+func square(n int) int {
+    return n * n
+}
 
-    // A first-order function
-    func square(n int) int {
-        return n * n
-    }
-
-    // It works with data (integers), not functions.
+// It works with data (integers), not functions.
+```
 
 ***
 
 
-### Key Differences
+### Key Differences {#h.6gwbeh2z8n2n}
 
 |                          |                                           |                                                    |
 | ------------------------ | ----------------------------------------- | -------------------------------------------------- |
@@ -2204,7 +2374,7 @@ Treating functions as first-class citizens in Go enables:​
 ***
 
 
-### Why These Terms Matter
+### Why These Terms Matter {#h.bppzkmid03e}
 
 1. **First-Class Citizen** is a **language design concept**.
 
@@ -2221,7 +2391,7 @@ Treating functions as first-class citizens in Go enables:​
 ***
 
 
-### Common Confusions Clarified
+### Common Confusions Clarified {#h.ony5rvecm6au}
 
 1. **"First-Class Function" vs "First-Class Citizen"**:
 
@@ -2241,14 +2411,14 @@ Treating functions as first-class citizens in Go enables:​
 
 
 
-## **📌 Closures in Go**
+## **📌 Closures in Go** {#h.2b1fqy4wsxwj}
 
-### **🔍 What is a Closure?**
+### **🔍 What is a Closure?** {#h.bjpf2v7puf31}
 
 A **closure** is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense, the function is "bound" to the variables.​
 
 
-### **🧠 Key Points:**
+### **🧠 Key Points:** {#h.csqwgfcqh21x}
 
 - **Function Inside Function**: Closures are functions defined within other functions.
 
@@ -2257,25 +2427,27 @@ A **closure** is a function value that references variables from outside its bod
 - **State Preservation**: Closures can maintain state between function calls.​
 
 
-### **🧪 Example:**
+### **🧪 Example:** {#h.e3kh0eavvg28}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func counter() func() int {
-        count := 0
-        return func() int {
-            count++
-            return count
-        }
-    }
+func counter() func() int {
+    count := 0
+    return func() int {
+        count++
+        return count
+    }
+}
 
-    func main() {
-        next := counter()
-        fmt.Println(next()) // Output: 1
-        fmt.Println(next()) // Output: 2
-    }
+func main() {
+    next := counter()
+    fmt.Println(next()) // Output: 1
+    fmt.Println(next()) // Output: 2
+}
+```
 
 In this example:
 
@@ -2286,14 +2458,14 @@ In this example:
 ***
 
 
-## **📌 Escape Analysis in Go**
+## **📌 Escape Analysis in Go** {#h.yktglspwiob2}
 
-### **🔍 What is Escape Analysis?**
+### **🔍 What is Escape Analysis?** {#h.tilysgd8olo9}
 
 **Escape analysis** is a process by which the Go compiler determines whether variables can be safely allocated on the stack or need to be allocated on the heap.​[DEV Community+5Syntactic-Sugar+5Welcome!+5](https://syntactic-sugar.dev/blog/nested-route/go-escape-analysis?utm_source=chatgpt.com)
 
 
-### **🧠 Key Points:**
+### **🧠 Key Points:** {#h.8duqtcc74otw}
 
 - **Stack Allocation**: Fast and efficient; used when variables do not escape the function scope.
 
@@ -2302,18 +2474,20 @@ In this example:
 - **Performance Implications**: Heap allocations are more expensive due to garbage collection overhead.​[Syntactic-Sugar](https://syntactic-sugar.dev/blog/nested-route/go-escape-analysis?utm_source=chatgpt.com)
 
 
-### **🧪 Example:**
+### **🧪 Example:** {#h.pvxfiaxgtz74}
 
 go
 
 CopyEdit
 
-    package main
+```
+package main
 
-    func escape() *int {
-        x := 42
-        return &x
-    }
+func escape() *int {
+    x := 42
+    return &x
+}
+```
 
 In this example:
 
@@ -2322,7 +2496,7 @@ In this example:
 - The Go compiler allocates `x` on the heap to ensure it remains valid after the function returns.​[Medium](https://medium.com/%40pranoy1998k/understanding-escape-analysis-in-go-b2db76be58f0?utm_source=chatgpt.com)
 
 
-### **🔧 Checking Escape Analysis:**
+### **🔧 Checking Escape Analysis:** {#h.6maewo3pj4q7}
 
 Use the following command to see escape analysis decisions:​[Scribd+4SlideShare+4Dev Genius+4](https://www.slideshare.net/cssa/escape-analysis-paralysis?utm_source=chatgpt.com)
 
@@ -2330,30 +2504,34 @@ bash
 
 CopyEdit
 
-    go build -gcflags="-m" yourfile.go
+```
+go build -gcflags="-m" yourfile.go
+```
 
 This will output messages indicating which variables are allocated on the heap.
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegAqfjFqi2FFk5jMLxchb0PxW-H1PMSy6Iau4gXKtPcHlU2LtXKTZHanBUcADxKpKeYXtBqf1308P5KFqjR1BNegwYOu46cYZKd0zVechZaV2JqVy-BUgqJ3vb0WHk59jbfLuafA?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
 
-## **🧠 What’s Happening in the Code?**
+## **🧠 What’s Happening in the Code?** {#h.qq82jhun2xq6}
 
-### **✅** `outer()` **returns a closure — a function that "remembers" its outer variables.**
+### **✅** `outer()` **returns a closure — a function that "remembers" its outer variables.** {#h.6omcwrhedoe8}
 
-    func outer() func() {
-        money := 100
-        age := 30
-        ...
-        show := func() {
-            money = money + a + p
-            fmt.Println(money)
-        }
-        return show
-    }
+```
+func outer() func() {
+    money := 100
+    age := 30
+    ...
+    show := func() {
+        money = money + a + p
+        fmt.Println(money)
+    }
+    return show
+}
+```
 
 
-### **🔍 Inside** `outer()`**:**
+### **🔍 Inside** `outer()`**:** {#h.2eh8kr1losb0}
 
 - `money` and `age` are **local variables**.
 
@@ -2364,20 +2542,22 @@ This will output messages indicating which variables are allocated on the heap.
 ***
 
 
-## **🔁 call() Function**
+## **🔁 call() Function** {#h.wgplizdjo984}
 
 This part demonstrates **closure instances maintaining their own state**:
 
-    incr1 := outer()
-    incr1()
-    incr1()
+```
+incr1 := outer()
+incr1()
+incr1()
 
-    incr2 := outer()
-    incr2()
-    incr2()
+incr2 := outer()
+incr2()
+incr2()
+```
 
 
-### **Key Observations:**
+### **Key Observations:** {#h.aw2fcicsqkqs}
 
 - `incr1` and `incr2` are **two separate closures** from two separate calls to `outer()`.
 
@@ -2392,23 +2572,23 @@ This part demonstrates **closure instances maintaining their own state**:
 ***
 
 
-## **🧠 Concepts at Play**
+## **🧠 Concepts at Play** {#h.o4a1uqgfy565}
 
-### **✅ 1. Closure**
+### **✅ 1. Closure** {#h.pzgbyvqgv87q}
 
 - `show` is a closure defined inside `outer()`.
 
 - It "remembers" and modifies the variable `money` even after `outer()` has returned.
 
 
-### **✅ 2. State Preservation**
+### **✅ 2. State Preservation** {#h.kwxa6xpfwlxy}
 
 - Each call to `outer()` creates a **new** `money`.
 
 - That `money` is preserved and updated **across multiple calls to the same closure**.
 
 
-### **✅ 3. Escape Analysis (Internally)**
+### **✅ 3. Escape Analysis (Internally)** {#h.kw4z18wgcroc}
 
 - Since `money` is used **inside a returned function**, Go **moves** `money` **to the heap**.
 
@@ -2416,14 +2596,18 @@ This part demonstrates **closure instances maintaining their own state**:
 
 Command to verify:
 
-    go build -gcflags="-m" yourfile.go
+```
+go build -gcflags="-m" yourfile.go
+```
 
 You’ll likely see:
 
-    ... escapes to heap
+```
+... escapes to heap
+```
 
 
-### **✅ Closure (your definition, improved):**
+### **✅ Closure (your definition, improved):** {#h.azdz4m4w8v7c}
 
 A **closure** is a function **defined inside another function** that can **use and remember variables** from the outer (enclosing) function's scope — **even after the outer function has finished running**.
 
@@ -2431,25 +2615,27 @@ A **closure** is a function **defined inside another function** that can **use a
 
 **Example:**
 
-    func outer() func() int {
-        x := 0
-        return func() int {
-            x++
-            return x
-        }
-    }
+```
+func outer() func() int {
+    x := 0
+    return func() int {
+        x++
+        return x
+    }
+}
+```
 
 Each call to the returned function still has access to `x`, even though `outer()` is done.
 
 ***
 
 
-### **✅ Escape Analysis (your definition, improved):**
+### **✅ Escape Analysis (your definition, improved):** {#h.z22jc7ryiuyj}
 
 **Escape analysis** is a compiler process that checks **where** a variable should live — **stack** or **heap**.
 
 
-### **🔍 Rules:**
+### **🔍 Rules:** {#h.7e03jryedhy9}
 
 - ✅ If the variable is **only used inside** the function and **doesn't outlive it** → **stack**.
 
@@ -2457,17 +2643,19 @@ Each call to the returned function still has access to `x`, even though `outer()
 
 **Example:**
 
-    func foo() *int {
-        x := 42
-        return &x  // x escapes, gets stored on the heap
-    }
+```
+func foo() *int {
+    x := 42
+    return &x  // x escapes, gets stored on the heap
+}
+```
 
 **Why?** Because the pointer to `x` will be used **after** `foo()` **returns**, so it can’t be on the stack (which is temporary). The Go compiler detects this and **allocates** `x` **on the heap**.
 
 ***
 
 
-### **📝 Summary in Your Words (Corrected):**
+### **📝 Summary in Your Words (Corrected):** {#h.8ns5juxi4r2l}
 
 ✅ **Closure**: A function **inside another function** that can **access and remember variables** from its parent, even after the parent function ends.
 
@@ -2477,31 +2665,35 @@ Each call to the returned function still has access to `x`, even though `outer()
 
 
 
-## **🧱 What is a Struct in Go?**
+## **🧱 What is a Struct in Go?** {#h.s5us8nvxe2z0}
 
 - A `struct` is a **composite data type** that groups related variables (called **fields**).
 
 - You can use it to model **real-world entities** like users, products, etc.
 
 
-### **🧠 Syntax:**
+### **🧠 Syntax:** {#h.az4t3khrwqy0}
 
-    type StructName struct {
-        field1 type
-        field2 type
-    }
+```
+type StructName struct {
+    field1 type
+    field2 type
+}
+```
 
 ***
 
 
-## **🧑‍💻 Your Code Breakdown**
+## **🧑‍💻 Your Code Breakdown** {#h.z60lhg1g1pip}
 
-### **✅ Step 1: Define a Struct**
+### **✅ Step 1: Define a Struct** {#h.xbrughjj24xe}
 
-    type User struct {
-        Name string  // field or property
-        Age  int
-    }
+```
+type User struct {
+    Name string  // field or property
+    Age  int
+}
+```
 
 - `User` is a **struct type**.
 
@@ -2510,24 +2702,26 @@ Each call to the returned function still has access to `x`, even though `outer()
 ***
 
 
-### **✅ Step 2: Create Struct Instances**
+### **✅ Step 2: Create Struct Instances** {#h.4e1fe4a6it6h}
 
-    var user1 User  // Declaration (zero values: "" and 0)
-    user1 = User{
-        Name: "Habib",
-        Age:  30,
-    }
+```
+var user1 User  // Declaration (zero values: "" and 0)
+user1 = User{
+    Name: "Habib",
+    Age:  30,
+}
+```
 
 - `user1` is **declared using var** and then assigned values later.
 
 - This way is **explicit and readable**.
 
-<!---->
-
-    user2 := User{
-        Name: "Roki",
-        Age:  16,
-    }
+```
+user2 := User{
+    Name: "Roki",
+    Age:  16,
+}
+```
 
 - `user2` uses **short declaration** (`:=`) — more compact.
 
@@ -2538,16 +2732,18 @@ Each call to the returned function still has access to `x`, even though `outer()
 Great question! In Go (Golang), you **must** specify the type (`User`) when using a composite literal _unless_ you are declaring the variable and assigning at the same time.
 
 
-## **Correct Ways:**
+## **Correct Ways:** {#h.64dcbwiesztw}
 
 **1. Declare and assign in one line**
 
 go
 
-    user1 := User{
-        Name: "Habib",
-        Age:  30,
-    }
+```
+user1 := User{
+    Name: "Habib",
+    Age:  30,
+}
+```
 
 _Here, Go knows you're making a_ `User`_, so you write_ `User{...}`_._
 
@@ -2555,35 +2751,41 @@ _Here, Go knows you're making a_ `User`_, so you write_ `User{...}`_._
 
 go
 
-    var user1 User  // Zero-value struct
-    user1 = User{
-        Name: "Habib",
-        Age:  30,
-    }
+```
+var user1 User  // Zero-value struct
+user1 = User{
+    Name: "Habib",
+    Age:  30,
+}
+```
 
 _Again, you must specify the type on the right (_`User{...}`_), even though_ `user1` _is already declared._
 
 
-## **Incorrect way (won't compile):**
+## **Incorrect way (won't compile):** {#h.c2jkom8ao5mw}
 
 go
 
-    var user1 User
-    user1 = {
-        Name: "Habib",
-        Age:  30,
-    }
+```
+var user1 User
+user1 = {
+    Name: "Habib",
+    Age:  30,
+}
+```
 
 **Error:**
 
 text
 
-    missing type in composite literal
+```
+missing type in composite literal
+```
 
 Go needs to know the type when creating a struct value. The `{...}` form alone is **not valid** — Go doesn't infer the type just from the left side.
 
 
-## **Summary table:**
+## **Summary table:** {#h.l9ibgc3s393w}
 
 |                                         |            |             |
 | :-------------------------------------: | :--------: | :---------: |
@@ -2599,7 +2801,7 @@ If you have any follow-up questions about struct literals or Go syntax, let me k
 ***
 
 
-## **📘 Useful Notes for Beginners**
+## **📘 Useful Notes for Beginners** {#h.6hervelqjkjj}
 
 |                    |                                                                                      |
 | :----------------: | :----------------------------------------------------------------------------------: |
@@ -2612,21 +2814,25 @@ If you have any follow-up questions about struct literals or Go syntax, let me k
 ***
 
 
-### **🧾 Example: Access and Print**
+### **🧾 Example: Access and Print** {#h.lnl714t8ddtc}
 
 You can print or access struct fields like this:
 
-    fmt.Println(user1.Name)  // Output: Habib
-    fmt.Println(user2.Age)   // Output: 16
+```
+fmt.Println(user1.Name)  // Output: Habib
+fmt.Println(user2.Age)   // Output: 16
+```
 
 Or even:
 
-    fmt.Printf("%+v\n", user1)  // Output: {Name:Habib Age:30}
+```
+fmt.Printf("%+v\n", user1)  // Output: {Name:Habib Age:30}
+```
 
 ***
 
 
-## **🧠 Summary Cheat Sheet**
+## **🧠 Summary Cheat Sheet** {#h.y4z87icpoj9g}
 
 |                       |                                               |
 | :-------------------: | :-------------------------------------------: |
@@ -2640,14 +2846,14 @@ Or even:
 
 
 
-## **📘 Receiver Functions in Go**
+## **📘 Receiver Functions in Go** {#h.i70wm1ehqemw}
 
-### **What is a Receiver Function?**
+### **What is a Receiver Function?** {#h.aykzgcfi29ii}
 
 In Go, **methods** (functions that belong to a type) are defined with a **receiver**. The receiver is the variable that the method operates on. It's like the "this" keyword in other OOP languages (like Java), but Go uses a more explicit receiver syntax.
 
 
-### **🧠 Key Points:**
+### **🧠 Key Points:** {#h.6szxe169vmp7}
 
 - **Receiver**: It’s the value (or pointer) that the method acts on.
 
@@ -2658,11 +2864,13 @@ In Go, **methods** (functions that belong to a type) are defined with a **receiv
 ***
 
 
-### **🧑‍💻 Receiver Syntax:**
+### **🧑‍💻 Receiver Syntax:** {#h.yvz7k521gx4c}
 
-    func (receiverName TypeName) methodName() {
-        // method body
-    }
+```
+func (receiverName TypeName) methodName() {
+    // method body
+}
+```
 
 - `receiverName`: A name for the variable that will hold the receiver value. It’s usually a short, descriptive name like `u` for a `User` type.
 
@@ -2671,43 +2879,47 @@ In Go, **methods** (functions that belong to a type) are defined with a **receiv
 - `methodName`: The name of the method (the function name).
 
 
-### **Example of a Receiver Function:**
+### **Example of a Receiver Function:** {#h.prckzd5ikxl1}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    type User struct {
-        Name string
-        Age  int
-    }
+type User struct {
+    Name string
+    Age  int
+}
 
-    // Method with a receiver
-    func (u User) Greet() {
-        fmt.Println("Hello, my name is", u.Name)
-    }
+// Method with a receiver
+func (u User) Greet() {
+    fmt.Println("Hello, my name is", u.Name)
+}
 
-    func main() {
-        user1 := User{Name: "Habib", Age: 30}
-        user1.Greet()  // Calling the Greet method on user1
-    }
+func main() {
+    user1 := User{Name: "Habib", Age: 30}
+    user1.Greet()  // Calling the Greet method on user1
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.hilpo89the4x}
 
 - `Greet()` is a **method** that has a receiver `(u User)`. The `u` is a **value receiver**, meaning it works with a copy of the `User` struct.
 
 - Inside the method, `u.Name` refers to the `Name` field of the `User` struct.
 
 
-### **Output:**
+### **Output:** {#h.7k0k391dcbw1}
 
-    Hello, my name is Habib
+```
+Hello, my name is Habib
+```
 
 ***
 
 
-## **🧠 What is a Receiver?**
+## **🧠 What is a Receiver?** {#h.ax2mcpwa16h}
 
 A receiver can either be:
 
@@ -2718,24 +2930,28 @@ A receiver can either be:
 ***
 
 
-### **🧑‍💻 Value Receiver vs Pointer Receiver**
+### **🧑‍💻 Value Receiver vs Pointer Receiver** {#h.zd903re8juk2}
 
-#### **Value Receiver:**
+#### **Value Receiver:** {#h.ut9g2mdx711z}
 
-    func (u User) PrintAge() {
-        fmt.Println("Age:", u.Age)
-    }
+```
+func (u User) PrintAge() {
+    fmt.Println("Age:", u.Age)
+}
+```
 
 - When using a **value receiver**, a **copy** of `u` is passed to the method.
 
 - The method **cannot modify** the original struct fields outside the method (because it's a copy).
 
 
-#### **Pointer Receiver:**
+#### **Pointer Receiver:** {#h.33two6u839b7}
 
-    func (u *User) SetAge(age int) {
-        u.Age = age  // Modifies the original struct
-    }
+```
+func (u *User) SetAge(age int) {
+    u.Age = age  // Modifies the original struct
+}
+```
 
 - A **pointer receiver** allows the method to modify the **original** struct values.
 
@@ -2744,41 +2960,45 @@ A receiver can either be:
 ***
 
 
-### **🧑‍💻 Full Example with Both Receivers:**
+### **🧑‍💻 Full Example with Both Receivers:** {#h.cw0jnn8kxqz7}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    type User struct {
-        Name string
-        Age  int
-    }
+type User struct {
+    Name string
+    Age  int
+}
 
-    // Method with value receiver
-    func (u User) Greet() {
-        fmt.Println("Hello, my name is", u.Name)
-    }
+// Method with value receiver
+func (u User) Greet() {
+    fmt.Println("Hello, my name is", u.Name)
+}
 
-    // Method with pointer receiver
-    func (u *User) SetAge(age int) {
-        u.Age = age  // Modifies the original struct
-    }
+// Method with pointer receiver
+func (u *User) SetAge(age int) {
+    u.Age = age  // Modifies the original struct
+}
 
-    func main() {
-        user1 := User{Name: "Habib", Age: 30}
+func main() {
+    user1 := User{Name: "Habib", Age: 30}
 
-        user1.Greet()  // Value receiver (does not modify user1)
-        
-        user1.SetAge(35)  // Pointer receiver (modifies user1)
-        fmt.Println("New Age:", user1.Age)  // Output: New Age: 35
-    }
+    user1.Greet()  // Value receiver (does not modify user1)
+    
+    user1.SetAge(35)  // Pointer receiver (modifies user1)
+    fmt.Println("New Age:", user1.Age)  // Output: New Age: 35
+}
+```
 
 
-### **Output:**
+### **Output:** {#h.ku5oofa5w8b}
 
-    Hello, my name is Habib
-    New Age: 35
+```
+Hello, my name is Habib
+New Age: 35
+```
 
 **Explanation**:
 
@@ -2789,7 +3009,7 @@ A receiver can either be:
 ***
 
 
-### **🚫 What You Can’t Do**
+### **🚫 What You Can’t Do** {#h.gsfqgb91y2ku}
 
 You **cannot define methods directly** on built-in types like `int`, `float64`, `bool`, etc. without creating an alias or a new custom type.
 
@@ -2799,20 +3019,22 @@ go
 
 Copy
 
-    package main
+```
+package main
 
-    // Error: Methods can't be defined on built-in types like int directly
-    func (n int) Square() int {
-        return n * n
-    }
+// Error: Methods can't be defined on built-in types like int directly
+func (n int) Square() int {
+    return n * n
+}
+```
 
 
-### **Why this happens:**
+### **Why this happens:** {#h.jw01v36i6g1o}
 
 - **Go doesn’t allow method definitions on primitive types directly**. You must create a **new named type** or an **alias** to attach methods to it.
 
 
-### **🧑‍💻 Receiver Functions for Basic Types (e.g.,** `int`**,** `bool`**)**
+### **🧑‍💻 Receiver Functions for Basic Types (e.g.,** `int`**,** `bool`**)** {#h.3on5t35qecix}
 
 In Go, you **can define methods** for basic types (like `int`, `bool`, `float64`, etc.), but there are a few important things to note:
 
@@ -2823,34 +3045,36 @@ In Go, you **can define methods** for basic types (like `int`, `bool`, `float64`
 ***
 
 
-### **🧠 How to Define Methods for Basic Types**
+### **🧠 How to Define Methods for Basic Types** {#h.daphn67rinfl}
 
 Let’s break it down with an example.
 
 
-#### **Step 1: Create a custom type (aliasing a built-in type)**
+#### **Step 1: Create a custom type (aliasing a built-in type)** {#h.1tl22lj54vm0}
 
 Here, we create a custom type `MyInt` that aliases `int`. Then, we can define methods for `MyInt`.
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Alias for int
-    type MyInt int
+// Alias for int
+type MyInt int
 
-    // Define method for MyInt (which is an alias of int)
-    func (m MyInt) Square() int {
-        return int(m) * int(m)
-    }
+// Define method for MyInt (which is an alias of int)
+func (m MyInt) Square() int {
+    return int(m) * int(m)
+}
 
-    func main() {
-        var a MyInt = 4
-        fmt.Println(a.Square()) // Output: 16
-    }
+func main() {
+    var a MyInt = 4
+    fmt.Println(a.Square()) // Output: 16
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.e4eomx85punt}
 
 - **Custom type** `MyInt` is an alias for the built-in `int` type.
 
@@ -2859,29 +3083,31 @@ Here, we create a custom type `MyInt` that aliases `int`. Then, we can define me
 ***
 
 
-#### **Step 2: Methods on** `bool` **or** `float64`
+#### **Step 2: Methods on** `bool` **or** `float64` {#h.fkrbybtg5tmv}
 
 You can similarly define methods for other basic types. Here’s an example of a `bool` type:
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Alias for bool
-    type MyBool bool
+// Alias for bool
+type MyBool bool
 
-    // Define method for MyBool
-    func (b MyBool) Negate() bool {
-        return !b
-    }
+// Define method for MyBool
+func (b MyBool) Negate() bool {
+    return !b
+}
 
-    func main() {
-        var status MyBool = true
-        fmt.Println(status.Negate()) // Output: false
-    }
+func main() {
+    var status MyBool = true
+    fmt.Println(status.Negate()) // Output: false
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.1yw0he1tax6a}
 
 - `MyBool` is an alias for `bool`, and we define the method `Negate()` to return the negation of the boolean value.
 
@@ -2891,45 +3117,49 @@ You can similarly define methods for other basic types. Here’s an example of a
 Yes, **receiver functions** are **only available for custom types** in Go. You cannot define methods directly for built-in types like `int`, `float64`, `bool`, etc. But you can create a **custom type** (e.g., an alias or a struct) based on a built-in type, and then define methods for that custom type.
 
 
-### **Why can’t you define methods for built-in types?**
+### **Why can’t you define methods for built-in types?** {#h.aopo7rsq5ept}
 
 Go’s design avoids method definitions for primitive types like `int` and `bool` to keep the language simpler and more predictable. If you want to define methods, you need to define a **custom type**.
 
 
-### **For Example:**
+### **For Example:** {#h.86778g8qllee}
 
-#### **❌ Not allowed on built-in types:**
+#### **❌ Not allowed on built-in types:** {#h.4bincztxuyzt}
 
-    package main
+```
+package main
 
-    func (x int) Double() int {  // Error: Cannot define methods on built-in types like int
-        return x * 2
-    }
+func (x int) Double() int {  // Error: Cannot define methods on built-in types like int
+    return x * 2
+}
+```
 
 
-#### **✅ Allowed on custom types:**
+#### **✅ Allowed on custom types:** {#h.w3qa5z4llyyz}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    // Custom type
-    type MyInt int
+// Custom type
+type MyInt int
 
-    // Method for the custom type MyInt
-    func (x MyInt) Double() int {
-        return int(x) * 2
-    }
+// Method for the custom type MyInt
+func (x MyInt) Double() int {
+    return int(x) * 2
+}
 
-    func main() {
-        var a MyInt = 10
-        fmt.Println(a.Double())  // Output: 20
-    }
+func main() {
+    var a MyInt = 10
+    fmt.Println(a.Double())  // Output: 20
+}
+```
 
 ***
 
 
-### **🔑 Summary:**
+### **🔑 Summary:** {#h.xqm0vhyx8bjm}
 
 - **Receiver functions** are **only available** for **custom types** (types that you define using `type`).
 
@@ -2943,25 +3173,27 @@ Go’s design avoids method definitions for primitive types like `int` and `bool
 
 
 
-# **📚 Arrays in Go - Beginner’s Notes**
+# **📚 Arrays in Go - Beginner’s Notes** {#h.4x5rf2yh4qgx}
 
-### **🧠 What is an Array?**
+### **🧠 What is an Array?** {#h.3qmg49pyebeu}
 
 An **array** in Go is a fixed-size collection of elements of the same type. Once you define the size of an array, it cannot grow or shrink.
 
 
-### **Key Points:**
+### **Key Points:** {#h.534cilv731bm}
 
 - **Fixed size**: The size of the array is defined when it is declared, and cannot be changed later.
 
 - **Homogeneous**: All elements in the array must be of the same type (e.g., `int`, `string`, etc.).
 
 
-### **🧑‍💻 Array Declaration Syntax**
+### **🧑‍💻 Array Declaration Syntax** {#h.42ugewkl3sw4}
 
 Here’s the general syntax for declaring an array:
 
-    var arrayName [size]Type
+```
+var arrayName [size]Type
+```
 
 - `size`: The number of elements the array can hold.
 
@@ -2970,37 +3202,45 @@ Here’s the general syntax for declaring an array:
 ***
 
 
-### **🧑‍💻 Ways to Declare and Initialize Arrays**
+### **🧑‍💻 Ways to Declare and Initialize Arrays** {#h.ucgj43prqq1n}
 
-### **1. Declaring an Array (Zero Value Initialization)**
+### **1. Declaring an Array (Zero Value Initialization)** {#h.c1uxnt20beg3}
 
 When you declare an array in Go, if you don’t explicitly initialize it, the elements will be initialized to their **zero value** (e.g., `0` for `int`, `false` for `bool`, and `""` for `string`).
 
-    var arr [3]int  // Array of 3 integers, all initialized to 0
+```
+var arr [3]int  // Array of 3 integers, all initialized to 0
+```
 
 
-### **2. Initializing an Array with Values**
+### **2. Initializing an Array with Values** {#h.vz74o6cmniod}
 
 You can initialize an array **at the time of declaration** by providing a list of values.
 
-    var arr = [3]int{1, 2, 3}  // Array with 3 integers
+```
+var arr = [3]int{1, 2, 3}  // Array with 3 integers
+```
 
 - The size (`[3]`) is automatically inferred from the number of elements.
 
 
-### **3. Using** `...` **to Let Go Infer the Size**
+### **3. Using** `...` **to Let Go Infer the Size** {#h.tqgatx1066ot}
 
 If you don’t want to specify the size of the array, you can use `...`, and Go will automatically determine the array's size based on the number of elements you provide.
 
-    var arr = [...]int{1, 2, 3, 4}  // Array of 4 integers, size inferred
+```
+var arr = [...]int{1, 2, 3, 4}  // Array of 4 integers, size inferred
+```
 
 
-### **4. Array Initialization with Specific Indices**
+### **4. Array Initialization with Specific Indices** {#h.l1trq6s93wku}
 
 You can initialize specific elements of an array by specifying the index.
 
-    arr := [5]int{1: 10, 3: 20}  // Array of size 5, with values at index 1 and 3
-    fmt.Println(arr)  // Output: [0 10 0 20 0]
+```
+arr := [5]int{1: 10, 3: 20}  // Array of size 5, with values at index 1 and 3
+fmt.Println(arr)  // Output: [0 10 0 20 0]
+```
 
 In this example:
 
@@ -3009,56 +3249,64 @@ In this example:
 - All other elements are initialized to `0`.
 
 
-### **5. Using Arrays as Function Parameters**
+### **5. Using Arrays as Function Parameters** {#h.r7yx6fjwuvm2}
 
 You can also pass arrays as **function parameters** in Go, but remember that Go passes arrays **by value** (copies the array).
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func sum(arr [3]int) int {
-        return arr[0] + arr[1] + arr[2]
-    }
+func sum(arr [3]int) int {
+    return arr[0] + arr[1] + arr[2]
+}
 
-    func main() {
-        arr := [3]int{1, 2, 3}
-        result := sum(arr)
-        fmt.Println(result)  // Output: 6
-    }
+func main() {
+    arr := [3]int{1, 2, 3}
+    result := sum(arr)
+    fmt.Println(result)  // Output: 6
+}
+```
 
 - Here, the array is passed by value, meaning any changes to `arr` inside the `sum` function won’t affect the original array.
 
 
-### **6. Arrays with Different Types (Multi-Dimensional Arrays)**
+### **6. Arrays with Different Types (Multi-Dimensional Arrays)** {#h.flxwuw4povbz}
 
 Go supports multi-dimensional arrays. These are arrays of arrays, like a **2D array**.
 
-    var matrix [2][3]int  // A 2D array (2 rows, 3 columns)
-    matrix[0][0] = 1
-    matrix[0][1] = 2
-    matrix[1][2] = 5
-    fmt.Println(matrix)
+```
+var matrix [2][3]int  // A 2D array (2 rows, 3 columns)
+matrix[0][0] = 1
+matrix[0][1] = 2
+matrix[1][2] = 5
+fmt.Println(matrix)
+```
 
 This will output:
 
-    [[1 2 0] [0 0 5]]
+```
+[[1 2 0] [0 0 5]]
+```
 
 
-### **7. Slicing Arrays**
+### **7. Slicing Arrays** {#h.syywyhs1fab8}
 
 Slices are more commonly used than arrays in Go, but it’s good to know how they relate. A **slice** is a dynamic view of an array. You can use slices to work with portions of an array.
 
-    arr := [5]int{1, 2, 3, 4, 5}
-    slice := arr[1:4]  // Slice from index 1 to 3 (4 is not included)
-    fmt.Println(slice)  // Output: [2 3 4]
+```
+arr := [5]int{1, 2, 3, 4, 5}
+slice := arr[1:4]  // Slice from index 1 to 3 (4 is not included)
+fmt.Println(slice)  // Output: [2 3 4]
+```
 
 - `arr[1:4]` gives you a slice from `arr[1]` to `arr[3]`.
 
 ***
 
 
-### **🧑‍💻 Summary of Array Declarations and Initializations**
+### **🧑‍💻 Summary of Array Declarations and Initializations** {#h.3kcq2whzhcgy}
 
 |                                      |                                             |                                  |
 | :----------------------------------: | :-----------------------------------------: | :------------------------------: |
@@ -3074,16 +3322,16 @@ Slices are more commonly used than arrays in Go, but it’s good to know how the
 ***
 
 
-### **📌 Key Differences Between Arrays and Slices in Go**
+### **📌 Key Differences Between Arrays and Slices in Go** {#h.dpoobmdsbn07}
 
 - **Arrays**: Fixed size. Once declared, you cannot change the size.
 
 - **Slices**: Dynamic size, more flexible and commonly used. You can append and resize slices.
 
 
-# **📚 Pointers in Go - Beginner’s Notes**
+# **📚 Pointers in Go - Beginner’s Notes** {#h.txunxdsjx0ba}
 
-### **🧠 What is a Pointer?**
+### **🧠 What is a Pointer?** {#h.o9w6e9yjlykj}
 
 A **pointer** is a variable that holds the **memory address** of another variable. Instead of holding the actual value, it points to the location in memory where the value is stored.
 
@@ -3092,14 +3340,16 @@ In Go, pointers allow you to **refer to and modify variables indirectly**.
 ***
 
 
-### **🧑‍💻 Declaring a Pointer**
+### **🧑‍💻 Declaring a Pointer** {#h.6ba6cvcqgg1t}
 
 To declare a pointer, you use the `*` (asterisk) operator, which denotes that the variable is a pointer to a specific type.
 
-    var p *int  // p is a pointer to an int
+```
+var p *int  // p is a pointer to an int
+```
 
 
-### **🧠 Understanding the Declaration:**
+### **🧠 Understanding the Declaration:** {#h.c5c8ok3p87o9}
 
 - `p` is a pointer of type `*int`, meaning it can point to an integer (`int`).
 
@@ -3108,187 +3358,207 @@ To declare a pointer, you use the `*` (asterisk) operator, which denotes that th
 ***
 
 
-### **🧑‍💻 Initializing Pointers**
+### **🧑‍💻 Initializing Pointers** {#h.88h6cezekw92}
 
 You can initialize a pointer by using the **address-of operator (**`&`**)**, which gives the address of a variable.
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        var x int = 42    // Regular variable
-        var p *int        // Pointer variable
+func main() {
+    var x int = 42    // Regular variable
+    var p *int        // Pointer variable
 
-        p = &x            // p now holds the address of x
+    p = &x            // p now holds the address of x
 
-        fmt.Println(p)     // Output: memory address of x
-        fmt.Println(*p)    // Output: 42 (dereferencing the pointer)
-    }
+    fmt.Println(p)     // Output: memory address of x
+    fmt.Println(*p)    // Output: 42 (dereferencing the pointer)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.joyowsza0v2e}
 
 - `p = &x`: This assigns the **memory address** of variable `x` to the pointer `p`.
 
 - `*p`: The `*` is used to **dereference** the pointer, meaning accessing the value at the memory address `p` is pointing to.
 
 
-### **Output:**
+### **Output:** {#h.ze672yt6yaud}
 
-    0x14000130030
-    42
+```
+0x14000130030
+42
+```
 
 ***
 
 
-### **🧑‍💻 Dereferencing a Pointer**
+### **🧑‍💻 Dereferencing a Pointer** {#h.h5acubhj2o7l}
 
 To access the value stored at the address a pointer is pointing to, we **dereference** the pointer using the `*` operator.
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        x := 10
-        p := &x       // p points to x
+func main() {
+    x := 10
+    p := &x       // p points to x
 
-        fmt.Println(*p)   // Dereferencing p to access the value of x, Output: 10
-        *p = 20          // Modifying the value of x using the pointer
-        fmt.Println(x)    // Output: 20
-    }
+    fmt.Println(*p)   // Dereferencing p to access the value of x, Output: 10
+    *p = 20          // Modifying the value of x using the pointer
+    fmt.Println(x)    // Output: 20
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.k81um9ky16t9}
 
 - `*p`: Dereferencing the pointer to get the value stored at the address `p` is pointing to.
 
 - `*p = 20`: This modifies the original value of `x` (through the pointer `p`).
 
 
-### **Output:**
+### **Output:** {#h.wkyavoib5m0m}
 
-    10
-    20
+```
+10
+20
+```
 
 ***
 
 
-### **🧑‍💻 Pointer to Structs**
+### **🧑‍💻 Pointer to Structs** {#h.vr7c60ptwyzj}
 
 You can also have **pointers to structs**. This is very useful when working with **large structures** because passing pointers is more efficient than copying the entire struct.
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    type User struct {
-        Name string
-        Age  int
-    }
+type User struct {
+    Name string
+    Age  int
+}
 
-    func main() {
-        u := User{Name: "Alice", Age: 30}
-        p := &u  // Pointer to struct
+func main() {
+    u := User{Name: "Alice", Age: 30}
+    p := &u  // Pointer to struct
 
-        fmt.Println(p)     // Output: Memory address of u
-        fmt.Println(*p)    // Dereferencing: Output: {Alice 30}
-        
-        p.Age = 35         // Modifying the struct through the pointer
-        fmt.Println(u)     // Output: {Alice 35}
-    }
+    fmt.Println(p)     // Output: Memory address of u
+    fmt.Println(*p)    // Dereferencing: Output: {Alice 30}
+    
+    p.Age = 35         // Modifying the struct through the pointer
+    fmt.Println(u)     // Output: {Alice 35}
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.6vy30ata9wbs}
 
 - `p := &u`: `p` is a pointer to the `User` struct.
 
 - `p.Age = 35`: Modifies the struct `u` via the pointer `p`.
 
 
-### **Output:**
+### **Output:** {#h.nbr9pgnatlvk}
 
-    &{Alice 30}
-    {Alice 30}
-    {Alice 35}
+```
+&{Alice 30}
+{Alice 30}
+{Alice 35}
+```
 
 ***
 
 
-### **🧑‍💻 Pointer to Arrays and Slices**
+### **🧑‍💻 Pointer to Arrays and Slices** {#h.blfpu17732ik}
 
 You can also use pointers with arrays and slices to modify their elements.
 
 
-#### **Pointer to Array:**
+#### **Pointer to Array:** {#h.u3rofhsfkfx8}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        arr := [3]int{1, 2, 3}
-        p := &arr
+func main() {
+    arr := [3]int{1, 2, 3}
+    p := &arr
 
-        fmt.Println(*p)         // Output: [1 2 3]
-        p[0] = 10              // Modifying array element through pointer
-        fmt.Println(arr)        // Output: [10 2 3]
-    }
+    fmt.Println(*p)         // Output: [1 2 3]
+    p[0] = 10              // Modifying array element through pointer
+    fmt.Println(arr)        // Output: [10 2 3]
+}
+```
 
 
-#### **Pointer to Slice:**
+#### **Pointer to Slice:** {#h.pdyr93c6s23c}
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        slice := []int{1, 2, 3}
-        p := &slice
+func main() {
+    slice := []int{1, 2, 3}
+    p := &slice
 
-        fmt.Println(*p)         // Output: [1 2 3]
-        (*p)[0] = 10            // Modifying slice element through pointer
-        fmt.Println(slice)      // Output: [10 2 3]
-    }
+    fmt.Println(*p)         // Output: [1 2 3]
+    (*p)[0] = 10            // Modifying slice element through pointer
+    fmt.Println(slice)      // Output: [10 2 3]
+}
+```
 
 ***
 
 
-### **🧑‍💻 Pointer with Functions**
+### **🧑‍💻 Pointer with Functions** {#h.pim4qridvx7i}
 
 You can pass pointers to functions, allowing you to **modify variables** directly from inside the function.
 
-    package main
+```
+package main
 
-    import "fmt"
+import "fmt"
 
-    func modifyValue(p *int) {
-        *p = 100  // Modify the value at the pointer
-    }
+func modifyValue(p *int) {
+    *p = 100  // Modify the value at the pointer
+}
 
-    func main() {
-        x := 10
-        modifyValue(&x)  // Passing pointer to function
-        fmt.Println(x)    // Output: 100 (modified value)
-    }
+func main() {
+    x := 10
+    modifyValue(&x)  // Passing pointer to function
+    fmt.Println(x)    // Output: 100 (modified value)
+}
+```
 
 
-### **Explanation:**
+### **Explanation:** {#h.wafaj24rg8hm}
 
 - `&x`: Passing the **address** of `x` (pointer) to the function.
 
 - Inside the function, `*p = 100` modifies `x` directly.
 
 
-### **Output:**
+### **Output:** {#h.2z01ohev4ucx}
 
-    100
+```
+100
+```
 
 ***
 
 
-## **📌 Important Notes for Beginners:**
+## **📌 Important Notes for Beginners:** {#h.g5o0ynu6l110}
 
 1. **Declaring Pointers**:
 
@@ -3315,9 +3585,9 @@ You can pass pointers to functions, allowing you to **modify variables** directl
 
 
 
-# **📚 Slices in Go - Beginner’s Notes**
+# **📚 Slices in Go - Beginner’s Notes** {#h.ri1powsx8l21}
 
-### **🧠 What is a Slice?**
+### **🧠 What is a Slice?** {#h.s5a9s8fttjp9}
 
 A **slice** is a **dynamic array-like data structure** in Go. Unlike arrays, slices do **not have a fixed size**. They are more flexible and efficient for working with sequences of data.
 
@@ -3330,98 +3600,114 @@ Slices are built on top of arrays but are **more commonly used** because:
 ***
 
 
-### **🧑‍💻 Slice Syntax**
+### **🧑‍💻 Slice Syntax** {#h.7zk00zdr4x72}
 
-#### **Basic Declaration:**
+#### **Basic Declaration:** {#h.63kc62auk7tb}
 
-    var slice []Type
+```
+var slice []Type
+```
 
 - `slice` is a slice of `Type` (e.g., `[]int` for a slice of integers).
 
 
-#### **Initialization:**
+#### **Initialization:** {#h.cmf4wld71wji}
 
 Slices can be initialized in several ways.
 
 ***
 
 
-### **🧑‍💻 How to Declare and Initialize Slices**
+### **🧑‍💻 How to Declare and Initialize Slices** {#h.fqcty8zdzal0}
 
-### **1. Slice from an Existing Array**
+### **1. Slice from an Existing Array** {#h.xowc2yij0asj}
 
 You can create a slice from an existing array using the slicing syntax `[start:end]`.
 
-    arr := [5]int{1, 2, 3, 4, 5}
-    slice := arr[1:4]  // Slice from index 1 to 3 (not including 4)
-    fmt.Println(slice)  // Output: [2 3 4]
+```
+arr := [5]int{1, 2, 3, 4, 5}
+slice := arr[1:4]  // Slice from index 1 to 3 (not including 4)
+fmt.Println(slice)  // Output: [2 3 4]
+```
 
 - **Explanation**: You can slice an array to get a subarray, which is actually a slice. The indices are inclusive for the start and exclusive for the end.
 
 
-### **2. Slice from Another Slice**
+### **2. Slice from Another Slice** {#h.ba13wyhgu28y}
 
 A slice can also be created from another slice using the same slicing syntax.
 
-    original := []int{10, 20, 30, 40, 50}
-    slice := original[1:4]  // Slice from index 1 to 3
-    fmt.Println(slice)       // Output: [20 30 40]
+```
+original := []int{10, 20, 30, 40, 50}
+slice := original[1:4]  // Slice from index 1 to 3
+fmt.Println(slice)       // Output: [20 30 40]
+```
 
 - **Explanation**: This creates a slice from another slice.
 
 - Both slice share the same underlying arrays
 
 
-### **3. Slice Literal**
+### **3. Slice Literal** {#h.hf137pl9dejs}
 
 You can define a slice directly using the slice literal syntax.
 
-    slice := []int{1, 2, 3, 4, 5}
-    fmt.Println(slice)  // Output: [1 2 3 4 5]
+```
+slice := []int{1, 2, 3, 4, 5}
+fmt.Println(slice)  // Output: [1 2 3 4 5]
+```
 
 - **Explanation**: The slice literal allows you to directly initialize a slice with values.
 
 
-### **4. Using** `make()` **to Create a Slice with Length and Capacity**
+### **4. Using** `make()` **to Create a Slice with Length and Capacity** {#h.sb4cldne2t8}
 
 The `make()` function creates a slice with a specific **length** and **capacity**.
 
-    slice := make([]int, 3)  // Creates a slice of length 3 with zero values
-    fmt.Println(slice)        // Output: [0 0 0]
+```
+slice := make([]int, 3)  // Creates a slice of length 3 with zero values
+fmt.Println(slice)        // Output: [0 0 0]
 
-    slice2 := make([]int, 3, 5)  // Length 3, Capacity 5
-    fmt.Println(slice2)           // Output: [0 0 0]
+slice2 := make([]int, 3, 5)  // Length 3, Capacity 5
+fmt.Println(slice2)           // Output: [0 0 0]
+```
 
 - **Explanation**: The first argument is the type, the second is the length, and the third (optional) is the capacity.
 
 
-### **5. Empty or Nil Slice**
+### **5. Empty or Nil Slice** {#h.lexqxgyrfyrg}
 
 An **empty slice** is a slice with no elements, but it’s still initialized.
 
-    var slice []int  // A nil slice
-    fmt.Println(slice)  // Output: []
+```
+var slice []int  // A nil slice
+fmt.Println(slice)  // Output: []
+```
 
 - **Explanation**: This creates a **nil slice** which has no memory allocated for its elements initially.
 
 ***
 
 
-### **🧑‍💻 Modifying Slices with** `append()`
+### **🧑‍💻 Modifying Slices with** `append()` {#h.9xdhhh2qo1jg}
 
 You can add elements to a slice dynamically using the `append()` function. This will resize the slice as necessary.
 
-    x := []int{1, 2, 3}
-    x = append(x, 4)   // Append a single element
-    x = append(x, 5, 6)  // Append multiple elements
-    fmt.Println(x)     // Output: [1 2 3 4 5 6]
+```
+x := []int{1, 2, 3}
+x = append(x, 4)   // Append a single element
+x = append(x, 5, 6)  // Append multiple elements
+fmt.Println(x)     // Output: [1 2 3 4 5 6]
+```
 
 In your code example:
 
-    var x []int  // Declares an empty slice
-    x = append(x, 1)  // Length = 1, Capacity = 1
-    x = append(x, 2)  // Length = 2, Capacity = 2
-    x = append(x, 3)  // Length = 3, Capacity = 2*2 = 4
+```
+var x []int  // Declares an empty slice
+x = append(x, 1)  // Length = 1, Capacity = 1
+x = append(x, 2)  // Length = 2, Capacity = 2
+x = append(x, 3)  // Length = 3, Capacity = 2*2 = 4
+```
 
 - **Explanation**: `append()` dynamically grows the slice’s size and increases its capacity as needed. It’s a common and efficient operation when dealing with slices.
 
@@ -3443,17 +3729,19 @@ Pointer, length, capacity
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfGff-pD6YnTvdXt81-yr1oj9jLrMwAKv5VmC0xZ3efqhZ0CyxuAsLdHLidDTD9yMa-b0nX3Rk_c0oBgHxuby5aBeQx4_28_nqKWb3CaSO5DnYZPImnQT-jfvKClFIxVJNGJzmHmg?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
 
-### **🧑‍💻 Appended Slices: Independent Copies**
+### **🧑‍💻 Appended Slices: Independent Copies** {#h.oiwhdw5g18yc}
 
 In your second image, the code shows that appending a slice to another slice creates **independent slices**:
 
-    x := []int{1, 2, 3}
-    y := x   // y is a reference to the same slice as x
+```
+x := []int{1, 2, 3}
+y := x   // y is a reference to the same slice as x
 
-    x = append(x, 4)  // This only modifies x
+x = append(x, 4)  // This only modifies x
 
-    fmt.Println(x)     // Output: [1 2 3 4]
-    fmt.Println(y)     // Output: [1 2 3]
+fmt.Println(x)     // Output: [1 2 3 4]
+fmt.Println(y)     // Output: [1 2 3]
+```
 
 - **Explanation**: When you append to a slice, **a new slice** may be created if the capacity is exceeded, making the original slice (`y`) unaffected by changes to `x`.
 
@@ -3462,7 +3750,7 @@ In your second image, the code shows that appending a slice to another slice cre
 ***
 
 
-### **🧑‍💻 Length and Capacity of Slices**
+### **🧑‍💻 Length and Capacity of Slices** {#h.b1f5w6wik9dj}
 
 - **Length**: The number of elements currently in the slice.
 
@@ -3470,11 +3758,13 @@ In your second image, the code shows that appending a slice to another slice cre
 
 Example:
 
-    x := make([]int, 3, 5)  // Length 3, Capacity 5
-    fmt.Println(len(x))  // Output: 3
-    fmt.Println(cap(x))  // Output: 5
+```
+x := make([]int, 3, 5)  // Length 3, Capacity 5
+fmt.Println(len(x))  // Output: 3
+fmt.Println(cap(x))  // Output: 5
 
-    Another Imprtant Example:
+Another Imprtant Example:
+```
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcw2ie06wI04JWUrDWI-_NzfBCU3iNsQUJNoJEJqw4jBaHZscPzkd6myfehxHJ8VONB2zeymw2dmUdVUTBkPZAfs0x5nGdAU4w59GElYP6iuy3Lvv0hTW61H_9cxmqvfotuZWepZw?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
@@ -3483,1199 +3773,1285 @@ Example:
 \
 
 
-    Explanation:
-    This Go code snippet is a classic example to understand how slices, slice internals, and append behavior work in Go. Let me explain it step-by-step, line-by-line, in a way that makes it clear for beginners.
+```
+Explanation:
+This Go code snippet is a classic example to understand how slices, slice internals, and append behavior work in Go. Let me explain it step-by-step, line-by-line, in a way that makes it clear for beginners.
+```
 
 ***
 
-    Main.go - function definition
-    package main
-    import "fmt"
+```
+Main.go - function definition
+package main
+import "fmt"
 
 
-    Standard Go package and import. You're importing "fmt" to use fmt.Println for printing.
-
-***
-
-    func changeSlice(p []int) []int {
-        p[0] = 10
-        p = append(p, 11)
-        return p
-    }
-
-    Let’s break this function:
-
-    p []int: A slice passed as input.
-
-
-
-    p[0] = 10: Changes the first element of the slice p to 10. Note: This modifies the underlying array that p points to.
-
-
-
-    p = append(p, 11): Appends 11 to the slice p. Important: If the capacity of the original array is full, Go will allocate a new array for the appended slice.
-
-
-
-    return p: Returns the new (possibly reallocated) slice.
+Standard Go package and import. You're importing "fmt" to use fmt.Println for printing.
+```
 
 ***
 
-    FILE 2 (main function)
-    go
-    CopyEdit
-    func main() {
-        x := []int{1, 2, 3, 4, 5}
+```
+func changeSlice(p []int) []int {
+    p[0] = 10
+    p = append(p, 11)
+    return p
+}
 
+Let’s break this function:
 
-    Create a slice x with 5 elements.
-
-
-
-    Capacity is likely also 5 (we’ll verify with behavior).
-
-
-
-       x = append(x, 6)
-        x = append(x, 7)
-
-
-    Appending 6 and 7 to x.
+p []int: A slice passed as input.
 
 
 
-    Now, x = [1 2 3 4 5 6 7]. Capacity increased behind the scenes (likely to 10 or so).
+p[0] = 10: Changes the first element of the slice p to 10. Note: This modifies the underlying array that p points to.
 
 
 
-    This will become important later because slices share the same underlying array unless a new array is created due to capacity overflow.
+p = append(p, 11): Appends 11 to the slice p. Important: If the capacity of the original array is full, Go will allocate a new array for the appended slice.
+
+
+
+return p: Returns the new (possibly reallocated) slice.
+```
 
 ***
 
-       a := x[4:]
+```
+FILE 2 (main function)
+go
+CopyEdit
+func main() {
+    x := []int{1, 2, 3, 4, 5}
 
 
-    Slicing x from index 4 onwards.
-
-
-
-    So, a = [5 6 7], but it shares the underlying array with x.
-
-
-
-       y := changeSlice(a)
-
-    Let’s trace what happens inside changeSlice(a):
-
-    a = [5 6 7] initially.
+Create a slice x with 5 elements.
 
 
 
-    p[0] = 10 changes the first element, so a[0] = 10. Since a shares the array with x, x[4] becomes 10!
+Capacity is likely also 5 (we’ll verify with behavior).
 
 
 
-    p = append(p, 11) adds 11 to p. Now we must ask: Was there room in the capacity?
+   x = append(x, 6)
+    x = append(x, 7)
+
+
+Appending 6 and 7 to x.
 
 
 
-    Yes! Because x had grown and had extra capacity left. So, the append does NOT allocate a new array. Instead, 11 is added to the same array.
-    Now:
-
-    p = [10 6 7 11]
+Now, x = [1 2 3 4 5 6 7]. Capacity increased behind the scenes (likely to 10 or so).
 
 
 
-    x is also updated since they share the array: x = [1 2 3 4 10 6 7 11]
+This will become important later because slices share the same underlying array unless a new array is created due to capacity overflow.
+```
 
 ***
 
-    Print statements
-    fmt.Println(x) 
+```
+   a := x[4:]
 
 
-    Output: [1 2 3 4 10 6 7]
-
-
-
-    Why?
+Slicing x from index 4 onwards.
 
 
 
-    x[4] became 10 from inside changeSlice.
+So, a = [5 6 7], but it shares the underlying array with x.
 
 
 
-    But the printed version here has only length 7 (you’ll fix that later).
+   y := changeSlice(a)
+
+Let’s trace what happens inside changeSlice(a):
+
+a = [5 6 7] initially.
 
 
 
-    fmt.Println(y)
-
-
-    Output: [10 6 7 11] — the result from changeSlice(a)
+p[0] = 10 changes the first element, so a[0] = 10. Since a shares the array with x, x[4] becomes 10!
 
 
 
-    fmt.Println(x[0:8])
-
-
-    Now we print x from index 0 to 8. Even though x was defined as 7 elements, the backing array has grown, and index 7 now holds the appended value 11.
+p = append(p, 11) adds 11 to p. Now we must ask: Was there room in the capacity?
 
 
 
-    Output: [1 2 3 4 10 6 7 11]
+Yes! Because x had grown and had extra capacity left. So, the append does NOT allocate a new array. Instead, 11 is added to the same array.
+Now:
+
+p = [10 6 7 11]
+
+
+
+x is also updated since they share the array: x = [1 2 3 4 10 6 7 11]
+```
 
 ***
 
-    Key Concepts Explained
+```
+Print statements
+fmt.Println(x) 
 
-    Line
 
-    	
-
-    Concept
-
-    	
-
-    Why it Matters
+Output: [1 2 3 4 10 6 7]
 
 
 
-
-    x := append(...)
-
-    	
-
-    Append changes slice length and possibly backing array
-
-    	
-
-    If capacity is exceeded, a new array is created, otherwise original array is reused
+Why?
 
 
 
-
-    a := x[4:]
-
-    	
-
-    Slicing creates a new slice, but same backing array
-
-    	
-
-    Modifying a can change x, unless new array is allocated
+x[4] became 10 from inside changeSlice.
 
 
 
-
-    p[0] = 10
-
-    	
-
-    Mutates shared memory
-
-    	
-
-    This is how x[4] becomes 10
+But the printed version here has only length 7 (you’ll fix that later).
 
 
 
+fmt.Println(y)
 
-    append(p, 11)
 
-    	
-
-    Appends 11 without reallocating
-
-    	
-
-    Because capacity wasn’t full, changes x as well
+Output: [10 6 7 11] — the result from changeSlice(a)
 
 
 
+fmt.Println(x[0:8])
 
-    x[0:8]
 
-    	
+Now we print x from index 0 to 8. Even though x was defined as 7 elements, the backing array has grown, and index 7 now holds the appended value 11.
 
-    Access beyond original length is OK if within capacity
 
-    	
 
-    Helps print entire updated content
+Output: [1 2 3 4 10 6 7 11]
+```
 
 ***
 
-    Visual Memory Model
-    Initial:
-    x: [1 2 3 4 5] (len=5, cap=5)
+```
+Key Concepts Explained
 
-    After append:
-    x: [1 2 3 4 5 6 7] (len=7, cap=maybe 10)
+Line
 
-    Slice a = x[4:]:
-    a: points to [5 6 7] in x's backing array
+	
 
-    Inside changeSlice:
+Concept
 
-    a[0] = 10 -> x[4] = 10
+	
 
-
-
-    append(a, 11) uses same backing array:
+Why it Matters
 
 
 
-    x: [1 2 3 4 10 6 7 11]
 
-***
+x := append(...)
 
-    Final Outputs
-    fmt.Println(x)        // [1 2 3 4 10 6 7]
-    fmt.Println(y)        // [10 6 7 11]
-    fmt.Println(x[0:8])   // [1 2 3 4 10 6 7 11]
+	
 
-***
+Append changes slice length and possibly backing array
 
-    🧠 What is Concurrency?
-    Concurrency refers to the ability of a program to handle multiple tasks at the same time. In Go, this is achieved using goroutines and channels, which allow functions to run independently and communicate with each other.
+	
 
-***
+If capacity is exceeded, a new array is created, otherwise original array is reused
 
-    🛠️ Goroutines
-    A goroutine is a lightweight thread managed by the Go runtime. You can start a goroutine by prefixing a function call with the go keyword.
-    Example:
-    go func() {
-        fmt.Println("Hello from a goroutine!")
-    }()
-    This launches an anonymous function as a goroutine. The Go runtime schedules it to run concurrently with other goroutines.
 
-***
 
-    📡 Channels
-    Channels are used to communicate between goroutines. They allow you to send and receive values, enabling synchronization and data exchange.
-    Creating a Channel:
-    ch := make(chan string)
-    Sending and Receiving:
-    ch <- "Hello"  // Send data to channel
-    msg := <-ch    // Receive data from channel
-    By default, channels are unbuffered, meaning the sender blocks until the receiver is ready.
 
-***
+a := x[4:]
 
-    🧪 Practical Example: Concurrent Greetings
-    Let’s create a program where multiple goroutines send messages to a channel, and the main function receives and prints them.
-    package main
+	
 
-    import (
-        "fmt"
-        "time"
-    )
+Slicing creates a new slice, but same backing array
 
-    func greet(ch chan string, msg string) {
-        time.Sleep(time.Second)
-        ch <- msg
-    }
+	
 
-    func main() {
-        ch := make(chan string)
-        go greet(ch, "Hello")
-        go greet(ch, "Hi")
-        go greet(ch, "Hey")
+Modifying a can change x, unless new array is allocated
 
-        fmt.Println(<-ch)
-        fmt.Println(<-ch)
-        fmt.Println(<-ch)
-    }
-    Output:
-    Hello
-    Hi
-    Hey
-    In this example, three goroutines send messages to the channel ch. The main function receives and prints these messages. The order of the output may vary because the goroutines run concurrently.
+
+
+
+p[0] = 10
+
+	
+
+Mutates shared memory
+
+	
+
+This is how x[4] becomes 10
+
+
+
+
+append(p, 11)
+
+	
+
+Appends 11 without reallocating
+
+	
+
+Because capacity wasn’t full, changes x as well
+
+
+
+
+x[0:8]
+
+	
+
+Access beyond original length is OK if within capacity
+
+	
+
+Helps print entire updated content
+```
 
 ***
 
-    ✅ Best Practices
+```
+Visual Memory Model
+Initial:
+x: [1 2 3 4 5] (len=5, cap=5)
 
-    Avoid Shared Memory: Prefer communicating via channels over sharing memory. This reduces the risk of data races.
+After append:
+x: [1 2 3 4 5 6 7] (len=7, cap=maybe 10)
 
+Slice a = x[4:]:
+a: points to [5 6 7] in x's backing array
 
+Inside changeSlice:
 
-    Use sync.WaitGroup for Synchronization: To wait for multiple goroutines to finish, use sync.WaitGroup.
-
-
-
-    Close Channels: Close channels when no more data will be sent to them. This signals to the receiver that no more values will be sent.
-
-***
-
-    📚 Further Reading
-
-    Concurrency with Goroutines and Channels in Go
+a[0] = 10 -> x[4] = 10
 
 
 
-    Go by Example: Channels
+append(a, 11) uses same backing array:
 
 
 
-    A Tour of Go: Concurrency
+x: [1 2 3 4 10 6 7 11]
+```
 
 ***
 
-    Absolutely! Let me explain the two examples in your concurrency notes clearly and step-by-step, assuming you’re new to Go and concurrency concepts.
+```
+Final Outputs
+fmt.Println(x)        // [1 2 3 4 10 6 7]
+fmt.Println(y)        // [10 6 7 11]
+fmt.Println(x[0:8])   // [1 2 3 4 10 6 7 11]
+```
 
 ***
 
-    Example 1: Starting a Goroutine
-    go func() {
-        fmt.Println("Hello from a goroutine!")
-    }()
-    What is this?
-
-    This example shows how to start a goroutine in Go.
-
-
-
-    Why?
-
-    Goroutines let your program do multiple things at the same time — for example, run a function while other parts of your program run too.
-
-
-
-    How?
-
-    go keyword before a function call starts that function concurrently.
-
-
-
-    The function here is anonymous (no name) and immediately called (notice the () at the end).
-
-
-
-    Inside that function, it prints: "Hello from a goroutine!"
-
-
-
-    Explanation line-by-line:
-
-    go func() { ... }()
-
-     Starts a new goroutine running the anonymous function in { ... }.
-
-
-
-    fmt.Println("Hello from a goroutine!")
-
-     Prints the message to the console.
-
-
-
-    Reason and Effect:
-
-    Because it’s a goroutine, this function runs independently and concurrently with other code.
-
-
-
-    The main program doesn’t wait for this print to finish — it runs in parallel.
-
-
-
-    If your main function exits before this goroutine runs, you might not see the print output, because the program ends.
+```
+🧠 What is Concurrency?
+Concurrency refers to the ability of a program to handle multiple tasks at the same time. In Go, this is achieved using goroutines and channels, which allow functions to run independently and communicate with each other.
+```
 
 ***
 
-    Example 2: Multiple Goroutines Sending to a Channel
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func greet(ch chan string, msg string) {
-        time.Sleep(time.Second)
-        ch <- msg
-    }
-
-    func main() {
-        ch := make(chan string)
-        go greet(ch, "Hello")
-        go greet(ch, "Hi")
-        go greet(ch, "Hey")
-
-        fmt.Println(<-ch)
-        fmt.Println(<-ch)
-        fmt.Println(<-ch)
-    }
+```
+🛠️ Goroutines
+A goroutine is a lightweight thread managed by the Go runtime. You can start a goroutine by prefixing a function call with the go keyword.
+Example:
+go func() {
+    fmt.Println("Hello from a goroutine!")
+}()
+This launches an anonymous function as a goroutine. The Go runtime schedules it to run concurrently with other goroutines.
+```
 
 ***
 
-    What is this?
-
-    This example demonstrates:
-
-
-
-    How multiple goroutines can send messages concurrently to a channel.
-
-
-
-    How the main function receives messages from the channel and prints them.
-
-
-
-    Why?
-
-    You want to run multiple tasks (greetings) at the same time.
-
-
-
-    You want to safely communicate between those tasks and the main program.
-
-
-
-    Channels let goroutines exchange data safely and coordinate.
+```
+📡 Channels
+Channels are used to communicate between goroutines. They allow you to send and receive values, enabling synchronization and data exchange.
+Creating a Channel:
+ch := make(chan string)
+Sending and Receiving:
+ch <- "Hello"  // Send data to channel
+msg := <-ch    // Receive data from channel
+By default, channels are unbuffered, meaning the sender blocks until the receiver is ready.
+```
 
 ***
 
-    How?
+```
+🧪 Practical Example: Concurrent Greetings
+Let’s create a program where multiple goroutines send messages to a channel, and the main function receives and prints them.
+package main
 
-    Define a function greet that:
+import (
+    "fmt"
+    "time"
+)
 
+func greet(ch chan string, msg string) {
+    time.Sleep(time.Second)
+    ch <- msg
+}
 
+func main() {
+    ch := make(chan string)
+    go greet(ch, "Hello")
+    go greet(ch, "Hi")
+    go greet(ch, "Hey")
 
-    Waits 1 second (time.Sleep),
-
-
-
-    Then sends a string message to a channel (ch <- msg).
-
-
-
-    In main():
-
-
-
-    Create a channel ch for strings: ch := make(chan string)
-
-
-
-    Start 3 goroutines that call greet with different messages (“Hello”, “Hi”, “Hey”).
-
-
-
-    Receive 3 messages from the channel with <-ch and print them.
-
-***
-
-    Explanation line-by-line:
-
-    func greet(ch chan string, msg string)
-
-     Defines a function greet that takes a string channel ch and a message msg.
-
-
-
-    time.Sleep(time.Second)
-
-     Pauses the goroutine for 1 second to simulate work or delay.
-
-
-
-    ch <- msg
-
-     Sends the message msg into the channel ch.
-
-
-
-    func main() {
-
-     The main function where execution begins.
-
-
-
-    ch := make(chan string)
-
-     Creates a channel ch that can send and receive strings.
-
-
-
-    go greet(ch, "Hello")
-
-     Starts a goroutine that will wait 1 second, then send "Hello" to ch.
-
-
-
-    go greet(ch, "Hi")
-
-     Starts another goroutine sending "Hi" to ch.
-
-
-
-    go greet(ch, "Hey")
-
-     Starts a third goroutine sending "Hey" to ch.
-
-
-
-    fmt.Println(<-ch) (3 times)
-
-     Receives one message from ch and prints it, repeated 3 times to get all messages.
+    fmt.Println(<-ch)
+    fmt.Println(<-ch)
+    fmt.Println(<-ch)
+}
+Output:
+Hello
+Hi
+Hey
+In this example, three goroutines send messages to the channel ch. The main function receives and prints these messages. The order of the output may vary because the goroutines run concurrently.
+```
 
 ***
 
-    Reason and Effect:
+```
+✅ Best Practices
 
-    Because the greetings run in goroutines, they all start at almost the same time and sleep concurrently.
-
-
-
-    After about 1 second, each goroutine sends its message to the channel.
+Avoid Shared Memory: Prefer communicating via channels over sharing memory. This reduces the risk of data races.
 
 
 
-    The main function waits (blocks) on each <-ch receive operation until it gets a message.
+Use sync.WaitGroup for Synchronization: To wait for multiple goroutines to finish, use sync.WaitGroup.
 
 
 
-    The printed output is the messages received from the channel.
-
-
-
-    The order of output can vary because the goroutines run concurrently — whichever goroutine finishes first sends its message first.
-
-
-
-    The channel coordinates the communication, ensuring messages are safely transferred without data races.
+Close Channels: Close channels when no more data will be sent to them. This signals to the receiver that no more values will be sent.
+```
 
 ***
 
-    Summary
+```
+📚 Further Reading
 
-    Concept
-
-    	
-
-    What it does
-
-    	
-
-    Why it’s important
-
-    	
-
-    How it works
-
-    	
-
-    Effect in program
+Concurrency with Goroutines and Channels in Go
 
 
 
-
-    Goroutine
-
-    	
-
-    Runs function concurrently
-
-    	
-
-    Enables multitasking in Go
-
-    	
-
-    go keyword before function
-
-    	
-
-    Functions run in parallel
+Go by Example: Channels
 
 
 
-
-    Channel
-
-    	
-
-    Communication between goroutines
-
-    	
-
-    Safe data exchange & sync
-
-    	
-
-    Created with make(chan type)
-
-    	
-
-    Sends and receives block until ready
-
-
-
-
-    time.Sleep
-
-    	
-
-    Pauses a goroutine
-
-    	
-
-    Simulate delay or waiting
-
-    	
-
-    time.Sleep(duration)
-
-    	
-
-    Delays sending to the channel
-
-
-
-
-    <-ch receive
-
-    	
-
-    Receive data from channel
-
-    	
-
-    Synchronize with sending goroutines
-
-    	
-
-    msg := <-ch or directly in print
-
-    	
-
-    Waits for data before proceeding
+A Tour of Go: Concurrency
+```
 
 ***
 
-\
-
-
-    Great question! Let’s break down this line clearly and simply:
-    fmt.Println(<-ch)
+```
+Absolutely! Let me explain the two examples in your concurrency notes clearly and step-by-step, assuming you’re new to Go and concurrency concepts.
+```
 
 ***
 
-    What does this mean?
+```
+Example 1: Starting a Goroutine
+go func() {
+    fmt.Println("Hello from a goroutine!")
+}()
+What is this?
 
-    fmt.Println is a function that prints whatever you give it to the console.
-
-
-
-    <-ch is the receive operation from a channel — it means “take a value from the channel ch”.
-
-***
-
-    Step-by-step explanation:
-
-    Channel Receive (<-ch):
+This example shows how to start a goroutine in Go.
 
 
 
-    Think of a channel ch as a queue or mailbox.
+Why?
+
+Goroutines let your program do multiple things at the same time — for example, run a function while other parts of your program run too.
 
 
 
-    The <-ch means: wait until there is a message in this mailbox, then take that message out.
+How?
+
+go keyword before a function call starts that function concurrently.
 
 
 
-    If the mailbox is empty, the program waits (blocks) here until a message arrives.
+The function here is anonymous (no name) and immediately called (notice the () at the end).
 
 
 
-    Once a message is received, <-ch evaluates to the value it got.
+Inside that function, it prints: "Hello from a goroutine!"
 
 
 
-    Passing the received value to fmt.Println:
+Explanation line-by-line:
+
+go func() { ... }()
+
+ Starts a new goroutine running the anonymous function in { ... }.
 
 
 
-    The value you got from <-ch is then passed as an argument to fmt.Println.
+fmt.Println("Hello from a goroutine!")
+
+ Prints the message to the console.
 
 
 
-    So, the program prints that value on the screen.
+Reason and Effect:
 
-***
-
-    In simpler terms:
-
-    The line fmt.Println(<-ch) means:
-
-     “Wait for a message from channel ch. When you get it, print it.”
-
-***
-
-    Why do we write it this way?
-
-    This syntax combines two things in one line:
+Because it’s a goroutine, this function runs independently and concurrently with other code.
 
 
 
-    Receive a message from the channel (<-ch)
+The main program doesn’t wait for this print to finish — it runs in parallel.
 
 
 
-    Print that message (fmt.Println(...))
-
-
-
-    It’s a concise way to say: “Get the next message from the channel and immediately print it.”
+If your main function exits before this goroutine runs, you might not see the print output, because the program ends.
+```
 
 ***
 
-    What happens during execution?
+```
+Example 2: Multiple Goroutines Sending to a Channel
+package main
 
-    When the program hits fmt.Println(<-ch), it pauses right at <-ch until a message comes through ch.
+import (
+    "fmt"
+    "time"
+)
 
+func greet(ch chan string, msg string) {
+    time.Sleep(time.Second)
+    ch <- msg
+}
 
+func main() {
+    ch := make(chan string)
+    go greet(ch, "Hello")
+    go greet(ch, "Hi")
+    go greet(ch, "Hey")
 
-    Once a goroutine sends a message into the channel (like ch <- "Hello"), the main function unblocks, receives that message, and prints it.
-
-
-
-    This happens for each fmt.Println(<-ch) line — waiting for a message, then printing it.
-
-***
-
-    Example analogy:
-    Imagine a post office where you wait at the mailbox:
-
-    <-ch = You waiting patiently until a letter arrives.
-
-
-
-    Once the letter (message) arrives, you open it.
-
-
-
-    Then fmt.Println = you read out loud what the letter says.
-
-***
-
-\
-\
-
-
-    Here’s a simple explanation of Concurrency vs Parallelism in Operating Systems:
+    fmt.Println(<-ch)
+    fmt.Println(<-ch)
+    fmt.Println(<-ch)
+}
+```
 
 ***
 
-    Concurrency:
+```
+What is this?
 
-    Definition: Multiple tasks make progress over the same time period by interleaving their execution.
-
-
-
-    How it works: The CPU switches rapidly between tasks (context switching), giving the illusion that tasks run simultaneously.
+This example demonstrates:
 
 
 
-    Example: On a single-core CPU, running two programs where the OS switches back and forth between them.
+How multiple goroutines can send messages concurrently to a channel.
 
 
 
-    Goal: Manage multiple tasks efficiently, improving resource utilization and responsiveness.
+How the main function receives messages from the channel and prints them.
 
 
 
-    Key point: Tasks are not literally running at the same instant but appear to be doing so.
+Why?
 
-***
-
-    Parallelism:
-
-    Definition: Multiple tasks actually run at the same time on multiple processors or cores.
+You want to run multiple tasks (greetings) at the same time.
 
 
 
-    How it works: Different processors/cores execute different tasks simultaneously.
+You want to safely communicate between those tasks and the main program.
 
 
 
-    Example: On a multi-core CPU, running two programs where each program runs on its own core at the same instant.
-
-
-
-    Goal: Increase computational speed by performing multiple operations simultaneously.
-
-
-
-    Key point: True simultaneous execution of tasks.
+Channels let goroutines exchange data safely and coordinate.
+```
 
 ***
 
-    Summary Table
+```
+How?
 
-    Aspect
-
-    	
-
-    Concurrency
-
-    	
-
-    Parallelism
+Define a function greet that:
 
 
 
-
-    Execution
-
-    	
-
-    Interleaved (time-sliced)
-
-    	
-
-    Simultaneous (at the same time)
+Waits 1 second (time.Sleep),
 
 
 
-
-    CPU cores
-
-    	
-
-    Can be on a single core
-
-    	
-
-    Requires multiple cores/processors
+Then sends a string message to a channel (ch <- msg).
 
 
 
-
-    Purpose
-
-    	
-
-    Manage multiple tasks efficiently
-
-    	
-
-    Speed up tasks by doing them at once
+In main():
 
 
 
+Create a channel ch for strings: ch := make(chan string)
 
-    Illusion or Real
 
-    	
 
-    Illusion of simultaneous progress
+Start 3 goroutines that call greet with different messages (“Hello”, “Hi”, “Hey”).
 
-    	
 
-    Real simultaneous execution
+
+Receive 3 messages from the channel with <-ch and print them.
+```
+
+***
+
+```
+Explanation line-by-line:
+
+func greet(ch chan string, msg string)
+
+ Defines a function greet that takes a string channel ch and a message msg.
+
+
+
+time.Sleep(time.Second)
+
+ Pauses the goroutine for 1 second to simulate work or delay.
+
+
+
+ch <- msg
+
+ Sends the message msg into the channel ch.
+
+
+
+func main() {
+
+ The main function where execution begins.
+
+
+
+ch := make(chan string)
+
+ Creates a channel ch that can send and receive strings.
+
+
+
+go greet(ch, "Hello")
+
+ Starts a goroutine that will wait 1 second, then send "Hello" to ch.
+
+
+
+go greet(ch, "Hi")
+
+ Starts another goroutine sending "Hi" to ch.
+
+
+
+go greet(ch, "Hey")
+
+ Starts a third goroutine sending "Hey" to ch.
+
+
+
+fmt.Println(<-ch) (3 times)
+
+ Receives one message from ch and prints it, repeated 3 times to get all messages.
+```
+
+***
+
+```
+Reason and Effect:
+
+Because the greetings run in goroutines, they all start at almost the same time and sleep concurrently.
+
+
+
+After about 1 second, each goroutine sends its message to the channel.
+
+
+
+The main function waits (blocks) on each <-ch receive operation until it gets a message.
+
+
+
+The printed output is the messages received from the channel.
+
+
+
+The order of output can vary because the goroutines run concurrently — whichever goroutine finishes first sends its message first.
+
+
+
+The channel coordinates the communication, ensuring messages are safely transferred without data races.
+```
+
+***
+
+```
+Summary
+
+Concept
+
+	
+
+What it does
+
+	
+
+Why it’s important
+
+	
+
+How it works
+
+	
+
+Effect in program
+
+
+
+
+Goroutine
+
+	
+
+Runs function concurrently
+
+	
+
+Enables multitasking in Go
+
+	
+
+go keyword before function
+
+	
+
+Functions run in parallel
+
+
+
+
+Channel
+
+	
+
+Communication between goroutines
+
+	
+
+Safe data exchange & sync
+
+	
+
+Created with make(chan type)
+
+	
+
+Sends and receives block until ready
+
+
+
+
+time.Sleep
+
+	
+
+Pauses a goroutine
+
+	
+
+Simulate delay or waiting
+
+	
+
+time.Sleep(duration)
+
+	
+
+Delays sending to the channel
+
+
+
+
+<-ch receive
+
+	
+
+Receive data from channel
+
+	
+
+Synchronize with sending goroutines
+
+	
+
+msg := <-ch or directly in print
+
+	
+
+Waits for data before proceeding
+```
 
 ***
 
 \
 
 
-     Here’s a clear explanation of Process vs Program in Operating Systems:
+```
+Great question! Let’s break down this line clearly and simply:
+fmt.Println(<-ch)
+```
 
 ***
 
-    Program:
+```
+What does this mean?
 
-    Definition: A program is a passive set of instructions or code stored on disk (like an executable file).
-
-
-
-    Nature: Static, just the code and data written by the programmer.
+fmt.Println is a function that prints whatever you give it to the console.
 
 
 
-    Example: A .exe file, a script, or a compiled binary.
-
-
-
-    State: Stored on disk, not running.
+<-ch is the receive operation from a channel — it means “take a value from the channel ch”.
+```
 
 ***
 
-    Process:
+```
+Step-by-step explanation:
 
-    Definition: A process is a dynamic instance of a program that is currently executing.
-
-
-
-    Nature: Active, it has its own execution context (program counter, registers, memory, etc.).
+Channel Receive (<-ch):
 
 
 
-    Example: When you run a program (like a web browser), the OS creates a process for it.
+Think of a channel ch as a queue or mailbox.
 
 
 
-    State: It exists in memory, has resources allocated, and is managed by the OS.
+The <-ch means: wait until there is a message in this mailbox, then take that message out.
+
+
+
+If the mailbox is empty, the program waits (blocks) here until a message arrives.
+
+
+
+Once a message is received, <-ch evaluates to the value it got.
+
+
+
+Passing the received value to fmt.Println:
+
+
+
+The value you got from <-ch is then passed as an argument to fmt.Println.
+
+
+
+So, the program prints that value on the screen.
+```
 
 ***
 
-    Key Differences:
+```
+In simpler terms:
 
-    Aspect
+The line fmt.Println(<-ch) means:
 
-    	
-
-    Program
-
-    	
-
-    Process
-
-
-
-
-    Definition
-
-    	
-
-    Static set of instructions
-
-    	
-
-    Active execution of a program
-
-
-
-
-    State
-
-    	
-
-    Passive (stored on disk)
-
-    	
-
-    Active (in memory & executing)
-
-
-
-
-    Existence
-
-    	
-
-    Exists before execution
-
-    	
-
-    Exists only when program runs
-
-
-
-
-    Components
-
-    	
-
-    Code, data, files
-
-    	
-
-    Code, data, stack, heap, registers, program counter
-
-
-
-
-    Number
-
-    	
-
-    One program can create multiple processes
-
-    	
-
-    One process per execution instance
-
-
-
-
-    Resource use
-
-    	
-
-    None
-
-    	
-
-    Requires CPU time, memory, etc.
+ “Wait for a message from channel ch. When you get it, print it.”
+```
 
 ***
 
-    In short:
+```
+Why do we write it this way?
 
-    A program is like a recipe written down.
+This syntax combines two things in one line:
 
 
 
-    A process is a chef actively cooking from that recipe.
+Receive a message from the channel (<-ch)
+
+
+
+Print that message (fmt.Println(...))
+
+
+
+It’s a concise way to say: “Get the next message from the channel and immediately print it.”
+```
+
+***
+
+```
+What happens during execution?
+
+When the program hits fmt.Println(<-ch), it pauses right at <-ch until a message comes through ch.
+
+
+
+Once a goroutine sends a message into the channel (like ch <- "Hello"), the main function unblocks, receives that message, and prints it.
+
+
+
+This happens for each fmt.Println(<-ch) line — waiting for a message, then printing it.
+```
+
+***
+
+```
+Example analogy:
+Imagine a post office where you wait at the mailbox:
+
+<-ch = You waiting patiently until a letter arrives.
+
+
+
+Once the letter (message) arrives, you open it.
+
+
+
+Then fmt.Println = you read out loud what the letter says.
+```
+
+***
+
+\
+\
+
+
+```
+Here’s a simple explanation of Concurrency vs Parallelism in Operating Systems:
+```
+
+***
+
+```
+Concurrency:
+
+Definition: Multiple tasks make progress over the same time period by interleaving their execution.
+
+
+
+How it works: The CPU switches rapidly between tasks (context switching), giving the illusion that tasks run simultaneously.
+
+
+
+Example: On a single-core CPU, running two programs where the OS switches back and forth between them.
+
+
+
+Goal: Manage multiple tasks efficiently, improving resource utilization and responsiveness.
+
+
+
+Key point: Tasks are not literally running at the same instant but appear to be doing so.
+```
+
+***
+
+```
+Parallelism:
+
+Definition: Multiple tasks actually run at the same time on multiple processors or cores.
+
+
+
+How it works: Different processors/cores execute different tasks simultaneously.
+
+
+
+Example: On a multi-core CPU, running two programs where each program runs on its own core at the same instant.
+
+
+
+Goal: Increase computational speed by performing multiple operations simultaneously.
+
+
+
+Key point: True simultaneous execution of tasks.
+```
+
+***
+
+```
+Summary Table
+
+Aspect
+
+	
+
+Concurrency
+
+	
+
+Parallelism
+
+
+
+
+Execution
+
+	
+
+Interleaved (time-sliced)
+
+	
+
+Simultaneous (at the same time)
+
+
+
+
+CPU cores
+
+	
+
+Can be on a single core
+
+	
+
+Requires multiple cores/processors
+
+
+
+
+Purpose
+
+	
+
+Manage multiple tasks efficiently
+
+	
+
+Speed up tasks by doing them at once
+
+
+
+
+Illusion or Real
+
+	
+
+Illusion of simultaneous progress
+
+	
+
+Real simultaneous execution
+```
+
+***
+
+\
+
+
+```
+ Here’s a clear explanation of Process vs Program in Operating Systems:
+```
+
+***
+
+```
+Program:
+
+Definition: A program is a passive set of instructions or code stored on disk (like an executable file).
+
+
+
+Nature: Static, just the code and data written by the programmer.
+
+
+
+Example: A .exe file, a script, or a compiled binary.
+
+
+
+State: Stored on disk, not running.
+```
+
+***
+
+```
+Process:
+
+Definition: A process is a dynamic instance of a program that is currently executing.
+
+
+
+Nature: Active, it has its own execution context (program counter, registers, memory, etc.).
+
+
+
+Example: When you run a program (like a web browser), the OS creates a process for it.
+
+
+
+State: It exists in memory, has resources allocated, and is managed by the OS.
+```
+
+***
+
+```
+Key Differences:
+
+Aspect
+
+	
+
+Program
+
+	
+
+Process
+
+
+
+
+Definition
+
+	
+
+Static set of instructions
+
+	
+
+Active execution of a program
+
+
+
+
+State
+
+	
+
+Passive (stored on disk)
+
+	
+
+Active (in memory & executing)
+
+
+
+
+Existence
+
+	
+
+Exists before execution
+
+	
+
+Exists only when program runs
+
+
+
+
+Components
+
+	
+
+Code, data, files
+
+	
+
+Code, data, stack, heap, registers, program counter
+
+
+
+
+Number
+
+	
+
+One program can create multiple processes
+
+	
+
+One process per execution instance
+
+
+
+
+Resource use
+
+	
+
+None
+
+	
+
+Requires CPU time, memory, etc.
+```
+
+***
+
+```
+In short:
+
+A program is like a recipe written down.
+
+
+
+A process is a chef actively cooking from that recipe.
+```
 
 ***
 
 ***
 
-    1. 
-    Thread vs Concurrency
+```
+1. 
+Thread vs Concurrency
 
-    Thread:
+Thread:
 
-     A thread is the smallest unit of execution within a process. Multiple threads can exist within one process and share the same memory.
-
-
-
-    Concurrency:
-
-     Concurrency is a concept where multiple tasks are in progress at the same time, possibly by interleaving their execution on a single CPU core.
+ A thread is the smallest unit of execution within a process. Multiple threads can exist within one process and share the same memory.
 
 
 
-    Relation:
+Concurrency:
 
-    Threads are often used to achieve concurrency. Multiple threads in a process can be scheduled by the OS to run concurrently (switching back and forth) on one core.
-
-***
-
-    2. 
-    Thread vs Parallelism
-
-    Thread:
-
-     As above, a thread is a unit of execution.
+ Concurrency is a concept where multiple tasks are in progress at the same time, possibly by interleaving their execution on a single CPU core.
 
 
 
-    Parallelism:
+Relation:
 
-     Parallelism means actually running multiple tasks at the same time on multiple cores or processors.
-
-
-
-    Relation:
-
-    Multiple threads can run in parallel if the system has multiple CPU cores. Each core runs one thread simultaneously, enabling true parallelism.
+Threads are often used to achieve concurrency. Multiple threads in a process can be scheduled by the OS to run concurrently (switching back and forth) on one core.
+```
 
 ***
 
-    3. 
-    Thread and Process
+```
+2. 
+Thread vs Parallelism
 
-    Aspect
+Thread:
 
-    	
-
-    Thread
-
-    	
-
-    Process
+ As above, a thread is a unit of execution.
 
 
 
+Parallelism:
 
-    Execution Unit
-
-    	
-
-    Smallest unit of execution
-
-    	
-
-    Independent executing program
+ Parallelism means actually running multiple tasks at the same time on multiple cores or processors.
 
 
 
+Relation:
 
-    Memory
-
-    	
-
-    Shares memory with other threads in the same process
-
-    	
-
-    Has its own separate memory space
-
-
-
-
-    Creation
-
-    	
-
-    Lightweight, faster to create
-
-    	
-
-    Heavyweight, takes more time to create
-
-
-
-
-    Communication
-
-    	
-
-    Easy between threads (shared memory)
-
-    	
-
-    Requires IPC mechanisms
-
-
-
-
-    Resource Ownership
-
-    	
-
-    Does not own resources (belongs to a process)
-
-    	
-
-    Owns resources like memory, files
-
-
-
-
-    Example
-
-    	
-
-    Multiple threads in a browser process handling UI, loading, etc.
-
-    	
-
-    Browser process itself
+Multiple threads can run in parallel if the system has multiple CPU cores. Each core runs one thread simultaneously, enabling true parallelism.
+```
 
 ***
 
-    Summary
+```
+3. 
+Thread and Process
 
-    Threads are units of execution within a process.
+Aspect
+
+	
+
+Thread
+
+	
+
+Process
 
 
 
-    Concurrency means multiple tasks making progress by time-slicing (can be achieved with threads).
+
+Execution Unit
+
+	
+
+Smallest unit of execution
+
+	
+
+Independent executing program
 
 
 
-    Parallelism means multiple tasks running truly simultaneously (can happen with multiple threads on multiple cores).
+
+Memory
+
+	
+
+Shares memory with other threads in the same process
+
+	
+
+Has its own separate memory space
+
+
+
+
+Creation
+
+	
+
+Lightweight, faster to create
+
+	
+
+Heavyweight, takes more time to create
+
+
+
+
+Communication
+
+	
+
+Easy between threads (shared memory)
+
+	
+
+Requires IPC mechanisms
+
+
+
+
+Resource Ownership
+
+	
+
+Does not own resources (belongs to a process)
+
+	
+
+Owns resources like memory, files
+
+
+
+
+Example
+
+	
+
+Multiple threads in a browser process handling UI, loading, etc.
+
+	
+
+Browser process itself
+```
+
+***
+
+```
+Summary
+
+Threads are units of execution within a process.
+
+
+
+Concurrency means multiple tasks making progress by time-slicing (can be achieved with threads).
+
+
+
+Parallelism means multiple tasks running truly simultaneously (can happen with multiple threads on multiple cores).
+```
 
 ***
 
@@ -4685,11 +5061,15 @@ Example:
 \
 
 
-    What Is a Thread?
+```
+What Is a Thread?
+```
 
 A thread is the smallest unit of execution within a process. When a program runs, it may have one or more threads carrying out tasks concurrently. Multiple threads can share resources such as memory space, files, and variables within their parent process but execute independently[`123`](https://www.geeksforgeeks.org/operating-systems/thread-in-operating-system/).
 
-    Key Features of Threads
+```
+Key Features of Threads
+```
 
 - Lightweight: Threads utilize fewer resources compared to full processes.
 
@@ -4699,9 +5079,9 @@ A thread is the smallest unit of execution within a process. When a program runs
 
 - Independent Stacks: Each thread has its own execution stack and program counter.
 
-<!---->
-
-    Why Use Threads?
+```
+Why Use Threads?
+```
 
 Threads make programs more efficient by enabling multitasking. For example:
 
@@ -4723,9 +5103,9 @@ In Golang (Go), every thread (and goroutine) has its own call stack—a dedicate
 
 - Goroutine: Each goroutine (Go’s lightweight thread) starts with a small stack (e.g., 2KB) which grows and shrinks as needed by the Go scheduler, making it memory efficient.
 
-<!---->
-
-    Why Is This Important?
+```
+Why Is This Important?
+```
 
 - Avoids conflicts and bugs: Each thread’s functions and data are isolated from others.
 
@@ -4743,49 +5123,51 @@ In Golang (Go), every thread (and goroutine) has its own call stack—a dedicate
 \
 
 
-    package main
-    import "fmt"
-    func calculate() (result int) {
-      fmt.Println("First", result)
-      show := func() {
-        result = result + 10
-        fmt.Println("defer", result)
-      }
-      defer show()
-      result = 5
-      fmt.Println("Second", result)
-      return
-    }
+```
+package main
+import "fmt"
+func calculate() (result int) {
+  fmt.Println("First", result)
+  show := func() {
+    result = result + 10
+    fmt.Println("defer", result)
+  }
+  defer show()
+  result = 5
+  fmt.Println("Second", result)
+  return
+}
+```
 
-<!---->
+```
+func calc() int {
+  result := 0
+  fmt.Println("First", result)
+  show := func() {
+    result = result + 10
+    fmt.Println("defer", result)
+  }
+  defer show()
+  result = 5
+  fmt.Println("Second", result)
+```
 
-    func calc() int {
-      result := 0
-      fmt.Println("First", result)
-      show := func() {
-        result = result + 10
-        fmt.Println("defer", result)
-      }
-      defer show()
-      result = 5
-      fmt.Println("Second", result)
+```
+  return result
+}
+```
 
-<!---->
+```
+func main() {
+  a := calculate()
+  fmt.Println("main first", a)
+```
 
-      return result
-    }
-
-<!---->
-
-    func main() {
-      a := calculate()
-      fmt.Println("main first", a)
-
-<!---->
-
-      b := calc()
-      fmt.Println("main second", b)
-    }
+```
+  b := calc()
+  fmt.Println("main second", b)
+}
+```
 
 \
 \
@@ -4793,320 +5175,322 @@ In Golang (Go), every thread (and goroutine) has its own call stack—a dedicate
 \
 
 
-    Below, I'll explain the provided Go code step by step, including how it executes and why it produces the exact output you shared. I'll break it down by function, focusing on key Go concepts like named return values, defer statements, closures, and variable scoping/shadowing. This will make the behavior clear, especially the differences between calculate() and calc().
-    Key Go Concepts to Understand
-    Before diving in:
+```
+Below, I'll explain the provided Go code step by step, including how it executes and why it produces the exact output you shared. I'll break it down by function, focusing on key Go concepts like named return values, defer statements, closures, and variable scoping/shadowing. This will make the behavior clear, especially the differences between calculate() and calc().
+Key Go Concepts to Understand
+Before diving in:
 
-    Named return values: In a function signature like func foo() (x int), x is a named return variable. It's automatically initialized to its zero value (e.g., 0 for int) at the start of the function. When you return (even implicitly), Go returns the current value of this named variable. Importantly, deferred functions (which run after the return statement but before the function actually exits) can still modify named return values, affecting what gets returned.
+Named return values: In a function signature like func foo() (x int), x is a named return variable. It's automatically initialized to its zero value (e.g., 0 for int) at the start of the function. When you return (even implicitly), Go returns the current value of this named variable. Importantly, deferred functions (which run after the return statement but before the function actually exits) can still modify named return values, affecting what gets returned.
 
 
 
-    Unnamed return values: In a function like func foo() int, the return value is just a type (no name). When you return someVar, Go copies the value of someVar at that exact moment as the return value. Deferred functions run after this copy is made, so modifications in a defer don't affect the already-copied return value.
+Unnamed return values: In a function like func foo() int, the return value is just a type (no name). When you return someVar, Go copies the value of someVar at that exact moment as the return value. Deferred functions run after this copy is made, so modifications in a defer don't affect the already-copied return value.
 
 
 
-    Defer: A defer statement schedules a function call to run after the surrounding function's return statement but before it returns control to the caller. Defers are often used for cleanup (e.g., closing files), but here they're used to modify variables.
+Defer: A defer statement schedules a function call to run after the surrounding function's return statement but before it returns control to the caller. Defers are often used for cleanup (e.g., closing files), but here they're used to modify variables.
 
 
 
-    Closures: The show functions are closures (anonymous functions that capture variables from their surrounding scope, like result).
+Closures: The show functions are closures (anonymous functions that capture variables from their surrounding scope, like result).
 
 
 
-    Execution order: Functions run line-by-line, but defers are "stacked" and execute in LIFO (last-in-first-out) order right before the function exits.
+Execution order: Functions run line-by-line, but defers are "stacked" and execute in LIFO (last-in-first-out) order right before the function exits.
 
 
 
-    All int variables start at 0 (zero value) unless assigned otherwise.
+All int variables start at 0 (zero value) unless assigned otherwise.
 
 
 
-    The code has two similar functions (calculate and calc) called from main. They look alike but differ in return handling, leading to different outputs.
-    Code Execution Step by Step
-    1. main() Starts
+The code has two similar functions (calculate and calc) called from main. They look alike but differ in return handling, leading to different outputs.
+Code Execution Step by Step
+1. main() Starts
 
-    main calls a := calculate() first.
+main calls a := calculate() first.
 
 
 
-    This runs calculate() completely (including its defer).
+This runs calculate() completely (including its defer).
 
 
 
-    Then prints "main first" with the returned value.
+Then prints "main first" with the returned value.
 
 
 
-    Next, main calls b := calc().
+Next, main calls b := calc().
 
 
 
-    This runs calc() completely (including its defer).
+This runs calc() completely (including its defer).
 
 
 
-    Then prints "main first" with the returned value (note: the output says "main first" for both, but with different values).
+Then prints "main first" with the returned value (note: the output says "main first" for both, but with different values).
 
 
 
-    Now, let's simulate each function.
-    2. Execution of calculate()
-    Signature: func calculate() (result int)
-     (This uses a named return value called result, initialized to 0.)
+Now, let's simulate each function.
+2. Execution of calculate()
+Signature: func calculate() (result int)
+ (This uses a named return value called result, initialized to 0.)
 
-    Line: fmt.Println("First", result)
+Line: fmt.Println("First", result)
 
 
 
-    result is the named return (starts at 0).
+result is the named return (starts at 0).
 
 
 
-    Output: First 0
+Output: First 0
 
 
 
-    Line: show := func() { result = result + 10; fmt.Println("defer", result) }
+Line: show := func() { result = result + 10; fmt.Println("defer", result) }
 
 
 
-    Defines a closure show that captures result (the named return variable) from the outer scope.
+Defines a closure show that captures result (the named return variable) from the outer scope.
 
 
 
-    It adds 10 to result and prints it.
+It adds 10 to result and prints it.
 
 
 
-    No execution yet.
+No execution yet.
 
 
 
-    Line: defer show()
+Line: defer show()
 
 
 
-    Schedules show() to run after the upcoming return but before the function exits.
+Schedules show() to run after the upcoming return but before the function exits.
 
 
 
-    No execution yet.
+No execution yet.
 
 
 
-    Line: result = 5
+Line: result = 5
 
 
 
-    Sets the named return result to 5.
+Sets the named return result to 5.
 
 
 
-    Line: fmt.Println("Second", result)
+Line: fmt.Println("Second", result)
 
 
 
-    Prints the current result (now 5).
+Prints the current result (now 5).
 
 
 
-    Output: Second 5
+Output: Second 5
 
 
 
-    Line: return
+Line: return
 
 
 
-    This is an implicit return result (since it's named).
+This is an implicit return result (since it's named).
 
 
 
-    Go prepares to return the current value of result (which is 5)... but defers run first!
+Go prepares to return the current value of result (which is 5)... but defers run first!
 
 
 
-    Defer executes now: show() runs.
+Defer executes now: show() runs.
 
 
 
-    Captured result is still accessible (it's 5).
+Captured result is still accessible (it's 5).
 
 
 
-    result = result + 10 → result = 15.
+result = result + 10 → result = 15.
 
 
 
-    fmt.Println("defer", result) → Output: defer 15
+fmt.Println("defer", result) → Output: defer 15
 
 
 
-    Since result is named, this modification affects the return value. The function now returns 15 (not 5).
+Since result is named, this modification affects the return value. The function now returns 15 (not 5).
 
 
 
-    calculate() exits, returning 15 to main.
+calculate() exits, returning 15 to main.
 
 
 
-    In main: a := calculate() sets a = 15.
+In main: a := calculate() sets a = 15.
 
 
 
-    fmt.Println("main first", a) → Output: main first 15
+fmt.Println("main first", a) → Output: main first 15
 
 
 
-    Why does the defer affect the return? Because result is a named return variable. The defer modifies it after the return statement but before the function exits, so the final returned value is the modified one (15).
-    3. Execution of calc()
-    Signature: func calc() int
-     (This uses an unnamed return—just returns an int. No named variable in the signature.)
+Why does the defer affect the return? Because result is a named return variable. The defer modifies it after the return statement but before the function exits, so the final returned value is the modified one (15).
+3. Execution of calc()
+Signature: func calc() int
+ (This uses an unnamed return—just returns an int. No named variable in the signature.)
 
-    Line: result := 0
+Line: result := 0
 
 
 
-    Declares a local variable result (not a named return). Initialized to 0.
+Declares a local variable result (not a named return). Initialized to 0.
 
 
 
-    (Note: This shadows any outer scope, but here it's just local.)
+(Note: This shadows any outer scope, but here it's just local.)
 
 
 
-    Line: fmt.Println("First", result)
+Line: fmt.Println("First", result)
 
 
 
-    Prints the local result (0).
+Prints the local result (0).
 
 
 
-    Output: First 0
+Output: First 0
 
 
 
-    Line: show := func() { result = result + 10; fmt.Println("defer", result) }
+Line: show := func() { result = result + 10; fmt.Println("defer", result) }
 
 
 
-    Defines a closure show that captures the local result from the outer scope.
+Defines a closure show that captures the local result from the outer scope.
 
 
 
-    It adds 10 to result and prints it.
+It adds 10 to result and prints it.
 
 
 
-    No execution yet.
+No execution yet.
 
 
 
-    Line: defer show()
+Line: defer show()
 
 
 
-    Schedules show() to run after the upcoming return but before the function exits.
+Schedules show() to run after the upcoming return but before the function exits.
 
 
 
-    No execution yet.
+No execution yet.
 
 
 
-    Line: result = 5
+Line: result = 5
 
 
 
-    Sets the local result to 5.
+Sets the local result to 5.
 
 
 
-    Line: fmt.Println("Second", result)
+Line: fmt.Println("Second", result)
 
 
 
-    Prints the current local result (now 5).
+Prints the current local result (now 5).
 
 
 
-    Output: Second 5
+Output: Second 5
 
 
 
-    Line: return result
+Line: return result
 
 
 
-    Go copies the current value of local result (5) as the return value.
+Go copies the current value of local result (5) as the return value.
 
 
 
-    Defer executes now: show() runs.
+Defer executes now: show() runs.
 
 
 
-    Captured local result is still accessible (it's 5).
+Captured local result is still accessible (it's 5).
 
 
 
-    result = result + 10 → local result = 15.
+result = result + 10 → local result = 15.
 
 
 
-    fmt.Println("defer", result) → Output: defer 15
+fmt.Println("defer", result) → Output: defer 15
 
 
 
-    But the return value was already copied as 5 before the defer ran. Modifying the local result afterward doesn't change the copied return value.
+But the return value was already copied as 5 before the defer ran. Modifying the local result afterward doesn't change the copied return value.
 
 
 
-    The function returns 5 (not 15).
+The function returns 5 (not 15).
 
 
 
-    calc() exits, returning 5 to main.
+calc() exits, returning 5 to main.
 
 
 
-    In main: b := calc() sets b = 5.
+In main: b := calc() sets b = 5.
 
 
 
-    fmt.Println("main first", b) → Output: main first 5
+fmt.Println("main first", b) → Output: main first 5
 
 
 
-    Why doesn't the defer affect the return? Because the return is unnamed. The return result copies the value (5) immediately. The defer modifies the local result afterward, but that local variable is no longer tied to the return value—it's just a local var going out of scope.
-    Why the Outputs Differ
+Why doesn't the defer affect the return? Because the return is unnamed. The return result copies the value (5) immediately. The defer modifies the local result afterward, but that local variable is no longer tied to the return value—it's just a local var going out of scope.
+Why the Outputs Differ
 
-    calculate() returns 15: Named return → defer modifies the named result after return but before exit → affects the final return value.
+calculate() returns 15: Named return → defer modifies the named result after return but before exit → affects the final return value.
 
 
 
-    calc() returns 5: Unnamed return → return copies the local result (5) before defer runs → defer's modification to the local var doesn't affect the already-copied return value.
+calc() returns 5: Unnamed return → return copies the local result (5) before defer runs → defer's modification to the local var doesn't affect the already-copied return value.
 
 
 
-    Both print defer 15 because:
+Both print defer 15 because:
 
 
 
-    At defer time, result is 5 in both cases (set just before return).
+At defer time, result is 5 in both cases (set just before return).
 
 
 
-    show() adds 10, making it 15, and prints it.
+show() adds 10, making it 15, and prints it.
 
 
 
-    The "First 0" and "Second 5" are identical in both because the code up to return behaves the same—differences only kick in at defer time.
+The "First 0" and "Second 5" are identical in both because the code up to return behaves the same—differences only kick in at defer time.
 
 
 
-    Full Output Explained
+Full Output Explained
+```
 
 **First 0       // From calculate(): initial named result=0**
 
@@ -5124,700 +5508,702 @@ In Golang (Go), every thread (and goroutine) has its own call stack—a dedicate
 
 **main first 5  // From main: calc() returned 5 (defer didn't affect the copied return value)**
 
-    Additional Notes
+```
+Additional Notes
 
-    This demonstrates a subtle Go gotcha: Named returns can lead to surprises with defers. Many Go developers avoid named returns unless needed (e.g., for documentation or to allow bare return).
+This demonstrates a subtle Go gotcha: Named returns can lead to surprises with defers. Many Go developers avoid named returns unless needed (e.g., for documentation or to allow bare return).
 
 
 
-    The closures capture result by reference (since it's in the outer scope), allowing modification.
+The closures capture result by reference (since it's in the outer scope), allowing modification.
 
 
 
-    No errors or panics here—everything is valid Go.
+No errors or panics here—everything is valid Go.
 
 
 
-    If you run this code (e.g., in Go Playground), you'll get the same output (assuming the date/time doesn't affect it, which it doesn't).
+If you run this code (e.g., in Go Playground), you'll get the same output (assuming the date/time doesn't affect it, which it doesn't).
 
 
 
-    If you have questions about modifying the code or testing variations, let me know!
+If you have questions about modifying the code or testing variations, let me know!
 
 
-    package main
+package main
+```
 
-<!---->
+```
+import "fmt"
+```
 
-    import "fmt"
+```
+func calculate() (result int) {
+  fmt.Println("First", result)
+```
 
-<!---->
+```
+  show := func() {
+    result = result + 10
+    fmt.Println("defer", result)
+  }
+```
 
-    func calculate() (result int) {
-      fmt.Println("First", result)
+```
+  defer show()
+```
 
-<!---->
+```
+  result = 5
+```
 
-      show := func() {
-        result = result + 10
-        fmt.Println("defer", result)
-      }
+```
+  p := func(a int){
+    fmt.Println("ami",a)
+  }
+```
 
-<!---->
+```
+  defer p(result)
+```
 
-      defer show()
+```
+  defer fmt.Println(result)
+ 
+ 
+  fmt.Println("Second", result)
+```
 
-<!---->
+```
+  defer fmt.Println(5)
+```
 
-      result = 5
+```
+  return
+}
+```
 
-<!---->
+```
+func main() {
+  a := calculate()
+  fmt.Println("main first", a)
+}
+```
 
-      p := func(a int){
-        fmt.Println("ami",a)
-      }
+```
+/*
+output:
+```
 
-<!---->
+```
+First 0
+Second 5
+5
+5
+ami 5
+defer 15
+main first 15
+*/
 
-      defer p(result)
 
-<!---->
+Key Go Concepts Recap (Relevant Here)
 
-      defer fmt.Println(result)
-     
-     
-      fmt.Println("Second", result)
+Named return values: func calculate() (result int) initializes result to 0 (zero value). Deferred functions can modify it after return but before the function exits, affecting the returned value.
 
-<!---->
 
-      defer fmt.Println(5)
 
-<!---->
+Defer: Defers schedule function calls to run after the return statement but before the function exits. They execute in LIFO order (last deferred = first executed).
 
-      return
-    }
 
-<!---->
 
-    func main() {
-      a := calculate()
-      fmt.Println("main first", a)
-    }
+Defer Argument Evaluation: When you defer someFunc(arg), the arg is evaluated immediately (at the time of the defer statement), but the function body runs later. Literals (e.g., 5) or variables (e.g., result) are captured as their current value at defer time—not re-evaluated later.
 
-<!---->
 
-    /*
-    output:
 
-<!---->
+Closures: Anonymous functions (like show) capture outer variables (like result) by reference, so they see/use the current value when they execute (not at defer time).
 
-    First 0
-    Second 5
-    5
-    5
-    ami 5
-    defer 15
-    main first 15
-    */
 
 
-    Key Go Concepts Recap (Relevant Here)
+Execution Order: Code runs top-to-bottom, but defers are stacked and run in reverse order on return.
 
-    Named return values: func calculate() (result int) initializes result to 0 (zero value). Deferred functions can modify it after return but before the function exits, affecting the returned value.
 
 
+Code Execution Step by Step
+main() calls calculate() and prints its result. calc() is unused, so we ignore it.
+Execution of calculate()
+Signature: func calculate() (result int)
+ (Named return result starts at 0.)
 
-    Defer: Defers schedule function calls to run after the return statement but before the function exits. They execute in LIFO order (last deferred = first executed).
+Line: fmt.Println("First", result)
 
 
 
-    Defer Argument Evaluation: When you defer someFunc(arg), the arg is evaluated immediately (at the time of the defer statement), but the function body runs later. Literals (e.g., 5) or variables (e.g., result) are captured as their current value at defer time—not re-evaluated later.
+result is 0 (named return's zero value).
 
 
 
-    Closures: Anonymous functions (like show) capture outer variables (like result) by reference, so they see/use the current value when they execute (not at defer time).
+Output: First 0
 
 
 
-    Execution Order: Code runs top-to-bottom, but defers are stacked and run in reverse order on return.
+Line: show := func() { result = result + 10; fmt.Println("defer", result) }
 
 
 
-    Code Execution Step by Step
-    main() calls calculate() and prints its result. calc() is unused, so we ignore it.
-    Execution of calculate()
-    Signature: func calculate() (result int)
-     (Named return result starts at 0.)
+Defines a closure show that captures result by reference (will modify and print its current value when executed).
 
-    Line: fmt.Println("First", result)
 
 
+No execution/output yet.
 
-    result is 0 (named return's zero value).
 
 
+Line: defer show() (Defer #1)
 
-    Output: First 0
 
 
+Schedules show() to run later (LIFO). Arguments: None, but as a closure, it captures result by reference.
 
-    Line: show := func() { result = result + 10; fmt.Println("defer", result) }
 
 
+Line: result = 5
 
-    Defines a closure show that captures result by reference (will modify and print its current value when executed).
 
 
+Sets named result to 5. (No output.)
 
-    No execution/output yet.
 
 
+Line: p := func(a int) { fmt.Println("ami", a) }
 
-    Line: defer show() (Defer #1)
 
 
+Defines an anonymous function p that takes an int and prints "ami" + the value.
 
-    Schedules show() to run later (LIFO). Arguments: None, but as a closure, it captures result by reference.
 
 
+No execution/output yet.
 
-    Line: result = 5
 
 
+Line: defer p(result) (Defer #2)
 
-    Sets named result to 5. (No output.)
 
 
+Schedules p(result) to run later.
 
-    Line: p := func(a int) { fmt.Println("ami", a) }
 
 
+Argument result is evaluated now (current value: 5), so this is effectively defer p(5).
 
-    Defines an anonymous function p that takes an int and prints "ami" + the value.
 
 
+When it runs later, it will print "ami 5" (using the captured 5, even if result changes).
 
-    No execution/output yet.
 
 
+Line: defer fmt.Println(result) (Defer #3)
 
-    Line: defer p(result) (Defer #2)
 
 
+Schedules fmt.Println(result) to run later.
 
-    Schedules p(result) to run later.
 
 
+Argument result is evaluated now (current value: 5), so this is effectively defer fmt.Println(5).
 
-    Argument result is evaluated now (current value: 5), so this is effectively defer p(5).
 
 
+When it runs later, it will print "5" (using the captured 5).
 
-    When it runs later, it will print "ami 5" (using the captured 5, even if result changes).
 
 
+Line: fmt.Println("Second", result)
 
-    Line: defer fmt.Println(result) (Defer #3)
 
 
+result is now 5.
 
-    Schedules fmt.Println(result) to run later.
 
 
+Output: Second 5
 
-    Argument result is evaluated now (current value: 5), so this is effectively defer fmt.Println(5).
 
 
+Line: defer fmt.Println(5) (Defer #4)
 
-    When it runs later, it will print "5" (using the captured 5).
 
 
+Schedules fmt.Println(5) to run later.
 
-    Line: fmt.Println("Second", result)
 
 
+Argument is a literal 5 (evaluated now, but it's constant).
 
-    result is now 5.
 
 
+When it runs later, it will print "5".
 
-    Output: Second 5
 
 
+Line: return
 
-    Line: defer fmt.Println(5) (Defer #4)
 
 
+Implicit return result (current value: 5).
 
-    Schedules fmt.Println(5) to run later.
 
 
+Before exiting, all defers run in LIFO order (last deferred first):
 
-    Argument is a literal 5 (evaluated now, but it's constant).
 
 
+Defer #4 (last deferred, first executed): fmt.Println(5)
 
-    When it runs later, it will print "5".
 
 
+Output: 5
 
-    Line: return
 
 
+result is still 5 (unchanged yet).
 
-    Implicit return result (current value: 5).
 
 
+Defer #3: fmt.Println(5) (captured value at defer time)
 
-    Before exiting, all defers run in LIFO order (last deferred first):
 
 
+Output: 5
 
-    Defer #4 (last deferred, first executed): fmt.Println(5)
 
 
+result is still 5.
 
-    Output: 5
 
 
+Defer #2: p(5) (captured value at defer time)
 
-    result is still 5 (unchanged yet).
 
 
+Runs p: fmt.Println("ami", 5)
 
-    Defer #3: fmt.Println(5) (captured value at defer time)
 
 
+Output: ami 5
 
-    Output: 5
 
 
+result is still 5.
 
-    result is still 5.
 
 
+Defer #1 (first deferred, last executed): show()
 
-    Defer #2: p(5) (captured value at defer time)
 
 
+Closure captures result by reference → current result is 5.
 
-    Runs p: fmt.Println("ami", 5)
 
 
+result = result + 10 → result = 15.
 
-    Output: ami 5
 
 
+fmt.Println("defer", result) → Output: defer 15
 
-    result is still 5.
 
 
+Now, since result is a named return, the modification (to 15) affects the return value. The function returns 15.
 
-    Defer #1 (first deferred, last executed): show()
 
 
+Execution of main()
 
-    Closure captures result by reference → current result is 5.
+Line: a := calculate()
 
 
 
-    result = result + 10 → result = 15.
+Runs calculate() (as explained above), sets a = 15 (modified by the last defer).
 
 
 
-    fmt.Println("defer", result) → Output: defer 15
+Line: fmt.Println("main first", a)
 
 
 
-    Now, since result is a named return, the modification (to 15) affects the return value. The function returns 15.
+Output: main first 15
 
 
 
-    Execution of main()
+Why the Output Matches Exactly
+text
+First 0       // From calculate(): initial named result=0
+Second 5      // From calculate(): after result=5
+5             // From Defer #4: fmt.Println(5) [last deferred, first run]
+5             // From Defer #3: fmt.Println(result) [evaluated to 5 at defer time]
+ami 5         // From Defer #2: p(result) [evaluated to p(5) at defer time]
+defer 15      // From Defer #1: show() [modifies result to 15 via closure]
+main first 15 // From main: calculate() returned 15 (named return modified by show)
 
-    Line: a := calculate()
 
+Key Insight on Defers: LIFO order means the "bottom" defers (like the literal 5) run first. Arguments are snapshotted at defer time (hence "5" and "ami 5" use the old value), but closures (like show) use live references.
 
 
-    Runs calculate() (as explained above), sets a = 15 (modified by the last defer).
 
+Why 15 is Returned: Named return allows show to modify result after return but before exit.
 
 
-    Line: fmt.Println("main first", a)
 
+No Output from calc(): It's defined but never called, so none of its code (including prints or defers) runs. If you called it (e.g., add b := calc(); fmt.Println("main second", b)), it would behave as in my first explanation (returns 5, prints "First 0", "Second 5", "defer 15").
 
 
-    Output: main first 15
 
+Additional Notes
 
+If You Remove/Change Defers: The output would shift (e.g., no "ami 5" if you remove defer p(result)).
 
-    Why the Output Matches Exactly
-    text
-    First 0       // From calculate(): initial named result=0
-    Second 5      // From calculate(): after result=5
-    5             // From Defer #4: fmt.Println(5) [last deferred, first run]
-    5             // From Defer #3: fmt.Println(result) [evaluated to 5 at defer time]
-    ami 5         // From Defer #2: p(result) [evaluated to p(5) at defer time]
-    defer 15      // From Defer #1: show() [modifies result to 15 via closure]
-    main first 15 // From main: calculate() returned 15 (named return modified by show)
 
 
-    Key Insight on Defers: LIFO order means the "bottom" defers (like the literal 5) run first. Arguments are snapshotted at defer time (hence "5" and "ami 5" use the old value), but closures (like show) use live references.
+Common Pitfall: Beginners often forget that defer arguments are evaluated early—leading to surprises if variables change later (but not here for the non-closure defers).
 
 
 
-    Why 15 is Returned: Named return allows show to modify result after return but before exit.
+Testing: Run this in Go Playground to verify. If you add a call to calc(), the output would extend with its lines (as in your original query).
 
 
 
-    No Output from calc(): It's defined but never called, so none of its code (including prints or defers) runs. If you called it (e.g., add b := calc(); fmt.Println("main second", b)), it would behave as in my first explanation (returns 5, prints "First 0", "Second 5", "defer 15").
 
+package main
+```
 
+```
+import "fmt"
+```
 
-    Additional Notes
+```
+func calculate() (result int) {
+  fmt.Println("First", result)
+```
 
-    If You Remove/Change Defers: The output would shift (e.g., no "ami 5" if you remove defer p(result)).
+```
+  show := func() {
+    result = result + 10
+    fmt.Println("defer", result)
+  }
+```
 
+```
+  defer show()
+```
 
+```
+  result = 5
+```
 
-    Common Pitfall: Beginners often forget that defer arguments are evaluated early—leading to surprises if variables change later (but not here for the non-closure defers).
+```
+  p := func(a int){
+    fmt.Println("ami",a)
+  }
+```
 
+```
+  result = 90
+ 
+  defer p(result)
+```
 
+```
+  result --;
+```
 
-    Testing: Run this in Go Playground to verify. If you add a call to calc(), the output would extend with its lines (as in your original query).
+```
+  defer fmt.Println(result)
+ 
+ 
+  fmt.Println("Second", result)
+```
 
+```
+  defer fmt.Println(5)
+```
 
+```
+  return
+}
+```
 
+```
+func main() {
+  a := calculate()
+  fmt.Println("main first", a)
+}
+```
 
-    package main
+```
+/*
+output:
+```
 
-<!---->
+```
+First 0
+Second 89
+5
+89
+ami 90
+defer 99
+main first 99
+*/
 
-    import "fmt"
 
-<!---->
+Key Go Concepts Recap (Relevant Here)
 
-    func calculate() (result int) {
-      fmt.Println("First", result)
+Named return values: result starts at 0 (zero value). Defers can modify it after return but before exit, affecting the returned value.
 
-<!---->
 
-      show := func() {
-        result = result + 10
-        fmt.Println("defer", result)
-      }
 
-<!---->
+Defer Order: Defers run in LIFO (last-in-first-out) order on return. They're stacked like a pile—the last one added runs first.
 
-      defer show()
 
-<!---->
 
-      result = 5
+Defer Argument Evaluation: Arguments to defer (e.g., defer fmt.Println(result)) are evaluated immediately at the defer statement, capturing the current value (like a snapshot). The function body runs later with that snapshot.
 
-<!---->
 
-      p := func(a int){
-        fmt.Println("ami",a)
-      }
 
-<!---->
+Closures: show captures result by reference, so it uses/modifies the live current value when it executes (not a snapshot).
 
-      result = 90
-     
-      defer p(result)
 
-<!---->
 
-      result --;
+Increment/Decrement: result --; is post-decrement (subtract 1 after using the value, but here it's standalone, so result = result - 1).
 
-<!---->
 
-      defer fmt.Println(result)
-     
-     
-      fmt.Println("Second", result)
 
-<!---->
+Code Execution Step by Step
+main() calls calculate() and prints its result.
+Execution of calculate()
+Signature: func calculate() (result int)
+ (Named return result starts at 0.)
 
-      defer fmt.Println(5)
+Line: fmt.Println("First", result)
 
-<!---->
 
-      return
-    }
 
-<!---->
+result is 0.
 
-    func main() {
-      a := calculate()
-      fmt.Println("main first", a)
-    }
 
-<!---->
 
-    /*
-    output:
+Output: First 0
 
-<!---->
 
-    First 0
-    Second 89
-    5
-    89
-    ami 90
-    defer 99
-    main first 99
-    */
 
+Line: show := func() { result = result + 10; fmt.Println("defer", result) }
 
-    Key Go Concepts Recap (Relevant Here)
 
-    Named return values: result starts at 0 (zero value). Defers can modify it after return but before exit, affecting the returned value.
 
+Defines closure show: Adds 10 to current result (by reference) and prints it.
 
 
-    Defer Order: Defers run in LIFO (last-in-first-out) order on return. They're stacked like a pile—the last one added runs first.
 
+No execution/output yet.
 
 
-    Defer Argument Evaluation: Arguments to defer (e.g., defer fmt.Println(result)) are evaluated immediately at the defer statement, capturing the current value (like a snapshot). The function body runs later with that snapshot.
 
+Line: defer show() (Defer #1)
 
 
-    Closures: show captures result by reference, so it uses/modifies the live current value when it executes (not a snapshot).
 
+Schedules show() (closure, no args, captures result by reference).
 
 
-    Increment/Decrement: result --; is post-decrement (subtract 1 after using the value, but here it's standalone, so result = result - 1).
 
+Line: result = 5
 
 
-    Code Execution Step by Step
-    main() calls calculate() and prints its result.
-    Execution of calculate()
-    Signature: func calculate() (result int)
-     (Named return result starts at 0.)
 
-    Line: fmt.Println("First", result)
+result now 5. (No output.)
 
 
 
-    result is 0.
+Line: p := func(a int) { fmt.Println("ami", a) }
 
 
 
-    Output: First 0
+Defines p: Prints "ami" + its int argument.
 
 
 
-    Line: show := func() { result = result + 10; fmt.Println("defer", result) }
+No execution/output yet.
 
 
 
-    Defines closure show: Adds 10 to current result (by reference) and prints it.
+Line: result = 90
 
 
 
-    No execution/output yet.
+result now 90. (No output.)
 
 
 
-    Line: defer show() (Defer #1)
+Line: defer p(result) (Defer #2)
 
 
 
-    Schedules show() (closure, no args, captures result by reference).
+Schedules p(result).
 
 
 
-    Line: result = 5
+Argument result evaluated now (90), so effectively defer p(90).
 
 
 
-    result now 5. (No output.)
+When it runs later, it will print "ami 90" (using snapshot 90, even if result changes).
 
 
 
-    Line: p := func(a int) { fmt.Println("ami", a) }
+Line: result --;
 
 
 
-    Defines p: Prints "ami" + its int argument.
+Decrements result by 1: result = 89. (No output.)
 
 
 
-    No execution/output yet.
+Line: defer fmt.Println(result) (Defer #3)
 
 
 
-    Line: result = 90
+Schedules fmt.Println(result).
 
 
 
-    result now 90. (No output.)
+Argument result evaluated now (89), so effectively defer fmt.Println(89).
 
 
 
-    Line: defer p(result) (Defer #2)
+When it runs later, it will print "89" (using snapshot 89).
 
 
 
-    Schedules p(result).
+Line: fmt.Println("Second", result)
 
 
 
-    Argument result evaluated now (90), so effectively defer p(90).
+result is 89.
 
 
 
-    When it runs later, it will print "ami 90" (using snapshot 90, even if result changes).
+Output: Second 89
 
 
 
-    Line: result --;
+Line: defer fmt.Println(5) (Defer #4)
 
 
 
-    Decrements result by 1: result = 89. (No output.)
+Schedules fmt.Println(5).
 
 
 
-    Line: defer fmt.Println(result) (Defer #3)
+Argument is literal 5 (constant snapshot).
 
 
 
-    Schedules fmt.Println(result).
+When it runs later, it will print "5".
 
 
 
-    Argument result evaluated now (89), so effectively defer fmt.Println(89).
+Line: return
 
 
 
-    When it runs later, it will print "89" (using snapshot 89).
+Implicit return result (current value: 89).
 
 
 
-    Line: fmt.Println("Second", result)
+Before exiting, defers run in LIFO order (last added = first executed):
 
 
 
-    result is 89.
+Defer #4 (last deferred, first run): fmt.Println(5)
 
 
 
-    Output: Second 89
+Output: 5
 
 
 
-    Line: defer fmt.Println(5) (Defer #4)
+result still 89 (unchanged).
 
 
 
-    Schedules fmt.Println(5).
+Defer #3: fmt.Println(89) (snapshot from defer time)
 
 
 
-    Argument is literal 5 (constant snapshot).
+Output: 89
 
 
 
-    When it runs later, it will print "5".
+result still 89.
 
 
 
-    Line: return
+Defer #2: p(90) (snapshot from defer time)
 
 
 
-    Implicit return result (current value: 89).
+Runs p: fmt.Println("ami", 90)
 
 
 
-    Before exiting, defers run in LIFO order (last added = first executed):
+Output: ami 90
 
 
 
-    Defer #4 (last deferred, first run): fmt.Println(5)
+result still 89.
 
 
 
-    Output: 5
+Defer #1 (first deferred, last run): show()
 
 
 
-    result still 89 (unchanged).
+Closure uses current result (89) by reference.
 
 
 
-    Defer #3: fmt.Println(89) (snapshot from defer time)
+result = 89 + 10 → result = 99.
 
 
 
-    Output: 89
+fmt.Println("defer", 99) → Output: defer 99
 
 
 
-    result still 89.
+Named return result is now 99, so the function returns 99.
 
 
 
-    Defer #2: p(90) (snapshot from defer time)
+Execution of main()
 
+Line: a := calculate()
 
 
-    Runs p: fmt.Println("ami", 90)
 
+Runs calculate() (as above), sets a = 99.
 
 
-    Output: ami 90
 
+Line: fmt.Println("main first", a)
 
 
-    result still 89.
 
+Output: main first 99
 
 
-    Defer #1 (first deferred, last run): show()
 
-
-
-    Closure uses current result (89) by reference.
-
-
-
-    result = 89 + 10 → result = 99.
-
-
-
-    fmt.Println("defer", 99) → Output: defer 99
-
-
-
-    Named return result is now 99, so the function returns 99.
-
-
-
-    Execution of main()
-
-    Line: a := calculate()
-
-
-
-    Runs calculate() (as above), sets a = 99.
-
-
-
-    Line: fmt.Println("main first", a)
-
-
-
-    Output: main first 99
-
-
-
-    Why the Output Matches Exactly
+Why the Output Matches Exactly
+```
 
 _First 0       // Initial named result=0_
 
@@ -5833,286 +6219,320 @@ _defer 99      // Defer #1: show() \[adds 10 to current 89 → 99; by referen
 
 _main first 99 // Returned value (named result modified to 99 by show)_
 
-    Snapshots vs. References: Non-closure defers (#2, #3, #4) use values snapshotted at defer time (90, 89, 5), so they don't see later changes (e.g., decrement or +10). The closure (#1) uses the live result (89) and modifies it.
+```
+Snapshots vs. References: Non-closure defers (#2, #3, #4) use values snapshotted at defer time (90, 89, 5), so they don't see later changes (e.g., decrement or +10). The closure (#1) uses the live result (89) and modifies it.
 
 
 
-    LIFO Order: Explains why "5" prints first (Defer #4 was added last), and "defer 99" last (Defer #1 was added first).
+LIFO Order: Explains why "5" prints first (Defer #4 was added last), and "defer 99" last (Defer #1 was added first).
 
 
 
-    Why 99 is Returned: Named return allows show to change result after return but before exit.
+Why 99 is Returned: Named return allows show to change result after return but before exit.
 
 
 
-    Decrement Effect: result --; happens after the snapshot for Defer #2 (90) but before Defer #3 (89) and the "Second" print.
+Decrement Effect: result --; happens after the snapshot for Defer #2 (90) but before Defer #3 (89) and the "Second" print.
 
 
 
-    Additional Notes
+Additional Notes
 
-    If You Change Order: Moving result --; before defer p(result) would snapshot 89 for p, changing "ami 90" to "ami 89".
-
-
-
-    No calc(): It's removed, so no impact.
+If You Change Order: Moving result --; before defer p(result) would snapshot 89 for p, changing "ami 90" to "ami 89".
 
 
 
-    Testing: This code runs as described in Go (e.g., Playground). It's a great example of defer timing—useful for understanding cleanup or resource management.
+No calc(): It's removed, so no impact.
 
-***
 
-    🎯 INTERVIEW QUESTIONS (Go Runtime & Goroutines)
+
+Testing: This code runs as described in Go (e.g., Playground). It's a great example of defer timing—useful for understanding cleanup or resource management.
+```
 
 ***
 
-    1. What is a goroutine in Go?
-    Answer:
-     A goroutine is a lightweight thread managed by the Go runtime. It allows functions or methods to run concurrently using the go keyword. Goroutines are more memory-efficient than OS threads and can scale to thousands in a program.
+```
+🎯 INTERVIEW QUESTIONS (Go Runtime & Goroutines)
+```
 
 ***
 
-    2. How do you start a goroutine?
-    Answer:
-     By prefixing a function or anonymous function call with the go keyword:
-    go myFunction()
-
-    This runs myFunction() as a separate goroutine.
-
-***
-
-    3. What is the Go runtime scheduler?
-    Answer:
-     The Go runtime scheduler manages all goroutines. It uses a work-stealing, preemptive, user-space scheduling algorithm to map many goroutines (G) onto a limited number of OS threads (M), using logical processors (P).
-    The Go runtime scheduler is like a manager that decides which goroutines run, when, and on which CPU core.
-
-
-    Components:
-
-    G: Goroutine
-
-
-
-    M: OS Thread
-
-
-
-    P: Processor (scheduler context)
+```
+1. What is a goroutine in Go?
+Answer:
+ A goroutine is a lightweight thread managed by the Go runtime. It allows functions or methods to run concurrently using the go keyword. Goroutines are more memory-efficient than OS threads and can scale to thousands in a program.
+```
 
 ***
 
-    4. How many OS threads are used when running goroutines?
-    Answer:
-     By default, the Go runtime uses as many OS threads as the number of logical CPUs, but it can adjust based on workload. You can control this with:
-    runtime.GOMAXPROCS(n)
+```
+2. How do you start a goroutine?
+Answer:
+ By prefixing a function or anonymous function call with the go keyword:
+go myFunction()
 
-    This sets the number of logical processors used by the scheduler.
-
-***
-
-    5. Why might a goroutine not finish execution before main() exits?
-    Answer:
-     If the main goroutine finishes and the program exits, all sub-goroutines are terminated immediately, regardless of whether they completed their tasks.
+This runs myFunction() as a separate goroutine.
+```
 
 ***
 
-    6. How do you wait for all goroutines to complete properly?
-    Answer:
-     Use a sync.WaitGroup to track goroutines and wait for them to finish:
-    var wg sync.WaitGroup
+```
+3. What is the Go runtime scheduler?
+Answer:
+ The Go runtime scheduler manages all goroutines. It uses a work-stealing, preemptive, user-space scheduling algorithm to map many goroutines (G) onto a limited number of OS threads (M), using logical processors (P).
+The Go runtime scheduler is like a manager that decides which goroutines run, when, and on which CPU core.
 
-    wg.Add(1)
-    go func() {
-        defer wg.Done()
-        // do work
-    }()
-    wg.Wait()
 
-***
+Components:
 
-    7. Are goroutines parallel or concurrent?
-    Answer:
-     Goroutines are concurrent by default, meaning tasks appear to run at the same time. If GOMAXPROCS is more than 1 and the hardware supports it, goroutines can run in parallel.
-
-***
-
-    8. Do goroutines share memory? How is data safely shared between them?
-    Answer:
-     Yes, goroutines can share memory. However, shared memory access must be synchronized using:
-
-    Channels (preferred in Go)
+G: Goroutine
 
 
 
-    Mutexes (sync.Mutex)
+M: OS Thread
 
 
 
-    Atomic operations
-
-
-
-    To avoid race conditions, never share writable data without synchronization.
+P: Processor (scheduler context)
+```
 
 ***
 
-    9. What happens if the main() goroutine exits while others are still running?
-    Answer:
-     If main() exits, the program terminates immediately, and all other goroutines are killed, even if they haven't finished. That’s why you must explicitly wait (e.g., using WaitGroup).
+```
+4. How many OS threads are used when running goroutines?
+Answer:
+ By default, the Go runtime uses as many OS threads as the number of logical CPUs, but it can adjust based on workload. You can control this with:
+runtime.GOMAXPROCS(n)
+
+This sets the number of logical processors used by the scheduler.
+```
 
 ***
 
-    10. What's the difference between goroutines and OS threads?
-    Answer:
-
-    Feature
-
-    	
-
-    Goroutine
-
-    	
-
-    OS Thread
-
-
-
-
-    Memory cost
-
-    	
-
-    ~2 KB
-
-    	
-
-    ~1 MB
-
-
-
-
-    Speed
-
-    	
-
-    Very fast
-
-    	
-
-    Slower to create
-
-
-
-
-    Scheduling
-
-    	
-
-    User-level (Go)
-
-    	
-
-    OS-level
-
-
-
-
-    Count
-
-    	
-
-    1000s possible
-
-    	
-
-    Limited (100s)
+```
+5. Why might a goroutine not finish execution before main() exits?
+Answer:
+ If the main goroutine finishes and the program exits, all sub-goroutines are terminated immediately, regardless of whether they completed their tasks.
+```
 
 ***
 
-    🧠 DEEPER QUESTIONS YOU ASKED
+```
+6. How do you wait for all goroutines to complete properly?
+Answer:
+ Use a sync.WaitGroup to track goroutines and wait for them to finish:
+var wg sync.WaitGroup
+
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    // do work
+}()
+wg.Wait()
+```
 
 ***
 
-    ❓ Why is extra time needed to complete all goroutines?
-    Answer:
-     Goroutines are asynchronous. When you start them, they run independently, and main() doesn't wait for them unless you explicitly block (e.g., using time.Sleep, WaitGroup, or channels). If you don't wait, the program might exit before they finish.
+```
+7. Are goroutines parallel or concurrent?
+Answer:
+ Goroutines are concurrent by default, meaning tasks appear to run at the same time. If GOMAXPROCS is more than 1 and the hardware supports it, goroutines can run in parallel.
+```
 
 ***
 
-    ❓ What if the main goroutine stops?
-    Answer:
-     The whole program terminates immediately, and any running goroutines are also forcibly stopped. This is why goroutines must be synchronized with main() using proper mechanisms.
+```
+8. Do goroutines share memory? How is data safely shared between them?
+Answer:
+ Yes, goroutines can share memory. However, shared memory access must be synchronized using:
+
+Channels (preferred in Go)
+
+
+
+Mutexes (sync.Mutex)
+
+
+
+Atomic operations
+
+
+
+To avoid race conditions, never share writable data without synchronization.
+```
 
 ***
 
-    ❓ Do goroutines share memory with the main goroutine?
-    Answer:
-     Yes, all goroutines—including the main one—share the same heap and global memory space. This means they can access shared variables, but you must protect such access with synchronization tools to avoid race conditions.
+```
+9. What happens if the main() goroutine exits while others are still running?
+Answer:
+ If main() exits, the program terminates immediately, and all other goroutines are killed, even if they haven't finished. That’s why you must explicitly wait (e.g., using WaitGroup).
+```
 
 ***
 
-    ✅ Summary Table
+```
+10. What's the difference between goroutines and OS threads?
+Answer:
 
-    Concept
+Feature
 
-    	
+	
 
-    Description
+Goroutine
 
+	
 
-
-
-    Goroutine
-
-    	
-
-    Lightweight concurrent task managed by Go runtime
+OS Thread
 
 
 
 
-    Go Runtime Scheduler
+Memory cost
 
-    	
+	
 
-    Maps goroutines to OS threads
+~2 KB
 
+	
 
-
-
-    Main() exits
-
-    	
-
-    All other goroutines are killed
+~1 MB
 
 
 
 
-    Wait for goroutines
+Speed
 
-    	
+	
 
-    Use sync.WaitGroup or channels
+Very fast
 
+	
 
-
-
-    Memory sharing
-
-    	
-
-    Goroutines share heap memory – protect with mutex or channel
+Slower to create
 
 
 
 
-    GOMAXPROCS
+Scheduling
 
-    	
+	
 
-    Controls number of CPUs used by scheduler
+User-level (Go)
+
+	
+
+OS-level
+
+
+
+
+Count
+
+	
+
+1000s possible
+
+	
+
+Limited (100s)
+```
+
+***
+
+```
+🧠 DEEPER QUESTIONS YOU ASKED
+```
+
+***
+
+```
+❓ Why is extra time needed to complete all goroutines?
+Answer:
+ Goroutines are asynchronous. When you start them, they run independently, and main() doesn't wait for them unless you explicitly block (e.g., using time.Sleep, WaitGroup, or channels). If you don't wait, the program might exit before they finish.
+```
+
+***
+
+```
+❓ What if the main goroutine stops?
+Answer:
+ The whole program terminates immediately, and any running goroutines are also forcibly stopped. This is why goroutines must be synchronized with main() using proper mechanisms.
+```
+
+***
+
+```
+❓ Do goroutines share memory with the main goroutine?
+Answer:
+ Yes, all goroutines—including the main one—share the same heap and global memory space. This means they can access shared variables, but you must protect such access with synchronization tools to avoid race conditions.
+```
+
+***
+
+```
+✅ Summary Table
+
+Concept
+
+	
+
+Description
+
+
+
+
+Goroutine
+
+	
+
+Lightweight concurrent task managed by Go runtime
+
+
+
+
+Go Runtime Scheduler
+
+	
+
+Maps goroutines to OS threads
+
+
+
+
+Main() exits
+
+	
+
+All other goroutines are killed
+
+
+
+
+Wait for goroutines
+
+	
+
+Use sync.WaitGroup or channels
+
+
+
+
+Memory sharing
+
+	
+
+Goroutines share heap memory – protect with mutex or channel
+
+
+
+
+GOMAXPROCS
+
+	
+
+Controls number of CPUs used by scheduler
+```
 
 ***
 
@@ -6120,350 +6540,368 @@ _main first 99 // Returned value (named result modified to 99 by show)_
 \
 
 
-    Absolutely! Let’s now combine everything into a clear, beginner-friendly explanation that connects all the pieces:
-     goroutine, Go runtime, processor, thread, stack, heap, memory, and allocation.
+```
+Absolutely! Let’s now combine everything into a clear, beginner-friendly explanation that connects all the pieces:
+ goroutine, Go runtime, processor, thread, stack, heap, memory, and allocation.
+```
 
 ***
 
-    🔹 What is a Goroutine?
-    A goroutine is a lightweight, independently running function in Go.
-    go doSomething()
+```
+🔹 What is a Goroutine?
+A goroutine is a lightweight, independently running function in Go.
+go doSomething()
 
-    This creates a goroutine.
+This creates a goroutine.
 
-    It’s like assigning a small task.
-
-
-
-    It runs concurrently with other tasks.
+It’s like assigning a small task.
 
 
 
-    Very cheap: you can create thousands of them.
-
-***
-
-    🔹 What is the Go Runtime?
-    The Go runtime is the built-in engine in Go that:
-
-    Manages goroutines
+It runs concurrently with other tasks.
 
 
 
-    Handles memory (stack/heap)
-
-
-
-    Schedules tasks across available processors and threads
-
-
-
-    Does garbage collection
-
-
-
-    It makes everything automatic and efficient.
+Very cheap: you can create thousands of them.
+```
 
 ***
 
-    🔸 How Do They All Work Together?
-    Let’s walk through the flow:
+```
+🔹 What is the Go Runtime?
+The Go runtime is the built-in engine in Go that:
 
-    Component
-
-    	
-
-    Role in Go
+Manages goroutines
 
 
 
-
-    Goroutine (G)
-
-    	
-
-    A small task/function to run. You create it with go myFunc()
+Handles memory (stack/heap)
 
 
 
-
-    Processor (P)
-
-    	
-
-    Go runtime's internal unit. It holds a queue of goroutines (tasks). Not a real CPU.
+Schedules tasks across available processors and threads
 
 
 
-
-    Thread (M)
-
-    	
-
-    A real OS thread. Executes goroutines. Go attaches this to a P.
+Does garbage collection
 
 
 
-
-    CPU core
-
-    	
-
-    Actual hardware core where threads are run by the OS.
-
-
-
-
-    Stack
-
-    	
-
-    Private memory for each goroutine to hold local variables. Starts small (2KB).
-
-
-
-
-    Heap
-
-    	
-
-    Shared memory area used when goroutines need to store large/global data.
-
-
-
-
-    Allocation
-
-    	
-
-    Go decides whether to store a variable on the stack or heap.
+It makes everything automatic and efficient.
+```
 
 ***
 
-    🔁 Full Execution Flow:
+```
+🔸 How Do They All Work Together?
+Let’s walk through the flow:
 
-    You call go doSomething() → creates a goroutine (G)
+Component
 
+	
 
-
-    The Go runtime puts that G in a P's queue
-
-
-
-    An M (OS thread) is attached to the P
-
-
-
-    The M picks the G and runs it on a real CPU core
-
-
-
-    While running:
-
-
-
-    Local variables = stored on stack
-
-
-
-    Shared/large data = stored on heap
-
-
-
-    When done, the garbage collector reclaims memory
-
-***
-
-    🔹 Memory Concepts (Simplified)
-
-    Term
-
-    	
-
-    Description
+Role in Go
 
 
 
 
-    Stack
+Goroutine (G)
 
-    	
+	
 
-    Private, fast memory for each goroutine's local variables
-
-
-
-
-    Heap
-
-    	
-
-    Shared memory for complex or large data structures
+A small task/function to run. You create it with go myFunc()
 
 
 
 
-    Allocation
+Processor (P)
 
-    	
+	
 
-    The decision of putting variables in stack or heap (done by Go)
-
-
+Go runtime's internal unit. It holds a queue of goroutines (tasks). Not a real CPU.
 
 
-    Garbage Collection
 
-    	
 
-    Go automatically frees unused memory in heap
+Thread (M)
+
+	
+
+A real OS thread. Executes goroutines. Go attaches this to a P.
+
+
+
+
+CPU core
+
+	
+
+Actual hardware core where threads are run by the OS.
+
+
+
+
+Stack
+
+	
+
+Private memory for each goroutine to hold local variables. Starts small (2KB).
+
+
+
+
+Heap
+
+	
+
+Shared memory area used when goroutines need to store large/global data.
+
+
+
+
+Allocation
+
+	
+
+Go decides whether to store a variable on the stack or heap.
+```
 
 ***
 
-    ✅ Summary Table
+```
+🔁 Full Execution Flow:
 
-    Concept
+You call go doSomething() → creates a goroutine (G)
 
-    	
 
-    What It Is
 
-    	
+The Go runtime puts that G in a P's queue
 
-    Real-Life Analogy
 
 
+An M (OS thread) is attached to the P
 
 
-    Goroutine (G)
 
-    	
+The M picks the G and runs it on a real CPU core
 
-    A lightweight, concurrent function
 
-    	
 
-    A task someone is assigned
+While running:
 
 
 
+Local variables = stored on stack
 
-    Thread (M)
 
-    	
 
-    OS-level worker that runs code
+Shared/large data = stored on heap
 
-    	
 
-    A worker doing the task
 
+When done, the garbage collector reclaims memory
+```
 
+***
 
+```
+🔹 Memory Concepts (Simplified)
 
-    Processor (P)
+Term
 
-    	
+	
 
-    Logical unit in Go that holds task queue
+Description
 
-    	
 
-    A desk with a to-do list
 
 
+Stack
 
+	
 
-    Stack
+Private, fast memory for each goroutine's local variables
 
-    	
 
-    Fast private memory for a goroutine
 
-    	
 
-    Sticky notes on a worker’s desk
+Heap
 
+	
 
+Shared memory for complex or large data structures
 
 
-    Heap
 
-    	
 
-    Shared memory space for large/shared data
+Allocation
 
-    	
+	
 
-    Office file cabinet
+The decision of putting variables in stack or heap (done by Go)
 
 
 
 
-    Allocation
+Garbage Collection
 
-    	
+	
 
-    Deciding where data is stored (stack/heap)
+Go automatically frees unused memory in heap
+```
 
-    	
+***
 
-    Where to put info: desk or file
+```
+✅ Summary Table
 
+Concept
 
+	
 
+What It Is
 
-    Go Runtime
+	
 
-    	
+Real-Life Analogy
 
-    Background system managing all this
 
-    	
 
-    Office manager
 
+Goroutine (G)
 
+	
 
+A lightweight, concurrent function
 
-    CPU core
+	
 
-    	
+A task someone is assigned
 
-    Real hardware processor
 
-    	
 
-    Physical engine running workers
+
+Thread (M)
+
+	
+
+OS-level worker that runs code
+
+	
+
+A worker doing the task
+
+
+
+
+Processor (P)
+
+	
+
+Logical unit in Go that holds task queue
+
+	
+
+A desk with a to-do list
+
+
+
+
+Stack
+
+	
+
+Fast private memory for a goroutine
+
+	
+
+Sticky notes on a worker’s desk
+
+
+
+
+Heap
+
+	
+
+Shared memory space for large/shared data
+
+	
+
+Office file cabinet
+
+
+
+
+Allocation
+
+	
+
+Deciding where data is stored (stack/heap)
+
+	
+
+Where to put info: desk or file
+
+
+
+
+Go Runtime
+
+	
+
+Background system managing all this
+
+	
+
+Office manager
+
+
+
+
+CPU core
+
+	
+
+Real hardware processor
+
+	
+
+Physical engine running workers
+```
 
 ***
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeRAd8PB7mTj7HFqxJu8JI7T8BveerKYaSWvZ_iEEJcg_xsOsO6FEoOtNd7PYmA09i2yCH1NSV_XjoBCvG43MgbWqgjFEIQT03vW2T5iDUUjd6LpGj7CCzX0TZUYUj8duv_P6v14Q?key=uGJzmVkcsJ1FQdidsJ_3Ayp3)
 
-    Behind the scenes:
+```
+Behind the scenes:
 
-    You create 3 goroutines (worker(1), worker(2), worker(3)).
-
-
-
-    Go runtime puts them in different P's queues.
+You create 3 goroutines (worker(1), worker(2), worker(3)).
 
 
 
-    M picks them up and runs them on CPU cores.
+Go runtime puts them in different P's queues.
 
 
 
-    Each goroutine uses a stack, and any big data goes to the heap.
+M picks them up and runs them on CPU cores.
 
 
 
-    After they finish, Go runtime cleans up.
+Each goroutine uses a stack, and any big data goes to the heap.
+
+
+
+After they finish, Go runtime cleans up.
+```
 
 ***
 
-    🧠 Final Thought (As a Beginner)
-    In Go, you write goroutines, and the Go runtime does all the heavy lifting: scheduling, managing memory, using threads and cores smartly — so you don’t have to.
+```
+🧠 Final Thought (As a Beginner)
+In Go, you write goroutines, and the Go runtime does all the heavy lifting: scheduling, managing memory, using threads and cores smartly — so you don’t have to.
+```
 
 ***
 
@@ -6472,361 +6910,403 @@ _main first 99 // Returned value (named result modified to 99 by show)_
 
 ***
 
-    ❓ Why does each P (Processor) have its own queue of goroutines?
-    ✅ Short Answer:
-    Yes, each P has its own run queue — not a single global one — for performance and scalability reasons.
+```
+❓ Why does each P (Processor) have its own queue of goroutines?
+✅ Short Answer:
+Yes, each P has its own run queue — not a single global one — for performance and scalability reasons.
+```
 
 ***
 
-    🧠 Deeper Explanation (Beginner-Friendly)
-    The Go runtime uses multiple logical processors (P) to run goroutines in parallel.
-     Each **P maintains its own private run queue of goroutines — this is called the local queue.
-    📌 Why not just use one global queue?
-    Because:
+```
+🧠 Deeper Explanation (Beginner-Friendly)
+The Go runtime uses multiple logical processors (P) to run goroutines in parallel.
+ Each **P maintains its own private run queue of goroutines — this is called the local queue.
+📌 Why not just use one global queue?
+Because:
 
-    Problem with Single Queue
+Problem with Single Queue
 
-    	
+	
 
-    Solution with Per-P Queue
-
-
-
-
-    All threads would fight for the same queue → lock contention
-
-    	
-
-    Each P has its own queue → no locking needed
+Solution with Per-P Queue
 
 
 
 
-    Slower performance under many goroutines
+All threads would fight for the same queue → lock contention
 
-    	
+	
 
-    Faster parallel scheduling
-
-
-
-
-    Less cache-friendly (jumping between CPUs)
-
-    	
-
-    More CPU-local task execution
-
-    So, Go avoids a single global queue and uses many small queues instead.
-
-***
-
-    🔁 What happens if one P runs out of goroutines?
-    If a P’s queue becomes empty, it does this:
-
-    It tries to steal goroutines from another P’s queue (this is called work stealing).
+Each P has its own queue → no locking needed
 
 
 
-    If it can’t find any, it stays idle until new work arrives.
+
+Slower performance under many goroutines
+
+	
+
+Faster parallel scheduling
 
 
 
-    This makes scheduling fast, balanced, and scalable.
+
+Less cache-friendly (jumping between CPUs)
+
+	
+
+More CPU-local task execution
+
+So, Go avoids a single global queue and uses many small queues instead.
+```
 
 ***
 
-    📦 Is there a global queue at all?
-    Yes, but it’s only used when a goroutine is first created or when no P is available at the moment.
+```
+🔁 What happens if one P runs out of goroutines?
+If a P’s queue becomes empty, it does this:
+
+It tries to steal goroutines from another P’s queue (this is called work stealing).
+
+
+
+If it can’t find any, it stays idle until new work arrives.
+
+
+
+This makes scheduling fast, balanced, and scalable.
+```
 
 ***
 
-    🧠 Final Visualization:
-    GOMAXPROCS = 2 → Go runtime creates:
-
-    P1: [G3, G5, G7]   ← own queue of goroutines
-    P2: [G2, G4]       ← own queue
-
-    If P2 finishes early:
-     → It steals G5 from P1 and runs it.
+```
+📦 Is there a global queue at all?
+Yes, but it’s only used when a goroutine is first created or when no P is available at the moment.
+```
 
 ***
 
-    Great question again — you're really close to mastering how Go's runtime works internally.
-    Let’s answer clearly and simply:
+```
+🧠 Final Visualization:
+GOMAXPROCS = 2 → Go runtime creates:
+
+P1: [G3, G5, G7]   ← own queue of goroutines
+P2: [G2, G4]       ← own queue
+
+If P2 finishes early:
+ → It steals G5 from P1 and runs it.
+```
 
 ***
 
-    ❓ Is holding the goroutine queue the only job of P (Processor)?
-    🟥 No — holding the goroutine queue is not its only job.
-    The P (Processor) in Go does more than just store a queue.
-     It’s a logical scheduler context with other important responsibilities.
+```
+Great question again — you're really close to mastering how Go's runtime works internally.
+Let’s answer clearly and simply:
+```
 
 ***
 
-    ✅ Main Responsibilities of P (in Go’s GMP model)
-    1. Owns a run queue of goroutines
-
-    Primary task: store runnable goroutines in a queue (runq)
-
-
-
-    When a thread (M) needs a goroutine, it picks from this queue
+```
+❓ Is holding the goroutine queue the only job of P (Processor)?
+🟥 No — holding the goroutine queue is not its only job.
+The P (Processor) in Go does more than just store a queue.
+ It’s a logical scheduler context with other important responsibilities.
+```
 
 ***
 
-    2. Performs scheduling decisions
+```
+✅ Main Responsibilities of P (in Go’s GMP model)
+1. Owns a run queue of goroutines
 
-    P helps decide which goroutine to run next on its attached M
-
-
-
-    It maintains fairness and responsiveness
-
-***
-
-    3. Handles memory allocation (via mcache)
-
-    Each P has its own memory cache (mcache) to reduce contention when goroutines allocate memory.
+Primary task: store runnable goroutines in a queue (runq)
 
 
 
-    This makes heap allocation faster, because they don’t need to lock a global memory manager.
+When a thread (M) needs a goroutine, it picks from this queue
+```
 
 ***
 
-    4. Assists with garbage collection (GC)
+```
+2. Performs scheduling decisions
 
-    During GC cycles, P helps mark and sweep memory.
-
-
-
-    Each P helps scan objects reachable by the goroutines it runs.
-
-***
-
-    5. Manages timers and syscalls
-
-    P can track timers and scheduled events (like time.AfterFunc).
+P helps decide which goroutine to run next on its attached M
 
 
 
-    When a goroutine blocks on a syscall (e.g., file or network I/O), the Go runtime detaches the M from the P and attaches another M to keep things moving.
+It maintains fairness and responsiveness
+```
 
 ***
 
-    6. Supports work stealing
+```
+3. Handles memory allocation (via mcache)
 
-    If a P has no goroutines, it tries to steal from others' queues.
-
-
-
-    Keeps goroutine scheduling balanced across all processors.
-
-***
-
-    🔧 Summary of P’s Responsibilities
-
-    Responsibility
-
-    	
-
-    Description
+Each P has its own memory cache (mcache) to reduce contention when goroutines allocate memory.
 
 
 
-
-    Run queue
-
-    	
-
-    Holds goroutines ready to run
-
-
-
-
-    Scheduling
-
-    	
-
-    Chooses goroutine for M to execute
-
-
-
-
-    Memory allocation cache
-
-    	
-
-    Speeds up memory allocation
-
-
-
-
-    Garbage collection support
-
-    	
-
-    Helps GC with object scanning
-
-
-
-
-    Timers & syscalls
-
-    	
-
-    Tracks time-based goroutines and blocking
-
-
-
-
-    Work stealing
-
-    	
-
-    Balances workload between Ps
+This makes heap allocation faster, because they don’t need to lock a global memory manager.
+```
 
 ***
 
-    📌 Important Point
-    P is not hardware, but a logical unit Go uses to control concurrency efficiently.
-    You can set how many Ps exist using:
-    runtime.GOMAXPROCS(n)
+```
+4. Assists with garbage collection (GC)
 
-    This defines how many Ps (and thus, how many goroutines can run in parallel) the Go runtime should use.
-
-***
-
-    Let me know if you want a real code example where we simulate goroutines and understand how many run at once when GOMAXPROCS is 1 vs. 4!
-
-***
-
-    🧠 What Happens with One CPU Core?
-    🔧 Case 1: GOMAXPROCS(1)
-
-    You have 1 logical P and 1 real CPU core.
+During GC cycles, P helps mark and sweep memory.
 
 
 
-    Only one goroutine runs at a time.
-
-
-
-    The Go scheduler runs goroutines one after another — purely concurrent, not parallel.
-
-
-
-    Even if you start 1000 goroutines, only one can actively use the CPU at any moment.
-
-
-
-    ⏱ You’ll see:
-
-    Total execution time ≈ sum of all goroutine durations.
+Each P helps scan objects reachable by the goroutines it runs.
+```
 
 ***
 
-    🔧 Case 2: GOMAXPROCS(4)
+```
+5. Manages timers and syscalls
 
-    Now you ask Go to use 4 logical processors, but you still have only 1 physical CPU core.
-
-
-
-    So Go will still only run one goroutine at a time, but it context-switches more frequently.
+P can track timers and scheduled events (like time.AfterFunc).
 
 
 
-    ⏱ You’ll see:
-
-    Goroutines may get interleaved (switching between them), but they’re not truly parallel.
-
-
-
-    Total execution time is still close to sequential.
+When a goroutine blocks on a syscall (e.g., file or network I/O), the Go runtime detaches the M from the P and attaches another M to keep things moving.
+```
 
 ***
 
-    ❗ Important Clarification
-    GOMAXPROCS ≠ number of physical cores.
-     It tells Go how many logical P (Processor objects) to use — not how many hardware CPU cores you actually have.
+```
+6. Supports work stealing
 
-    Go can schedule goroutines on multiple Ps even with one core, but they will run in turns, not simultaneously.
-
-
-
-    Go uses preemptive scheduling to switch goroutines roughly every 10ms on a single core.
-
-***
-
-    📌 Summary Table
-
-    Scenario
-
-    	
-
-    Physical Cores
-
-    	
-
-    GOMAXPROCS
-
-    	
-
-    Behavior
+If a P has no goroutines, it tries to steal from others' queues.
 
 
 
-
-    Single-core, P = 1
-
-    	
-
-    1
-
-    	
-
-    1
-
-    	
-
-    One goroutine runs at a time
-
-
-
-
-    Single-core, P = 4
-
-    	
-
-    1
-
-    	
-
-    4
-
-    	
-
-    More context switching, still 1 at a time
-
-
-
-
-    Multi-core, P = 4
-
-    	
-
-    ≥4
-
-    	
-
-    4
-
-    	
-
-    True parallel goroutine execution
+Keeps goroutine scheduling balanced across all processors.
+```
 
 ***
 
-    ✅ Final Thought
-    If you have only one CPU core, Go cannot run goroutines in true parallel — only concurrently using time-sharing.
+```
+🔧 Summary of P’s Responsibilities
+
+Responsibility
+
+	
+
+Description
+
+
+
+
+Run queue
+
+	
+
+Holds goroutines ready to run
+
+
+
+
+Scheduling
+
+	
+
+Chooses goroutine for M to execute
+
+
+
+
+Memory allocation cache
+
+	
+
+Speeds up memory allocation
+
+
+
+
+Garbage collection support
+
+	
+
+Helps GC with object scanning
+
+
+
+
+Timers & syscalls
+
+	
+
+Tracks time-based goroutines and blocking
+
+
+
+
+Work stealing
+
+	
+
+Balances workload between Ps
+```
+
+***
+
+```
+📌 Important Point
+P is not hardware, but a logical unit Go uses to control concurrency efficiently.
+You can set how many Ps exist using:
+runtime.GOMAXPROCS(n)
+
+This defines how many Ps (and thus, how many goroutines can run in parallel) the Go runtime should use.
+```
+
+***
+
+```
+Let me know if you want a real code example where we simulate goroutines and understand how many run at once when GOMAXPROCS is 1 vs. 4!
+```
+
+***
+
+```
+🧠 What Happens with One CPU Core?
+🔧 Case 1: GOMAXPROCS(1)
+
+You have 1 logical P and 1 real CPU core.
+
+
+
+Only one goroutine runs at a time.
+
+
+
+The Go scheduler runs goroutines one after another — purely concurrent, not parallel.
+
+
+
+Even if you start 1000 goroutines, only one can actively use the CPU at any moment.
+
+
+
+⏱ You’ll see:
+
+Total execution time ≈ sum of all goroutine durations.
+```
+
+***
+
+```
+🔧 Case 2: GOMAXPROCS(4)
+
+Now you ask Go to use 4 logical processors, but you still have only 1 physical CPU core.
+
+
+
+So Go will still only run one goroutine at a time, but it context-switches more frequently.
+
+
+
+⏱ You’ll see:
+
+Goroutines may get interleaved (switching between them), but they’re not truly parallel.
+
+
+
+Total execution time is still close to sequential.
+```
+
+***
+
+```
+❗ Important Clarification
+GOMAXPROCS ≠ number of physical cores.
+ It tells Go how many logical P (Processor objects) to use — not how many hardware CPU cores you actually have.
+
+Go can schedule goroutines on multiple Ps even with one core, but they will run in turns, not simultaneously.
+
+
+
+Go uses preemptive scheduling to switch goroutines roughly every 10ms on a single core.
+```
+
+***
+
+```
+📌 Summary Table
+
+Scenario
+
+	
+
+Physical Cores
+
+	
+
+GOMAXPROCS
+
+	
+
+Behavior
+
+
+
+
+Single-core, P = 1
+
+	
+
+1
+
+	
+
+1
+
+	
+
+One goroutine runs at a time
+
+
+
+
+Single-core, P = 4
+
+	
+
+1
+
+	
+
+4
+
+	
+
+More context switching, still 1 at a time
+
+
+
+
+Multi-core, P = 4
+
+	
+
+≥4
+
+	
+
+4
+
+	
+
+True parallel goroutine execution
+```
+
+***
+
+```
+✅ Final Thought
+If you have only one CPU core, Go cannot run goroutines in true parallel — only concurrently using time-sharing.
+```
