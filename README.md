@@ -5,9 +5,8 @@ This repository contains my personal notes and documentation on various programm
 
 ## Contents
 
-- **[Go/Golang](golang.md)** - Notes on Go programming language
+- **[Go/Golang](Golang.pdf)** - Notes on Go programming language
 - **[Shell Scripting](shell-scripting.md)** - Shell scripting tips and examples
-- **[Golang.pdf](Golang.pdf)** - Additional Go language reference
 
 ## Purpose
 
