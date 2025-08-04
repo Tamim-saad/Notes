@@ -1210,3 +1210,484 @@ echo "Current date is: $d"
 
 ---
 
+## **🧠 What is `awk`?**
+
+**`awk`** is a powerful command-line **text processing tool** used to analyze, extract, and format structured data from files or command output.  
+ It processes input **line by line** and **field by field**, using patterns and actions.
+
+---
+
+**whatis awk**
+
+awk (1)              \- pattern scanning and text processing language
+
+---
+
+(The full meaning of **`awk`** comes from the **initials of its creators**:
+
+**A**ho, **W**einberger, and **K**ernighan)
+
+---
+
+### **🔧 What is `awk` used for?**
+
+* Filtering and transforming text
+
+* Extracting specific fields from lines
+
+* Doing calculations while reading files
+
+* Creating reports from structured text
+
+It’s like a **mini programming language** designed for:
+
+pattern { action }
+
+---
+
+## **🧩 Basic Syntax**
+
+awk 'pattern {action}' filename
+
+* **pattern**: Optional. Specifies the condition to match.
+
+* **action**: What to do when the pattern is matched.
+
+* **filename**: File to read from (or input from pipe `|`).
+
+---
+
+## **🔢 Built-in Variables**
+
+| Variable | Description |
+| ----- | ----- |
+| `$0` | Entire line |
+| `$1` | First field |
+| `$2` | Second field |
+| `$NF` | Last field (NF \= Number of Fields) |
+| `NF` | Total number of fields in a line |
+| `NR` | Current line number (Number of Records) |
+| `FS` | Field separator (default: space/tab) |
+
+---
+
+## **📌 Common Usage Examples**
+
+### **1\. 🔍 Extract columns**
+
+awk '{print $1, $3}' file.txt
+
+Prints the first and third columns of each line.
+
+---
+
+### **2\. 📊 Sum column values**
+
+awk '{sum \+= $2} END {print "Total:", sum}' file.txt
+
+Adds all numbers in the second column.
+
+---
+
+### **3\. 📈 Print line number**
+
+awk '{print NR, $0}' file.txt
+
+Adds line numbers before each line.
+
+---
+
+### **4\. 🔘 Print last field**
+
+awk '{print $NF}' file.txt
+
+---
+
+### **5\. 🧮 Count lines**
+
+awk   'END {print NR}'   file.txt
+
+---
+
+### **6\. 📂 Comma-separated (CSV)**
+
+awk  \-F,   '{print $1, $3}' data.csv
+
+`-F,` tells `awk` to use a comma as the field separator.
+
+---
+
+## **🛠️ From a Pipe: Real Use Case**
+
+### **Example: Get PIDs of running "amazon" processes**
+
+ps \-ef | grep amazon | awk \-F" " '{print $2}'
+
+* `ps -ef`: Shows all processes
+
+* `grep amazon`: Filters lines related to "amazon"
+
+* `awk -F" " '{print $2}'`: Extracts the second field (PID)
+
+---
+
+## **💎 Extra Formatting (Pretty Output)**
+
+awk '{printf "%-10s %-5s\\n", $1, $2}' file.txt
+
+Formats fields nicely using `printf`.
+
+---
+
+## **🧪 Bonus Tricks**
+
+### **🔄 Conditional filtering**
+
+awk '$3 \> 1000' file.txt
+
+Prints lines where the third field is greater than 1000\.
+
+---
+
+### **🗂️ Print only lines with more than 3 fields**
+
+awk 'NF \> 3' file.txt
+
+---
+
+## **🧵 Combine with Other Commands**
+
+### **Example: Top memory users**
+
+ps \-ef | grep power | awk '{sum+=$2} END {print "Total:", sum}'
+
+---
+
+## **✅ Summary Cheatsheet**
+
+| Task | Command |
+| ----- | ----- |
+| Extract 2nd column | `awk '{print $2}'` |
+| Use comma separator | `awk -F, '{print $1}'` |
+| Sum values in column | `awk '{sum+=$1} END{print sum}'` |
+| Print line numbers | `awk '{print NR, $0}'` |
+| Print last field | `awk '{print $NF}'` |
+| Only lines with \>3 columns | `awk 'NF>3'` |
+
+---
+
+Great\! Let’s break down `set -e`, `set -o`, and how they work in shell scripting — especially in `bash`.
+
+---
+
+---
+
+### **✅ `set -e`**
+
+**Exit immediately if a command exits with a non-zero status.**
+
+It’s like saying:  
+ 💣 “If anything fails, stop the script right there.”
+
+#### **Example:**
+
+set \-e
+
+echo "Step 1"
+
+false       \# This fails (exit status 1\)
+
+echo "Step 2"  \# This will NOT run
+
+---
+
+### **✅ `set -o pipefail` — Explained**
+
+The `set -o pipefail` option in `bash` (or `set -pipefail` in `zsh`) **makes your pipeline safer** by making the **entire pipeline fail if any command fails**, not just the last one.
+
+---
+
+### **🔧 Without `pipefail` (Default Behavior):**
+
+Only the **last command** in a pipeline determines the pipeline’s exit status.
+
+#### **Example:**
+
+false | grep "something"
+
+echo $?  \# Outputs: 0 ✅ (success) — misleading\!
+
+Here, even though `false` failed, `grep` didn’t fail, so the pipeline exit status is `0`.
+
+---
+
+### **⚠️ Problem:**
+
+That hides errors\! In a script, it might continue even if an earlier step failed.
+
+---
+
+### **✅ With `set -o pipefail`:**
+
+Now, the **pipeline fails** if **any** command fails.
+
+#### **Example:**
+
+set \-o pipefail
+
+false | grep "something"
+
+echo $?  \# Outputs: 1 ❌ — correctly shows failure
+
+---
+
+### **🌐 `curl` — Command Line Tool to Transfer Data from or to a Server**
+
+---
+
+### **✅ What is `curl`?**
+
+`curl` stands for **Client URL**. It's used to **fetch or send data** using URLs — via protocols like `HTTP`, `HTTPS`, `FTP`, etc.
+
+It’s commonly used to:
+
+* Download web pages or files
+
+* Interact with REST APIs
+
+* Send POST or GET requests
+
+* Test endpoints
+
+---
+
+### **📦 Basic Syntax:**
+
+curl \[options\] \[URL\]
+
+---
+
+### **🔹 Common Examples:**
+
+#### **1\. 📥 Download a file**
+
+curl \-O https://example.com/file.txt
+
+* `-O` saves the file with the original filename.
+
+---
+
+#### **2\. 📄 Show webpage content**
+
+curl https://example.com
+
+---
+
+#### **3\. 📤 POST data (simulate form submission or API call)**
+
+curl \-X POST \-d "name=Tamim\&email=test@example.com" https://httpbin.org/post
+
+* `-X POST` tells curl to use POST
+
+* `-d` sends form data
+
+---
+
+#### **4\. 🧠 Set custom headers**
+
+curl \-H "Authorization: Bearer \<token\>" https://api.example.com/data
+
+---
+
+#### **5\. 📁 Upload a file**
+
+curl \-F "file=@example.txt" https://httpbin.org/post
+
+* `-F` means form-data
+
+---
+
+#### **6\. 🧪 Check response headers only**
+
+curl \-I https://example.com
+
+---
+
+### **📌 Useful Options:**
+
+| Option | Description |
+| ----- | ----- |
+| `-O` | Save file with remote name |
+| `-o filename` | Save output to a file manually |
+| `-L` | Follow redirects |
+| `-X` | Specify request type (GET, POST…) |
+| `-d` | Send POST data |
+| `-F` | Send multipart/form-data |
+| `-H` | Add custom header |
+| `-I` | Fetch headers only |
+| `-s` | Silent mode (no progress/output) |
+
+---
+
+---
+
+## **🔍 `curl -X` → What does `-X` stand for?**
+
+* `-X` stands for **"request command/method"**.
+
+* It tells `curl` to use a specific **HTTP method** (like `GET`, `POST`, `PUT`, `DELETE`, etc.).
+
+### **✅ Example:**
+
+curl \-X POST https://httpbin.org/post
+
+This sends a **POST** request instead of the default **GET**.
+
+📌 Without `-X`, `curl` uses `GET` by default.
+
+---
+
+## **🔹 Practice Site:**
+
+Use [https://httpbin.org](https://httpbin.org/) to test all `curl` features safely.
+
+---
+
+Here's your **final note on `wget`** — a powerful command-line tool for downloading files from the web.
+
+---
+
+## **✅ `wget` — *Web Get***
+
+### **🔹 What it is:**
+
+`wget` stands for **Web Get** — it’s a non-interactive command-line tool to **download files** from the web using protocols like HTTP, HTTPS, and FTP.
+
+---
+
+## **🔹 Basic Syntax:**
+
+wget \[options\] \[URL\]
+
+---
+
+## **🔸 Common Use Cases:**
+
+| Use Case | Command Example |
+| ----- | ----- |
+| 📥 Download a file | `wget https://example.com/file.zip` |
+| 💾 Save with custom name | `wget -O myfile.zip https://example.com/file.zip` |
+| 🔁 Resume a partially downloaded file | `wget -c https://example.com/bigfile.zip` |
+| 🕵️ Download in background | `wget -b https://example.com/file.iso` |
+
+---
+
+## **🔹 Key Options:**
+
+| Option | Description |
+| ----- | ----- |
+| `-O FILE` | Save download as specific filename |
+| `-c` | Continue incomplete download (resume) |
+| `-P DIR` | Save file(s) to specific directory |
+| `--limit-rate=200k` | Throttle download speed to 200 KB/s |
+| `--user`, `--password` | HTTP authentication login info |
+| `--mirror` | Mirror entire website |
+| `--no-check-certificate` | Skip SSL certificate verification |
+
+---
+
+## **🔸 Difference Between `curl` and `wget`:**
+
+| Feature | `curl` | `wget` |
+| ----- | ----- | ----- |
+| Protocols | HTTP, FTP, SCP, etc. | HTTP, FTP |
+| Resuming downloads | Manual (`-C -`) | Built-in (`-c`) |
+| Recursive download | ❌ | ✅ Yes (`--recursive`, `--mirror`) |
+| POST/PUT requests | ✅ | Limited |
+| Default install | Common on macOS/Linux | Common on Linux |
+
+---
+
+## **🔹 Practice URLs:**
+
+Try downloading from:
+
+ wget [https://www.gnu.org/software/wget/manual/wget.txt](https://www.gnu.org/software/wget/manual/wget.txt)
+
+---
+
+Here’s a concise and practical **final note on `find`** — one of the most powerful tools in Linux to search for files and directories.
+
+---
+
+## **✅ `find` — *Search for Files and Directories***
+
+### **🔹 What it is:**
+
+`find` is used to **search files/directories recursively** in a directory hierarchy, based on name, type, time, size, permissions, etc.
+
+---
+
+## **🔸 Basic Syntax:**
+
+find \[path\] \[options\] \[expression\]
+
+---
+
+## **🔸 Common Use Cases:**
+
+| Purpose | Command Example |
+| ----- | ----- |
+| 🔍 Find by name | `find . -name "file.txt"` |
+| 🔍 Case-insensitive name | `find . -iname "file.txt"` |
+| 📂 Find only directories | `find . -type d -name "folder*"` |
+| 📄 Find only files | `find . -type f -name "*.sh"` |
+| 🔒 Find by permissions | `find . -type f -perm 644` |
+| 🕒 Find by modification time | `find . -mtime -1` *(within last 1 day)* |
+| 📏 Find by size | `find . -size +10M` *(files larger than 10 MB)* |
+| ❌ Find and delete files | `find . -name "*.tmp" -delete` |
+| 🧩 Find and execute command | `find . -name "*.log" -exec rm {} \;` *(delete logs)* |
+| 🔄 Find and use xargs | \`find . \-name "\*.txt" |
+
+---
+
+## **🔸 Useful Options:**
+
+| Option | Meaning |
+| ----- | ----- |
+| `.` | Current directory |
+| `-name` | Match file name exactly |
+| `-iname` | Match name case-insensitively |
+| `-type f` | Files only |
+| `-type d` | Directories only |
+| `-mtime -n` | Modified less than n days ago |
+| `-size +nM` | Bigger than n megabytes |
+| `-perm 644` | Files with exact permission |
+| `-exec CMD \;` | Run command on found files (e.g., delete) |
+
+---
+
+## **🧠 Examples to Remember:**
+
+\# All .c files in /home
+
+**find /home \-type f \-name "\*.c"**
+
+\# Delete all temp files
+
+**find . \-name "\*.tmp" \-delete**
+
+\# List all directories
+
+**find . \-type d**
+
+\# Find large files \>100MB
+
+**find / \-type f \-size \+100M**
+
+\# Find modified in last 2 days
+
+**find . \-mtime \-2**
+
+---
+
