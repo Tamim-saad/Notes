@@ -344,3 +344,147 @@ Cloud providers like AWS use VMs at scale to serve millions.
 
 * **"Explain hypervisors with an example."**: Software like VMware that partitions physical servers logically. E.g., AWS uses them in data centers to create VMs on demand.
 
+---
+
+# **Day 9-10**
+
+## **📝 Version Control Systems (VCS) – Beginner Notes**
+
+---
+
+### **✅ 1\. Definition**
+
+* **VCS** helps track changes in code, collaborate with others, and revert to previous versions when needed.
+
+---
+
+### **🆚 Centralized vs Distributed**
+
+| Feature | CVCS (Centralized) | DVCS (Distributed) |
+| ----- | ----- | ----- |
+| **Main Idea** | One central server stores all versions | Every user has a full copy (code \+ history) |
+| **Examples** | SVN, CVS, Perforce | Git, Mercurial |
+| **Internet Needed to Commit?** | ✅ Yes | ❌ No (local commits work offline) |
+| **Offline Work** | ❌ Limited | ✅ Fully supported |
+| **Speed** | Slower (depends on network) | Faster (done locally) |
+| **Backup** | One central copy (risk of loss) | Everyone has full backup |
+| **Branching** | Harder, slower | Easier, faster |
+| **Used in** | Older systems, some enterprises | Most modern teams, open-source projects |
+
+---
+
+## **🧠 What to Remember for Interviews**
+
+### **✅ Key Differences**
+
+**“In CVCS, there's one central repo; in DVCS, every developer has a full local copy.”**
+
+### **✅ Pros of CVCS**
+
+* Simpler to understand
+
+* Easy for small teams
+
+* Central control
+
+### **✅ Pros of DVCS (like Git)**
+
+* Work offline
+
+* Faster operations
+
+* Safer (no single point of failure)
+
+* Better for collaboration and open-source
+
+---
+
+## **🗣️ How to Answer in an Interview**
+
+**Q: What's the difference between centralized and distributed version control?**
+
+*"In centralized version control, there's a single server that holds the code, and developers commit changes directly to it. In distributed version control, like Git, every developer has a full local copy of the repository, including the full history, so they can work offline and commit locally. This makes DVCS faster, more flexible, and safer against data loss."*
+
+---
+
+---
+
+## **📝 Git vs GitHub – Beginner Notes**
+
+---
+
+### **✅ 1\. Definition**
+
+| Concept | Git | GitHub |
+| ----- | ----- | ----- |
+| **What is it?** | A **version control tool** (software) | A **hosting platform** for Git repositories |
+| **Type** | Local tool you install and use on your computer | Cloud service to store and share your Git repositories |
+| **Function** | Tracks changes, lets you commit, branch, merge, revert | Hosts code online, helps collaboration, pull requests, issue tracking |
+
+---
+
+### **🧠 Easy Analogy:**
+
+**Git** is like **Microsoft Word** that lets you write and edit documents.  
+ **GitHub** is like **Google Drive** that lets you store, share, and collaborate on those documents online.
+
+---
+
+### **✅ 2\. Key Differences**
+
+| Feature | Git | GitHub |
+| ----- | ----- | ----- |
+| **Tool or Platform** | Tool (CLI or GUI) | Web-based platform |
+| **Where it works** | On your local machine | On the cloud (online) |
+| **Works offline?** | ✅ Yes | ❌ No (needs internet) |
+| **Usage** | Version tracking, branching, merging | Hosting, sharing, collaboration, team workflows |
+| **Installation needed?** | ✅ Yes (you install Git) | ❌ No (used via browser) |
+
+---
+
+### **✅ 3\. How They Work Together**
+
+1. You use **Git** on your computer to:
+
+   * Initialize a repository (`git init`)
+
+   * Track changes (`git add`, `git commit`)
+
+   * Create branches and merge changes
+
+2. You use **GitHub** to:
+
+   * Host that repository online
+
+   * Collaborate with others via pull requests
+
+   * Backup your code remotely
+
+   * Show your portfolio (for public projects)
+
+3. You connect Git to GitHub using:
+
+   * `git remote add origin <url>`
+
+   * `git push` and `git pull` commands
+
+---
+
+## **🗣️ How to Answer in an Interview**
+
+**Q: What's the difference between Git and GitHub?**
+
+*"Git is a version control system that helps you track changes to code and manage different versions locally on your computer. GitHub is a cloud-based platform that hosts Git repositories online and helps developers collaborate using features like pull requests, issues, and project management tools. You use Git to manage your code, and GitHub to share it with others."*
+
+---
+
+## **💡Other GitHub Alternatives**
+
+* **GitLab**
+
+* **Bitbucket**
+
+* **Azure Repos**
+
+---
+
