@@ -346,7 +346,134 @@ Cloud providers like AWS use VMs at scale to serve millions.
 
 ---
 
-# **Day 9-10**
+# **Day 4**
+
+## **What is Boto3?**
+
+**Boto3** is the **Amazon Web Services (AWS) SDK for Python**.
+
+* **What it is:**  
+   Boto3 provides a Python interface to interact with AWS services like S3 (storage), EC2 (virtual machines), DynamoDB (NoSQL database), Lambda (serverless functions), etc.
+
+* **Why it’s used:**  
+   It allows developers to write Python code to **create, configure, and manage AWS resources** instead of using the AWS Console manually.
+
+* **Examples of use:**
+
+  * Uploading files to S3
+
+  * Launching/stopping EC2 instances
+
+  * Writing data to DynamoDB
+
+  * Invoking Lambda functions
+
+* **How it works:**  
+   Boto3 acts as a **client library** that sends requests to AWS APIs under the hood. It handles authentication (through AWS credentials), request signing, retries, and parsing responses.
+
+👉 So, in SWE terms:  
+ **Boto3 \= AWS Python SDK that abstracts AWS APIs and lets engineers automate cloud resource management with Python code.**
+
+---
+
+## **🔹 AWS Console vs Boto3 (Python SDK)**
+
+### **AWS Console**
+
+* Web-based UI provided by AWS.
+
+* Best for **beginners** and **one-off tasks**.
+
+* Point-and-click, no coding required.
+
+* Visual way to explore and manage resources.
+
+* Drawback: **manual, slow, and repetitive** for large-scale work.
+
+### **Boto3 (AWS SDK for Python)**
+
+* Python library to interact with AWS services programmatically.
+
+* Best for **automation, repeated tasks, and integration into apps**.
+
+* Great for uploading large numbers of files, managing EC2/Lambda, handling backups, etc.
+
+* Requires **Python knowledge \+ AWS concepts**.
+
+* Drawback: **steeper learning curve** than Console.
+
+### **Key Difference**
+
+* **Console \= manual remote control**
+
+* **Boto3 \= automation through Python code**
+
+✅ **Rule of Thumb:**
+
+* Use **Console** for small manual tasks or when learning.
+
+* Use **Boto3** for automation, scaling, and integrating AWS into software.
+
+---
+
+## **How scripts interact with AWS to create resources like EC2 instances**.
+
+---
+
+### **1\. Script → AWS Services**
+
+On the left, the word **"Script"** points to different ways you can automate AWS:
+
+* **AWS CLI** → Command Line Interface (run commands to interact with AWS).
+
+* **AWS API (Boto3)** → SDKs (like Python’s boto3) to programmatically access AWS services.
+
+* **AWS CFT (CloudFormation Template)** → Infrastructure as Code (IaC) service for AWS.  
+* **AWS CDK (Cloud Development Kit)** → Infrastructure as Code but using real programming languages (Python, TS, Java, etc.). **Generates CloudFormation templates automatically.**  
+* **Terraform** → Third-party IaC tool that works with multiple clouds (not just AWS).
+
+These tools/scripts **send requests** to AWS.
+
+---
+
+### **2\. API Communication**
+
+* All these tools eventually talk to the **AWS API**.
+
+* That API interacts with **AWS EC2** (the service that manages virtual machines).
+
+So whether you use CLI, SDK, CloudFormation, or Terraform, **everything is just making API requests** to AWS.
+
+---
+
+### **3\. Request Handling**
+
+* The request first goes to AWS.
+
+* AWS checks if it is **Valid**:
+
+  * **Authenticated** → Are you a real, known user? (via IAM credentials).
+
+  * **Authorized** → Do you have permission to perform this action? (via IAM policies).
+
+* If both checks pass, AWS **provisions the EC2 instance**.
+
+---
+
+### **4\. Output**
+
+* After validation and authorization, AWS **creates the requested EC2 instance** (the virtual machine).
+
+* That’s how automation happens in the cloud.
+
+---
+
+✅ **In short:**  
+ Your script (via CLI, SDK, CloudFormation, or Terraform) makes API calls to AWS → AWS checks your identity and permissions → if valid, it spins up an EC2 instance (VM).
+
+---
+
+# **Day 9-10-11**
 
 ## **📝 Version Control Systems (VCS) – Beginner Notes**
 
@@ -485,6 +612,92 @@ Cloud providers like AWS use VMs at scale to serve millions.
 * **Bitbucket**
 
 * **Azure Repos**
+
+---
+
+---
+
+## **1\. git merge vs git rebase :What They Do**
+
+Both are ways to integrate changes from one branch into another, but they work differently.
+
+### **Merge**
+
+* **Action:** Combines branch histories together with a new *merge commit*.
+
+* **History:** Keeps all commits exactly as they happened — a *non-linear history*.
+
+* **Result:** The commit graph will show branches merging like a tree with junctions.
+
+**Example**
+
+\# You are on main
+
+git merge feature
+
+📜 History after merge:
+
+A---B---C---M    (main)
+
+     \\     /
+
+      D---E      (feature)
+
+`M` is the merge commit.
+
+---
+
+### **Rebase**
+
+* **Action:** Reapplies commits from one branch on top of another — rewriting commit history.
+
+* **History:** Makes it look like your work started from the tip of the branch you’re rebasing onto — a *linear history*.
+
+* **Result:** No merge commits (unless you explicitly choose to keep them).
+
+**Example**
+
+\# You are on feature
+
+git rebase main
+
+📜 History after rebase:
+
+A---B---C---D'---E'   (feature)
+
+`D'` and `E'` are *new commits* with the same changes as `D` and `E`, but different IDs.
+
+---
+
+## **2\. Key Differences**
+
+| Aspect | Merge | Rebase |
+| ----- | ----- | ----- |
+| **History shape** | Non-linear (branches \+ merge commits) | Linear (straight line) |
+| **Preserves original commits** | ✅ Yes | ❌ No (rewrites commits) |
+| **Adds a merge commit** | ✅ Usually | ❌ No |
+| **Safe for shared branches** | ✅ Yes | ⚠️ Avoid rebasing public branches |
+| **Ease of conflict resolution** | Once, at merge time | Possibly multiple times (per commit) |
+
+---
+
+## **3\. When to Use Which**
+
+* **Use `merge`** when:
+
+  * You want to preserve the exact history of how changes happened.
+
+  * You’re working with a team and want to avoid rewriting shared history.
+
+  * You like seeing branch structure in logs.
+
+* **Use `rebase`** when:
+
+  * You want a clean, linear history for easier reading (`git log` looks neat).
+
+  * You’re working on a feature branch privately and haven’t pushed yet.
+
+  * You want to avoid merge commits cluttering history.
 
 ---
 
