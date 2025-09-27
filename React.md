@@ -977,3 +977,1183 @@ Example:
 
 ---
 
+# **📘 Lecture 4: React Components**
+
+---
+
+## **1\. What is a Component?**
+
+* A **component** \= a small, reusable piece of UI.
+
+* React applications are made up of **many components** combined together.
+
+* Example:
+
+  * **Header**
+
+  * **Sidebar (Nav)**
+
+  * **Main Content**
+
+  * **Footer**
+
+  * **App** → root component that contains all others.
+
+📌 **Think of components like LEGO blocks** → each block is small and reusable, but when combined, they build a complete structure (the app).
+
+---
+
+## **2\. Properties of Components**
+
+✔️ **Describe a part of the UI**.  
+ ✔️ **Reusable** → same component can display different data using **props**.  
+ ✔️ **Composable** → one component can contain other components.  
+ ✔️ **Organized** → each component usually lives in its own `.js` or `.jsx` file.
+
+---
+
+## **3\. Types of Components**
+
+### **🔹 1\. Functional Components**
+
+* **Just JavaScript functions** that return JSX (HTML-like syntax).
+
+* **Stateless** in older React → but now (with Hooks) they can handle state and lifecycle.
+
+Example:
+
+ function Welcome(props) {
+
+  return \<h1\>Hello, {props.name}\</h1\>
+
+}
+
+*   
+* Modern React apps **prefer functional components** because they’re simpler and work with Hooks.
+
+---
+
+### **🔹 2\. Class Components (Older Style)**
+
+* ES6 **classes** that extend `React.Component`.
+
+* Must have a **render() method** that returns JSX.
+
+Example:
+
+ class Welcome extends React.Component {
+
+  render() {
+
+    return \<h1\>Hello, {this.props.name}\</h1\>
+
+  }
+
+}
+
+*   
+* **Stateful** in older React → they could hold state and lifecycle methods.
+
+📌 Today, **Hooks (useState, useEffect, etc.)** allow functional components to do everything class components could → so class components are less common in new projects.
+
+---
+
+## **4\. App Component Example**
+
+In a new React project, you’ll see `App.js`:
+
+ class App extends React.Component {
+
+  render() {
+
+    return \<h1\>Hello World\</h1\>
+
+  }
+
+}
+
+*   
+* This is a **class component** (older style).
+
+But we could easily rewrite it as a **functional component**:
+
+ function App() {
+
+  return \<h1\>Hello World\</h1\>
+
+}
+
+* 
+
+---
+
+## **5\. Why Components Matter**
+
+* **Scalability** → Facebook uses **30,000+ components** internally.
+
+* **Maintainability** → small, reusable pieces are easier to debug/test.
+
+* **Flexibility** → can nest, reuse, and compose them.
+
+---
+
+# **📌 Interview Q\&A on Components**
+
+**Q1: What is a React Component?**  
+ ➡️ A reusable piece of UI that can be nested, reused, and managed independently.
+
+**Q2: Difference between functional and class components?**
+
+* Functional: simple JS function, modern, use hooks for state/lifecycle.
+
+* Class: ES6 class, older, use `this.state` and lifecycle methods.
+
+**Q3: Which one should we use today?**  
+ ➡️ Functional components (with Hooks). Class components are mostly legacy.
+
+**Q4: Can components contain other components?**  
+ ➡️ Yes, React apps are trees of nested components (composition).
+
+**Q5: What is the root component?**  
+ ➡️ Usually `App`, which contains all other components and is rendered inside the `#root` DOM node.
+
+---
+
+# **📘 Lecture 5: Functional Components in React**
+
+---
+
+## **1\. What is a Functional Component?**
+
+* A **functional component** is simply a **JavaScript function** that:
+
+  1. Can receive **props** (properties \= input).
+
+  2. Returns **JSX** (HTML-like syntax describing UI).
+
+👉 Example:
+
+function Greet() {
+
+  return \<h1\>Hello, Vishwas\</h1\>
+
+}
+
+---
+
+## **2\. Creating the First Functional Component**
+
+Steps:
+
+1. Create a folder `components/`.
+
+2. Inside, create `Greet.js`.
+
+Define a function:
+
+ import React from "react";
+
+function Greet() {
+
+  return \<h1\>Hello, Vishwas\</h1\>
+
+}
+
+export default Greet;
+
+3. 
+
+Use inside `App.js`:
+
+ import Greet from "./components/Greet";
+
+function App() {
+
+  return (
+
+    \<div\>
+
+      \<Greet /\>
+
+    \</div\>
+
+  )
+
+}
+
+4. 
+
+📌 Notice: Components are written in **PascalCase** (`Greet`, `App`) → React treats lowercase (`div`, `span`) as HTML tags and uppercase as components.
+
+---
+
+## **3\. Arrow Function Syntax**
+
+A modern way to define functional components:
+
+const Greet \= () \=\> \<h1\>Hello, Vishwas\</h1\>;
+
+* ✅ More concise.
+
+* ✅ Avoids `this` keyword confusion (important when passing props/events).
+
+* ✅ Preferred in modern React codebases.
+
+---
+
+## **4\. Exporting & Importing Components**
+
+### **🔹 Default Export**
+
+// Greet.js
+
+export default Greet;
+
+// App.js
+
+import MyComponent from "./components/Greet";
+
+* Import name can be **anything**.
+
+* Most common in small projects.
+
+---
+
+### **🔹 Named Export**
+
+// Greet.js
+
+export const Greet \= () \=\> \<h1\>Hello, Vishwas\</h1\>;
+
+// App.js
+
+import { Greet } from "./components/Greet";
+
+* Must use the **exact same name** when importing.
+
+* Useful when a file exports **multiple components**.
+
+---
+
+## **5\. Props (Properties) – Quick Intro**
+
+* Functional components can accept an object called **props**.
+
+* Props \= inputs passed from parent → child component.
+
+Example:
+
+const Greet \= (props) \=\> \<h1\>Hello, {props.name}\</h1\>;
+
+\<App\>
+
+  \<Greet name="Vishwas" /\>
+
+  \<Greet name="Sarah" /\>
+
+\</App\>
+
+✅ Output:
+
+* Hello, Vishwas
+
+* Hello, Sarah
+
+---
+
+## **6\. Key Points**
+
+* Functional Components \= **functions that return JSX**.
+
+* Use **arrow functions \+ default exports** as best practice.
+
+* Props allow them to be **reusable**.
+
+* With **Hooks**, functional components can do everything class components can.  
+  They are **stateless** in older React, but with Hooks they can now manage **state** and **lifecycle** too.
+
+---
+
+# **📌 Interview Q\&A on Functional Components**
+
+**Q1: What is a functional component in React?**  
+ ➡️ A function that takes props as input and returns JSX describing part of the UI.
+
+**Q2: Difference between default export and named export?**
+
+* Default → Can be imported with any name.
+
+* Named → Must use the same name when importing.
+
+**Q3: Why are functional components preferred today over class components?**  
+ ➡️ They are simpler, more concise, and with **Hooks** they can handle state & lifecycle.
+
+**Q4: Why do we use PascalCase for components?**  
+ ➡️ React distinguishes between HTML tags (lowercase) and components (uppercase).
+
+**Q5: Can functional components use state?**  
+ ➡️ Yes, with **Hooks** (`useState`, `useEffect`, etc.), introduced in React 16.8.
+
+---
+
+# **📘 Lecture 6: Class Components in React**
+
+---
+
+## **1\. What is a Class Component?**
+
+* A **class component** is an **ES6 class** that:
+
+  1. **Extends** `React.Component`.
+
+  2. Must have a **render() method** → returns JSX (UI).
+
+  3. Can **receive props** (like functional components).
+
+  4. Can **maintain private state** (unlike functional components, unless using hooks).
+
+  5. Can access **lifecycle methods** (`componentDidMount`, `shouldComponentUpdate`, etc.).
+
+👉 Example:
+
+import React, { Component } from "react";
+
+class Welcome extends Component {
+
+  render() {
+
+    return \<h1\>Hello, Class Component\!\</h1\>;
+
+  }
+
+}
+
+export default Welcome;
+
+Usage in `App.js`:
+
+import Welcome from "./components/Welcome";
+
+function App() {
+
+  return (
+
+    \<div\>
+
+      \<Welcome /\>
+
+    \</div\>
+
+  );
+
+}
+
+✅ Output → `Hello, Class Component!`
+
+---
+
+## **2\. Comparison: Functional vs Class Components**
+
+| Feature | Functional Components (before Hooks) | Class Components |
+| ----- | ----- | ----- |
+| Syntax | Simple JS functions | ES6 classes |
+| Props | ✅ Yes | ✅ Yes |
+| State | ❌ No (before Hooks) | ✅ Yes |
+| Lifecycle Methods | ❌ No | ✅ Yes |
+| Use of `this` keyword | ❌ No | ✅ Yes (tricky) |
+| Common Aliases | Stateless / Dumb / Presentational | Stateful / Smart / Container |
+
+---
+
+## **3\. Why Functional Components Are Preferred Today**
+
+* Simpler syntax → no `this` confusion.
+
+* Easier to maintain & debug.
+
+* With **React Hooks (16.8+)**, functional components can now:
+
+  * Manage **state** (`useState`).
+
+  * Handle **side effects** (`useEffect`).
+
+  * Use **context** (`useContext`), refs, reducers, etc.
+
+* As a result → almost everything class components can do is now possible in functional components.
+
+👉 **Modern Best Practice**: Use **functional components \+ hooks** whenever possible.  
+ Class components are still useful to understand for **legacy codebases** and **interviews**.
+
+---
+
+## **4\. Lifecycle Methods in Class Components (Preview)**
+
+Class components provide lifecycle hooks:
+
+* **Mounting** → `componentDidMount`
+
+* **Updating** → `shouldComponentUpdate`, `componentDidUpdate`
+
+* **Unmounting** → `componentWillUnmount`
+
+👉 Equivalent in functional components is done via **Hooks** (`useEffect`).
+
+---
+
+## **5\. Key Takeaways**
+
+* **Class components** \= more powerful (state \+ lifecycle).
+
+* **Functional components** \= preferred today (simpler, hooks-enabled).
+
+* **Rule of thumb**: If you can → use functional components; use class components only when working with older code.
+
+---
+
+# **📌 Interview Q\&A**
+
+**Q1: What is the difference between functional and class components?**  
+ ➡️ Functional components are plain JS functions that take props and return JSX; class components extend `React.Component`, can hold state, and use lifecycle methods.
+
+**Q2: Why are class components also called stateful/smart/container components?**  
+ ➡️ Because they can manage internal state and complex logic, unlike older functional components (before hooks).
+
+**Q3: Why are functional components preferred today over class components?**  
+ ➡️ Hooks provide state & lifecycle functionality to functional components, making them simpler, easier to test, and more concise.
+
+**Q4: Do functional components support state?**  
+ ➡️ Yes, but only with **Hooks** (`useState`, `useEffect`, etc.) introduced in React 16.8.
+
+**Q5: Can we use lifecycle methods in functional components?**  
+ ➡️ Not directly, but hooks like `useEffect` replace lifecycle methods.
+
+**Q6: Should I still learn class components?**  
+ ➡️ Yes — many older React codebases use them, and interviews often test knowledge of lifecycle methods.
+
+---
+
+✅ **Summary**:
+
+* Class components \= ES6 classes with state \+ lifecycle.
+
+* Functional components \= simple functions, preferred today (with hooks).
+
+* Learn both → **functional for modern work, class for legacy \+ interviews**.
+
+---
+
+# **📘 Lecture 7: Hooks Update (Dorkar nai)**
+
+# **📘 Lecture 8: JSX in React**
+
+---
+
+## **1\. What is JSX?**
+
+* **JSX** → JavaScript XML.
+
+* Syntax extension for JavaScript used with React.
+
+* Looks like **HTML inside JavaScript**, but isn’t HTML.
+
+* Each JSX element is **syntactic sugar** for `React.createElement`.
+
+👉 JSX allows writing:
+
+return \<h1\>Hello Vishwas\</h1\>;
+
+Instead of:
+
+return React.createElement("h1", null, "Hello Vishwas");
+
+---
+
+## **2\. Why Do We Use JSX?**
+
+* **Not mandatory** → React apps can be written without JSX.
+
+* JSX makes code:
+
+  * **Simpler & more elegant.**
+
+  * **Readable & familiar** to web developers (looks like HTML).
+
+  * Easier to debug and maintain.
+
+➡️ JSX code is compiled (by Babel) into `React.createElement`, which browsers understand as pure JavaScript.
+
+---
+
+## **3\. JSX vs Without JSX**
+
+### **✅ JSX version**
+
+const Hello \= () \=\> {  
+  return (  
+    \<div id="hello" className="dummyClass"\>  
+      \<h1\>Hello Vishwas\</h1\>  
+    \</div\>  
+  );  
+};
+
+### **❌ Without JSX version**
+
+const Hello \= () \=\> {  
+  return React.createElement(  
+    "div",  
+    { id: "hello", className: "dummyClass" },  
+    React.createElement("h1", null, "Hello Vishwas")  
+  );  
+};
+
+👉 Clearly, JSX is shorter, cleaner, and easier to read.
+
+---
+
+## **4\. Key Differences Between JSX & HTML**
+
+| In HTML | In JSX (Reason) |
+| ----- | ----- |
+| `class` | `className` (because `class` is JS keyword) |
+| `for` | `htmlFor` (because `for` is JS keyword) |
+| Inline attributes | CamelCase (`onClick`, `tabIndex`) |
+
+Example:
+
+\<button onClick={handleClick} tabIndex={0}\>Click Me\</button\>
+
+---
+
+## **5\. How JSX Works (Behind the Scenes)**
+
+1. JSX → Compiled by **Babel** → `React.createElement`.
+
+2. `React.createElement` returns a **React element (JS object)**.
+
+3. React DOM takes that object and renders it into the actual **DOM node** in the browser.
+
+---
+
+## **6\. Why Do We Import React When Using JSX?**
+
+* JSX transforms into `React.createElement(...)`.
+
+* `React` must be in scope because Babel compiles JSX into code that calls `React.createElement`.
+
+*(Note: In React 17+, new JSX Transform removed the need to explicitly import React in every file, but in older versions it’s mandatory.)*
+
+---
+
+## **7\. Future Changes in JSX**
+
+* React team is working on **breaking changes** (React 18/19+).
+
+* Example: `className` might eventually become just `class`.
+
+* Always check React docs for updates.
+
+---
+
+# **📌 Interview Prep**
+
+**Q1: What is JSX in React?**  
+ ➡️ JSX is a syntax extension for JavaScript that allows writing XML/HTML-like code inside React. It is compiled into `React.createElement` calls, which return JavaScript objects representing DOM elements.
+
+**Q2: Is JSX mandatory in React?**  
+ ➡️ No. React can be written with `React.createElement` directly, but JSX is preferred because it’s cleaner and easier to read.
+
+**Q3: What does JSX compile to?**  
+ ➡️ Each JSX element compiles to a `React.createElement` call. Example:
+
+\<h1\>Hello\</h1\>
+
+compiles to:
+
+React.createElement("h1", null, "Hello");
+
+**Q4: What are the differences between HTML and JSX?**  
+ ➡️
+
+* `class` → `className`
+
+* `for` → `htmlFor`
+
+* Event handlers/attributes use **camelCase** (`onClick`, `tabIndex`).
+
+**Q5: Why do we import React when using JSX?**  
+ ➡️ Because JSX compiles into `React.createElement`, which requires `React` in scope.  
+ *(Exception: React 17+ with new JSX Transform doesn’t require explicit imports.)*
+
+**Q6: What are the advantages of JSX?**  
+ ➡️
+
+* Improves readability.
+
+* Looks like HTML (familiar to web devs).
+
+* Easier to debug.
+
+* Reduces boilerplate compared to nested `React.createElement` calls.
+
+**Q7: Can JSX return multiple elements?**  
+ ➡️ Yes, but they must be wrapped in one parent (e.g., a `<div>` or `<React.Fragment>`).
+
+---
+
+# **📘 Lecture 9: Props in React**
+
+---
+
+## **1\. What are Props?**
+
+* **Props** → short for **properties**.
+
+* Props are **inputs to a component**.
+
+* They make components **dynamic and reusable**.
+
+* Passed from **parent → child** as **attributes** on the component.
+
+* Inside the child, props are accessed as:
+
+  * **Functional component:** `props` parameter.
+
+  * **Class component:** `this.props`.
+
+---
+
+## **2\. Example – Props in Functional Components**
+
+**App.js**
+
+\<Greet name="Bruce" heroName="Batman" /\>  
+\<Greet name="Clark" heroName="Superman" /\>  
+\<Greet name="Diana" heroName="Wonder Woman" /\>
+
+**Greet.js**
+
+const Greet \= (props) \=\> {  
+  return (  
+    \<div\>  
+      \<h1\>  
+        Hello {props.name} aka {props.heroName}  
+      \</h1\>  
+      {props.children}  
+    \</div\>  
+  );  
+};
+
+export default Greet;
+
+**Rendered Output:**
+
+Hello Bruce aka Batman  
+Hello Clark aka Superman  
+Hello Diana aka Wonder Woman
+
+---
+
+## **3\. Children Prop**
+
+* Special prop: **`props.children`**.
+
+* Used when you don’t know what content will be passed inside the component.
+
+* Allows **nested JSX**.
+
+Example:
+
+\<Greet name="Bruce" heroName="Batman"\>  
+  \<p\>This is children props\</p\>  
+\</Greet\>
+
+\<Greet name="Clark" heroName="Superman"\>  
+  \<button\>Action\</button\>  
+\</Greet\>
+
+**👉 In `Greet`, `{props.children}` will render that paragraph/button.**
+
+---
+
+## **4\. Props in Class Components**
+
+**App.js**
+
+\<Welcome name="Bruce" heroName="Batman" /\>  
+\<Welcome name="Clark" heroName="Superman" /\>  
+\<Welcome name="Diana" heroName="Wonder Woman" /\>
+
+**Welcome.js**
+
+import React, { Component } from "react";
+
+class Welcome extends Component {  
+  render() {  
+    return (  
+      \<h1\>  
+        Welcome {this.props.name} aka {this.props.heroName}  
+      \</h1\>  
+    );  
+  }  
+}
+
+export default Welcome;
+
+---
+
+## **5\. Important Rule → Props are Immutable**
+
+* Props **cannot be modified** inside the component.
+
+* They are **read-only**.
+
+* Components must act like **pure functions** of props.
+
+Example ❌:
+
+props.name \= "Vishwas"; // ❌ ERROR → Cannot assign to read-only property
+
+---
+
+## **6\. When to Use Props?**
+
+* To pass **static or dynamic data** into a component.
+
+* To make components **reusable** with different values.
+
+* To allow components to display **nested children**.
+
+---
+
+# **📌 Interview Prep – Props**
+
+**Q1. What are props in React?**  
+ ➡️ Props are inputs to components that allow data to be passed from parent to child. They are bundled into an object and are immutable.
+
+**Q2. Difference between props and state?**  
+ ➡️
+
+* **Props**: Passed from parent, immutable, external data.
+
+* **State**: Managed within the component, mutable, internal data.
+
+**Q3. How do you access props in a functional vs class component?**  
+ ➡️
+
+* Functional: via function parameter `props`.
+
+* Class: via `this.props`.
+
+**Q4. What is `props.children`?**  
+ ➡️ Special prop for rendering nested JSX inside a component’s opening/closing tags.
+
+**Q5. Why are props immutable?**  
+ ➡️ To ensure components act like **pure functions**, preventing side effects and ensuring predictable UI updates.
+
+**Q6. Can props have default values?**  
+ ➡️ Yes, via **defaultProps**. Example:
+
+Greet.defaultProps \= {  
+  name: "Guest"  
+};
+
+**Q7. Can props be validated?**  
+ ➡️ Yes, using **propTypes** library (helps in type checking). Example:
+
+import PropTypes from 'prop-types';
+
+Greet.propTypes \= {  
+  name: PropTypes.string.isRequired,  
+  heroName: PropTypes.string  
+};
+
+---
+
+✅ **Summary**:
+
+* Props \= inputs from parent to child.
+
+* Accessed via `props` (functions) or `this.props` (classes).
+
+* `props.children` allows nested JSX.
+
+* Props are immutable (read-only).
+
+* Props make components reusable and dynamic.
+
+---
+
+# **📘 Lecture 10: Component State in React**
+
+---
+
+## **1\. Recap: Props vs State**
+
+| Feature | Props | State |
+| ----- | ----- | ----- |
+| **How it’s set** | Passed from parent | Declared inside the component |
+| **Who controls it** | Parent component | Component itself |
+| **Mutability** | Immutable (read-only) | Mutable (can change with `setState`) |
+| **Analogy** | Function parameters | Local variables inside a function |
+| **Access in functional component** | `props` parameter | `useState` hook |
+| **Access in class component** | `this.props` | `this.state` |
+
+📌 Both **props and state** hold information that affects what gets rendered on screen.
+
+---
+
+## **2\. State in Class Components(Old Practice)**
+
+* Initialize in `constructor` with `this.state`.
+
+* Update with `this.setState()`.
+
+* Example:
+
+class Message extends React.Component {  
+  constructor() {  
+    super();  
+    this.state \= { message: "Welcome Visitor" };  
+  }
+
+  changeMessage \= () \=\> {  
+    this.setState({ message: "Thank you for subscribing" });  
+  };
+
+  render() {  
+    return (  
+      \<div\>  
+        \<h1\>{this.state.message}\</h1\>  
+        \<button onClick={this.changeMessage}\>Subscribe\</button\>  
+      \</div\>  
+    );  
+  }  
+}
+
+---
+
+## **3\. State in Functional Components (Modern Way)**
+
+Functional components use **hooks**, introduced in React 16.8.
+
+### **✅ `useState` Hook**
+
+import React, { useState } from "react";
+
+function Message() {  
+  // Declare state variable and updater function  
+  const \[message, setMessage\] \= useState("Welcome Visitor");
+
+  return (  
+    \<div\>  
+      \<h1\>{message}\</h1\>  
+      \<button onClick={() \=\> setMessage("Thank you for subscribing")}\>  
+        Subscribe  
+      \</button\>  
+    \</div\>  
+  );  
+}
+
+### **Key Points:**
+
+1. `useState(initialValue)` returns an **array**: `[state, setStateFunction]`.
+
+2. State updates are **asynchronous** and trigger re-render.
+
+3. You can have **multiple `useState` hooks** in one component.
+
+const \[count, setCount\] \= useState(0);  
+const \[isLoggedIn, setIsLoggedIn\] \= useState(false);  
+const \[user, setUser\] \= useState({ name: "Alice", age: 25 });
+
+---
+
+## **4\. Best Practices**
+
+* **Prefer functional components with hooks** → cleaner, easier to test, less boilerplate.
+
+* Use **class components only in legacy codebases**.
+
+* For complex state logic → use `useReducer` instead of multiple `useState`s.
+
+* For global/shared state → use **Context API**, **Redux Toolkit**, or **React Query** (depending on needs).
+
+---
+
+## **5\. Advanced Notes on `setState` (Applies to Both Class \+ Function)**
+
+1. **Asynchronous nature**
+
+   * *React batches state updates for performance.*
+
+   * Never rely on the immediate next line to read the updated value.
+
+setCount(count \+ 1);  
+setCount(count \+ 1); // ❌ might not increment twice  
+ ✅ Fix: Use updater function form:
+
+ setCount(prevCount \=\> prevCount \+ 1);  
+setCount(prevCount \=\> prevCount \+ 1); // increments twice correctly
+
+2. **Merging behavior**
+
+   * In class components: `setState` **merges** objects.
+
+   * In functional components: `useState` **replaces** the state.
+
+// Class component  
+this.setState({ age: 26 }); // merges with existing state
+
+// Function component  
+setUser({ age: 26 }); // ❌ overwrites, removes other keys  
+// ✅ Fix  
+setUser(prev \=\> ({ ...prev, age: 26 }));
+
+---
+
+## **6\. Interview Questions**
+
+**Q1. What’s the difference between props and state?**  
+ ➡️ Props \= external input (immutable). State \= internal, mutable, controlled by component.
+
+**Q2. How do you update state in function components?**  
+ ➡️ Using `useState` hook: `setState(newValue)` or `setState(prev => newValue)`.
+
+**Q3. Why shouldn’t you update state directly?**  
+ ➡️ Direct mutations (`this.state = ...` or modifying object/array directly) won’t trigger re-render.
+
+**Q4. What is the difference between state in class vs functional components?**  
+ ➡️ Class → `this.state` \+ `this.setState()` (merges).  
+ ➡️ Function → `useState` hook (replaces).
+
+**Q5. Can multiple states exist in one component?**  
+ ➡️ Yes. With hooks, you can use as many `useState`s as needed.
+
+**Q6. What’s the best practice today: class or function with hooks?**  
+ ➡️ Function with hooks. Class components are legacy, but you should understand them for maintaining older codebases.
+
+**Q7. What if you have complex state logic?**  
+ ➡️ Use `useReducer` hook for better structure.
+
+**Q8. What happens when state changes?**  
+ ➡️ React schedules a re-render, compares new virtual DOM with old (reconciliation), and updates only what changed in the real DOM.
+
+---
+
+✅ **Summary**
+
+* Props \= external, immutable inputs.
+
+* State \= internal, mutable data.
+
+* State updates trigger re-render.
+
+* Modern React → **functional components with hooks** (prefer `useState`, `useReducer`, `useContext`).
+
+* Class state is still useful for understanding old code.
+
+---
+
+# **📘 Lecture 11: setState in React**
+
+---
+
+## **Quick concept**
+
+* **State**: component-private data that influences rendering.
+
+* **Props**: data passed from parent → child (read-only).
+
+* **Class components** use `this.state` / `this.setState`.
+
+* **Functional components** use `useState` / setter (`setX`) and `useEffect` for post-update effects.
+
+---
+
+## **1\) Never mutate state directly**
+
+**Wrong**
+
+`count = count + 1;  // UI won't re-render`
+
+**Right**
+
+`setCount(prev => prev + 1);`
+
+Direct assignment updates the JS variable but React won’t know to re-render.
+
+---
+
+## **2\) `useState` updates are asynchronous / batched**
+
+* `setState` calls may be **batched** for performance.
+
+* Reading state immediately after calling setter may still show the old value.
+
+* Use `useEffect` to run code after update:
+
+  `useEffect(() => {`  
+    `console.log(count); // guaranteed updated`
+
+     `}, [count]);`
+
+---
+
+## **3\) When new state depends on previous state → use the updater function**
+
+**Why:** because batching may combine calls and if you use `(count + 1)` directly each call might read the same stale value.
+
+**Bad** (stale value)
+
+`setCount(count + 1); // multiple calls may overwrite each other`
+
+**Correct**
+
+`setCount(prev => prev + 1);`
+
+---
+
+## **4\) The incrementFive example**
+
+**Problem code (fails because of batching):**
+
+`const increment = () => setCount(count + 1);`
+
+`const incrementFive = () => {`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+`};`
+
+*May only increase by 1 due to batching.*
+
+**Solutions:**
+
+* **Use updater/arrow funtion**
+
+`const increment = () => setCount(prev => prev + 1);`
+
+`const incrementFive = () => {`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+  `increment();`  
+`};`
+
+* **Or do one update adding 5 at once**
+
+`setCount(prev => prev + 5);`
+
+##  **Arrow functions: why they show up**
+
+* Concise syntax for defining functions in components.
+
+* Updater functions: `prev => ...` is passed to setter to get latest previous state.
+
+* Always receives **previous state**: `setCount(prev => newValue)`.
+
+## **Batching & functional updates**
+
+* React may batch multiple `setCount` calls inside event handlers or effects.
+
+* Object/primitive updates can overwrite each other if they rely on stale state.
+
+* **Always use functional updater** when new state depends on old state.
+
+---
+
+## **5\) Best practices**
+
+* Prefer **functional components with hooks** for new code.
+
+* Always use the **updater** (`prev => ...`) when new state depends on old state.
+
+* Never directly mutate state.
+
+* For object state in hooks, merge manually: `setObj(prev => ({ ...prev, field: value }))`.
+
+* For complex state logic, consider `useReducer`.
+
+* Use `useEffect` for post-update side effects (hooks) instead of relying on a callback param (hooks don’t accept callbacks).
+
+---
+
+## **6\) Compact examples**
+
+**Functional Counter**
+
+import React, { useState, useEffect } from "react";
+
+function Counter() {  
+  const \[count, setCount\] \= useState(0);
+
+  const increment \= () \=\> setCount(prev \=\> prev \+ 1);
+
+  const incrementFive \= () \=\> {  
+    for (let i \= 0; i \< 5; i++) increment();  
+    // OR: setCount(prev \=\> prev \+ 5);  
+  };
+
+  useEffect(() \=\> {  
+    console.log("count updated:", count);  
+  }, \[count\]);
+
+  return (  
+    \<div\>  
+      \<h1\>{count}\</h1\>  
+      \<button onClick={increment}\>Increment\</button\>  
+      \<button onClick={incrementFive}\>+5\</button\>  
+    \</div\>  
+  );  
+}
+
+**Class Counter**
+
+class Counter extends React.Component {  
+  constructor() {  
+    super();  
+    this.state \= { count: 0 };  
+  }
+
+  increment \= () \=\> {  
+    // correct: updater form  
+    this.setState(prev \=\> ({ count: prev.count \+ 1 }));  
+  }
+
+  incrementFive \= () \=\> {  
+    for (let i \= 0; i \< 5; i++) this.increment();  
+    // OR: this.setState(prev \=\> ({ count: prev.count \+ 5 }));  
+  }
+
+  render() {  
+    return (  
+      \<div\>  
+        \<h1\>{this.state.count}\</h1\>  
+        \<button onClick={this.increment}\>Increment\</button\>  
+        \<button onClick={this.incrementFive}\>+5\</button\>  
+      \</div\>  
+    );  
+  }  
+}
+
+---
+
+## **7\) Interview Q\&A**
+
+**Q1 — Why did incrementFive only increase by 1?**  
+ **A:** Because `setCount(count + 1)` reads stale `count` in each call due to batching. Use functional updater `setCount(prev => prev + 1)`.
+
+**Q2 — How do you fix incrementFive?**  
+ **A:** Call the updater repeatedly or do one atomic update: `setCount(prev => prev + 5)`.
+
+**Q3 — Why use arrow functions in functional components?**  
+ **A:** For concise syntax and capturing the right variables in closures.
+
+**Q4 — Is `setCount` synchronous?**  
+ **A:** No. React batches updates; `setCount` is asynchronous. Use `useEffect` to react after updates.
+
+---
+
