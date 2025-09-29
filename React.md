@@ -2157,3 +2157,108 @@ class Counter extends React.Component {
 
 ---
 
+# **📘 Lecture 12: Destructuring Props & State in React**
+
+---
+
+## **1\. What is Destructuring?**
+
+* **Destructuring** is an ES6 feature.
+
+* Lets you unpack values from **objects** or **arrays** into separate variables.
+
+* In React, commonly used for **props** and **state**.
+
+* Benefits:
+
+  * Cleaner, more readable code.
+
+  * Avoids repetitive `props.something` or `this.state.something`.
+
+---
+
+## **2\. Destructuring Props in Functional Components**
+
+### **✅ Method 1: In Function Parameters**
+
+function Greet({ name, heroName }) {  
+  return \<h1\>Hello {name} a.k.a {heroName}\</h1\>;  
+}
+
+### **✅ Method 2: Inside Function Body**
+
+function Greet(props) {  
+  const { name, heroName } \= props;  
+  return \<h1\>Hello {name} a.k.a {heroName}\</h1\>;  
+}
+
+👉 Both are valid — **method 1** is more concise and widely used.
+
+---
+
+## **3\. Destructuring State in Functional Components**
+
+If you have multiple values in state (using `useState` or `useReducer`), destructuring is very common:
+
+const \[count, setCount\] \= useState(0);
+
+const \[user, setUser\] \= useState({ name: "Bruce", role: "Batman" });
+
+const { name, role } \= user; // destructure object state
+
+---
+
+## **4\. Destructuring in Class Components (for interview prep)**
+
+### **✅ Destructuring Props**
+
+Usually done inside `render()`:
+
+class Welcome extends React.Component {  
+  render() {  
+    const { name, heroName } \= this.props;  
+    return \<h1\>Welcome {name} a.k.a {heroName}\</h1\>;  
+  }  
+}
+
+### **✅ Destructuring State**
+
+class Counter extends React.Component {  
+  state \= { count: 0, step: 1 };
+
+  render() {  
+    const { count, step } \= this.state;  
+    return \<h2\>Count: {count}, Step: {step}\</h2\>;  
+  }  
+}
+
+---
+
+## **5\. Best Practices**
+
+* Destructure at the **top** of your function/class to keep JSX clean.
+
+* Only extract props/state you need — helps with readability.
+
+* For deeply nested objects, destructure carefully (or consider optional chaining).
+
+---
+
+## **6\. Interview Questions**
+
+**Q1. Why do we use destructuring in React?**  
+ ➡️ To simplify code readability and avoid repeatedly writing `props.` or `this.state.`.
+
+**Q2. What’s the difference between destructuring props in parameters vs body?**  
+ ➡️ No functional difference — parameter destructuring is shorter, body destructuring is clearer when you need both `props` object and individual fields.
+
+**Q3. Can you destructure nested props or state?**  
+ ➡️ Yes:
+
+const { user: { name, role } } \= props;
+
+**Q4. How do hooks encourage destructuring?**  
+ ➡️ `useState` returns an array `[value, setter]`, and we nearly always destructure it directly.
+
+---
+
