@@ -1,3 +1,5 @@
+[https://youtube.com/playlist?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3\&si=AjjYeiQoHZ7-L68S](https://youtube.com/playlist?list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&si=AjjYeiQoHZ7-L68S)
+
 # **📘1: Introduction to react**
 
 * **What is React?**
@@ -2262,3 +2264,499 @@ const { user: { name, role } } \= props;
 
 ---
 
+# **📘 Lecture 13: Event Handling in React**
+
+---
+
+## **1\. Why Event Handling?**
+
+* Web apps are **interactive** → user actions like clicks, typing, mouse moves, form changes trigger **events**.
+
+* React allows us to capture these events and run functions (**event handlers**) to update state, trigger logic, etc.
+
+---
+
+## **2\. Event Handling in Functional Components (Modern Approach)**
+
+### **Example**
+
+function FunctionClick() {  
+  function clickHandler() {  
+    console.log("Button clicked");  
+  }
+
+  return (  
+    \<button onClick={clickHandler}\>Click\</button\>  
+  );  
+}
+
+✅ Key Points:
+
+1. **Event names are camelCase**: use `onClick`, not `onclick`.
+
+2. **Pass the function reference, not a call**:
+
+   * ✅ `onClick={clickHandler}`
+
+   * ❌ `onClick={clickHandler()}` (executes immediately).
+
+### **Using Arrow Functions (inline)**
+
+\<button onClick={() \=\> console.log("Clicked inline\!")}\>Click\</button\>
+
+⚠️ Use sparingly for simple handlers; avoid for heavy logic (can create new functions on each render).
+
+---
+
+## **3\. Event Handling in Class Components (Interview Prep)**
+
+### **Example**
+
+class ClassClick extends React.Component {  
+  clickHandler() {  
+    console.log("Button clicked (class)");  
+  }
+
+  render() {  
+    return (  
+      \<button onClick={this.clickHandler}\>  
+        Click Me  
+      \</button\>  
+    );  
+  }  
+}
+
+✅ Key Points:
+
+* Methods are accessed with `this` → `onClick={this.clickHandler}`.
+
+* Same rule applies: don’t add parentheses.
+
+---
+
+## **4\. Common Mistakes**
+
+* ❌ Writing `onClick={handler()}` → executes immediately, no event waiting.
+
+* ❌ Using lowercase event names (`onclick`) → React won’t recognize them.
+
+* ❌ Forgetting to bind `this` in class components when using state updates (covered in next lecture).
+
+---
+
+## **5\. Handling Events with Parameters**
+
+Sometimes you need to pass arguments:
+
+function GreetButton({ name }) {  
+  function greetUser(user) {  
+    console.log(\`Hello ${user}\`);  
+  }
+
+  return (  
+    \<button onClick={() \=\> greetUser(name)}\>  
+      Greet {name}  
+    \</button\>  
+  );  
+}
+
+**👉 Notice we wrap `greetUser(name)` in an arrow function, otherwise it runs immediately.**
+
+---
+
+## **6\. Best Practices**
+
+* Keep handlers short; delegate heavy logic to helper functions.
+
+* For functional components, **prefer arrow functions or inline callbacks**.
+
+* For class components, ensure correct **`this` binding** (explored in next lecture).
+
+Use event objects when needed:
+
+ function handleClick(event) {  
+  console.log("Event:", event);  
+}  
+\<button onClick={handleClick}\>Click\</button\>
+
+* 
+
+---
+
+## **7\. Interview Questions**
+
+**Q1. How are React event handlers different from plain HTML event handlers?**  
+ ➡️ CamelCase naming, pass function reference instead of strings.
+
+**Q2. What happens if you write `onClick={handler()}` instead of `onClick={handler}`?**  
+ ➡️ The function executes immediately during render → undesired behavior.
+
+**Q3. Can you pass arguments to an event handler?**  
+ ➡️ Yes, by wrapping in an arrow function: `onClick={() => handler(arg)}`.
+
+**Q4. Why do class components often face issues with event handlers?**  
+ ➡️ Because `this` binding in JavaScript can cause methods to lose context → requires explicit binding.
+
+---
+
+Excellent — here’s a structured, **modernized \+ interview-ready** version of **Lecture 14: Binding Event Handlers in React**, keeping the original class-component focus (as in the video), but also adding functional-component context for clarity and modern comparison.
+
+---
+
+# **📘 Lecture 14: Binding Event Handlers in React** (Concern in Class component, may not necessary in modern Functional components )
+
+---
+
+## **1\. Why Do We Need to Bind Event Handlers?**
+
+🔹 The need for **binding** arises due to **how `this` works in JavaScript**, *not because of React itself*.  
+ In JavaScript, `this` depends on **how a function is called**, not where it is defined.
+
+👉 In React **class components**, when event handlers are called (e.g., button click), the function is **not automatically bound** to the component instance — so `this` becomes `undefined`.
+
+---
+
+## **2\. The Problem Demonstration**
+
+class EventBind extends React.Component {  
+  constructor(props) {  
+    super(props);  
+    this.state \= { message: "Hello" };  
+  }
+
+  clickHandler() {  
+    this.setState({ message: "Goodbye" }); // ❌ this is undefined  
+  }
+
+  render() {  
+    return (  
+      \<div\>  
+        \<div\>{this.state.message}\</div\>  
+        \<button onClick={this.clickHandler}\>Click\</button\>  
+      \</div\>  
+    );  
+  }  
+}
+
+🧠 **Error:**
+
+TypeError: Cannot read properties of undefined (reading 'setState')
+
+Because `this` inside `clickHandler` is not bound to the component instance.
+
+---
+
+## **3\. Four Ways to Bind Event Handlers (Class Components)**
+
+---
+
+### **Approach 1: Binding in Render (Using `.bind()`)**
+
+\<button onClick={this.clickHandler.bind(this)}\>Click\</button\>
+
+✅ Works correctly, but ❌ **creates a new function every render** — may impact performance in large apps.
+
+🧩 **Summary:**
+
+* ✅ Fixes `this` issue
+
+* ❌ Not recommended for performance-sensitive components
+
+---
+
+### **Approach 2: Using Arrow Function in Render**
+
+\<button onClick={() \=\> this.clickHandler()}\>Click\</button\>
+
+✅ Works fine and very common for **quick usage** or **when passing parameters**.  
+ ❌ Similar performance implications — creates new function on each render.
+
+🧩 **Best for:** Passing arguments easily.
+
+\<button onClick={() \=\> this.clickHandler("React")}\>Click\</button\>
+
+---
+
+### **Approach 3: Binding in Constructor (Recommended)**
+
+constructor(props) {  
+  super(props);  
+  this.state \= { message: "Hello" };  
+  this.clickHandler \= this.clickHandler.bind(this);  
+}
+
+\<button onClick={this.clickHandler}\>Click\</button\>
+
+✅ Binds `this` **once** at initialization.  
+ ✅ Recommended in **official React documentation**.  
+ 💡 Most stable & performant for class components.
+
+---
+
+### **Approach 4: Class Property Arrow Function (Modern Approach)**
+
+clickHandler \= () \=\> {  
+  this.setState({ message: "Goodbye" });  
+};
+
+\<button onClick={this.clickHandler}\>Click\</button\>
+
+✅ Automatically binds `this` (arrow functions **lexically bind** `this`).  
+ ✅ Clean, concise, modern syntax.  
+ ⚠️ Relies on **class field syntax**, which is fully supported in modern React setups (Create React App, Vite, etc.).
+
+🧩 **Best Practice Today:**
+
+* Most modern codebases use **Approach 4**.
+
+---
+
+## **4\. Functional Components (Modern Equivalent)**
+
+Functional components don’t have `this`, so **no binding needed**.
+
+function EventBindFunctional() {  
+  const \[message, setMessage\] \= useState("Hello");
+
+  const clickHandler \= () \=\> {  
+    setMessage("Goodbye");  
+  };
+
+  return (  
+    \<div\>  
+      \<div\>{message}\</div\>  
+      \<button onClick={clickHandler}\>Click\</button\>  
+    \</div\>  
+  );  
+}
+
+✅ **Hooks** replace class-based `this` \+ binding complexity.
+
+---
+
+## **6\. Interview Questions**
+
+**Q1. Why do we need to bind event handlers in React class components?**  
+ ➡️ Because `this` in JavaScript depends on how a function is called, and by default, `this` in event handlers is `undefined`.
+
+**Q2. What are the different ways to bind event handlers?**  
+ ➡️ `.bind()` in render, arrow in render, bind in constructor, or arrow class property.
+
+**Q3. Which method is preferred and why?**  
+ ➡️ Binding in the constructor or using class property arrow functions — both are efficient and stable.
+
+**Q4. Do functional components need binding?**  
+ ➡️ No, because they don’t use `this`. Functions capture variables via closures instead.
+
+**Q5. Why are inline arrow functions in render discouraged?**  
+ ➡️ They create a new function on each render → minor performance hit, can affect memoization.
+
+---
+
+## **7\. Summary**
+
+* The **`this` binding issue** arises from JavaScript’s function context rules.
+
+* **Class components require explicit binding**, **functional components don’t**.
+
+* Recommended approaches:
+
+  * ✅ Bind in constructor
+
+  * ✅ Use arrow function class property
+
+* Avoid frequent re-creation of functions during render for better performance.
+
+---
+
+# **📘 Lecture 15: Passing Methods as Props (Child-to-Parent Communication)**
+
+---
+
+## **1\. Concept Overview**
+
+In React, **data flow is unidirectional (top-down)** — meaning:
+
+* A **parent** component can send data to its **child** components using **props**.
+
+* But what if the **child** needs to communicate back to the **parent**?
+
+🧩 **Solution:**  
+ Pass a **function from the parent** as a **prop** to the child.  
+ The **child calls that function**, optionally sending arguments → the parent can respond.
+
+This is called **“method as props”** or **child-to-parent communication**.
+
+---
+
+## **2\. Class Component Example (As in the Video)**
+
+### **🧱 Parent Component**
+
+import React, { Component } from "react";  
+import ChildComponent from "./ChildComponent";
+
+class ParentComponent extends Component {  
+  constructor(props) {  
+    super(props);
+
+    this.state \= {  
+      parentName: "Parent",  
+    };
+
+    // 🔹 Bind the method (since it's a class)  
+    this.greetParent \= this.greetParent.bind(this);  
+  }
+
+  greetParent(childName) {  
+    alert(\`Hello ${this.state.parentName} from ${childName}\`);  
+  }
+
+  render() {  
+    return (  
+      \<div\>  
+        \<ChildComponent greetHandler={this.greetParent} /\>  
+      \</div\>  
+    );  
+  }  
+}
+
+export default ParentComponent;
+
+---
+
+### **🧩 Child Component (Functional Component)**
+
+import React from "react";
+
+function ChildComponent(props) {  
+  return (  
+    \<div\>  
+      \<button onClick={() \=\> props.greetHandler("Child")}\>  
+        Greet Parent  
+      \</button\>  
+    \</div\>  
+  );  
+}
+
+export default ChildComponent;
+
+🧠 **What happens:**
+
+1. Parent passes method `greetParent` → as prop `greetHandler`.
+
+2. Child calls `props.greetHandler("Child")` → triggers parent method.
+
+Alert displays:
+
+ Hello Parent from Child
+
+3. 
+
+---
+
+## **3\. Key Takeaways**
+
+| Direction | Technique | Example |
+| ----- | ----- | ----- |
+| Parent → Child | Props | `<Child name="John" />` |
+| Child → Parent | Method as Prop | `<Child greetHandler={this.greetParent} />` |
+
+💡 React’s data flow is **one-way**, so this pattern is essential whenever the **child must notify or update the parent**.
+
+---
+
+## **4\. Why Arrow Functions Are Important Here**
+
+To pass **arguments** to the parent’s function, you must wrap the call inside an arrow function:
+
+\<button onClick={() \=\> props.greetHandler("Child")}\>Click\</button\>
+
+If you wrote:
+
+\<button onClick={props.greetHandler("Child")}\>
+
+❌ It would **execute immediately** during render instead of waiting for a click.
+
+So the arrow function ensures the method is **invoked only when clicked**.
+
+---
+
+## **5\. Functional Component (Modern Approach)**
+
+In modern React, this pattern remains identical — just without `this` or binding.
+
+### **✅ Example:**
+
+function Parent() {  
+  const \[name\] \= React.useState("Parent");
+
+  const greetParent \= (child) \=\> {  
+    alert(\`Hello ${name} from ${child}\`);  
+  };
+
+  return \<Child greetHandler={greetParent} /\>;  
+}
+
+function Child({ greetHandler }) {  
+  return (  
+    \<button onClick={() \=\> greetHandler("Child")}\>Greet Parent\</button\>  
+  );  
+}
+
+---
+
+## **6\. Common Use Cases**
+
+1. **Button clicks or actions** in a child should update **parent state**.
+
+2. **Forms** where input components send data back to parent.
+
+3. **Modals or dropdowns** where the parent controls visibility.
+
+---
+
+## **7\. Interview Questions & Answers**
+
+**Q1. How can a child component communicate with its parent in React?**  
+ ➡️ By calling a method passed down from the parent as a prop.
+
+---
+
+**Q2. What is the data flow direction in React?**  
+ ➡️ React has **unidirectional data flow** (top → down).  
+ Communication from child → parent is simulated via **function props**.
+
+---
+
+**Q3. How can you pass parameters from a child to a parent function?**  
+ ➡️ Use an **arrow function** in the child component:
+
+onClick={() \=\> props.handler("argument")}
+
+---
+
+**Q4. Why not directly modify parent state from the child?**  
+ ➡️ Because **state is private** to the component where it’s declared.  
+ Child components should **request** updates through props, not directly mutate.
+
+---
+
+**Q5. Is this approach still valid with hooks?**  
+ ➡️ Yes — even in functional components with hooks, **functions are still passed as props**.  
+ This pattern is fundamental in React architecture.
+
+---
+
+## **8\. Best Practices**
+
+✅ Keep parent methods descriptive, e.g. `onChildClick`, `onFormSubmit`.  
+ ✅ Use arrow functions only where necessary (to avoid unnecessary re-renders).  
+ ✅ Avoid deeply nested prop passing (consider Context or state management tools for that).  
+ ✅ Use TypeScript or PropTypes for clarity on function props.
+
+---
+
+# 
+
+# **📘 Lecture 16: ….(to be cont..)**
