@@ -4855,4 +4855,92 @@ Clicking **Submit** triggers this alert:
 
 ---
 
-# **📘 Lecture 22 —**
+# **📘 Lecture 22 —** 
+
+## **✅ React Component Lifecycle (Functional Components)**
+
+React components life cycle in the UI:
+
+MOUNT → UPDATE → UPDATE → ... → UNMOUNT
+
+---
+
+### **✅ 1️⃣ Mount (Component Appears)**
+
+Happens when a component is **added to the DOM**
+
+Example scenario:  
+ ✔ User opens a **Chat Window** → UI first appears  
+ ✔ Fetch initial data  
+ ✔ Start timers / WebSocket / event listeners
+
+In React (functional):
+
+useEffect(() \=\> {  
+  console.log("MOUNT: Component displayed");  
+}, \[\]); // empty dependency → runs once on mount
+
+---
+
+### **✅ 2️⃣ Update (Component Re-Renders)**
+
+Triggered when:  
+ ✔ State changes  
+ ✔ Props change  
+ ✔ Parent re-renders
+
+Example scenario:  
+ ✔ New chat messages  
+ ✔ Live number updates  
+ ✔ User typing
+
+In React:
+
+useEffect(() \=\> {  
+  console.log("UPDATE: Component updated due to state change");  
+}, \[someState\]); // runs every time someState changes
+
+---
+
+### **✅ 3️⃣ Unmount (Component Removed)**
+
+Unmount \= React **removes** UI from the DOM and also **cleans up memory**.
+
+Example scenario:  
+ ✔ User closes Chat Window → UI disappears  
+ ✔ Stop WebSocket / timer / event listeners
+
+In React:
+
+useEffect(() \=\> {  
+  connectToServer();
+
+  return () \=\> {  
+    console.log("UNMOUNT: Cleanup before component is removed");  
+    disconnectFromServer(); // cleanup  
+  };  
+}, \[\]);
+
+---
+
+### **🧠 Key Takeaways Table**
+
+| Phase | When It Happens | What You Do |
+| ----- | ----- | ----- |
+| **Mount** | Component first appears | Fetch data, start connections |
+| **Update** | State/props change | Sync UI with new data |
+| **Unmount** | Component disappears | Cleanup: stop timers, listeners, sockets |
+
+---
+
+### **✅ Final Definition**
+
+**“**In functional components, `useEffect` handles lifecycle: the effect executes on mount and dependency updates, while the returned cleanup runs before re-runs and on unmount.**”**
+
+✅ **Unmount means React completely removes the component from the UI and memory**.  
+ It is no longer visible and all side effects **must be cleaned** (to prevent memory leaks).
+
+---
+
+# **📘 Lecture 23 —** 
+
